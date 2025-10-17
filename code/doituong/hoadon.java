@@ -201,14 +201,26 @@ class Hoadonban extends GiaoDich{
                     System.out.println(e);
                 }
         }
-    }
-
-    public void Them(Scanner sc){
-        Sytem.out.println("Nhap ma hon can thue");
-        String newMaHDB = sc.nextLine();
-
-        System.out.println("Nhap ma khach hang")
-        String newMaKH = sc.nextLine();
-
-        Khachhang
+        public void Them(Scanner sc){
+            dshd = Arrays.copyOf(dshd, n+1);
+            dshd[n]= new Hoadonban();
+            dshd[n].Nhap(sc);
+            n++;
+            WriteFile();
+        }
+        public Hoadonban Timkiem_MaHD(Hoadonban MaHD){
+            boolean found=false;
+            Hoadonban hd= new Hoadonban();
+            for(int i=0; i<n;; i++){
+                if(ds[i].getMaHDB().equals(MaHD)){
+                    hd=ds[i];
+                    found=true;
+                    break;
+                }   
+            }
+            if(found)
+                return hd;
+            else
+                return null;
+        }
     }
