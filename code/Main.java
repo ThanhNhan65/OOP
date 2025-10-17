@@ -47,7 +47,13 @@ public class Main {
                     dsnv.GhiVaoFile("danhsachNV.txt");
                     break;
                 case 4:
-                    dsnv.TimkiemNV();
+                    NhanVien nv = dsnv.TimkiemNV();
+                    if (nv != null) {
+                        System.out.println("Thong tin nhan vien tim thay:");
+                        nv.Xuat();
+                    } else {
+                        System.out.println("Khong tim thay nhan vien.");
+                    }
                     break;
                 case 5:
                     dsnv.Xuat();

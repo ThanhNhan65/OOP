@@ -177,7 +177,7 @@ public class DanhSachKhachHang {
             System.out.println("Da sua thong tin khach hang ");
     }
 
-    public KhachHang TimkiemKH(KhachHang[] dskh) {
+    public KhachHang TimkiemKH() {
         boolean found = false;
         Scanner sc = new Scanner(System.in);
         System.out.println("-----TIM KIEM KHACH HANG-----");

@@ -48,7 +48,13 @@ public class MainKH {
                     dskh.GhiVaoFile("danhsachKH.txt");
                     break;
                 case 4:
-                    dskh.TimkiemKH();
+                    DanhSachKhachHang kh = dskh.TimkiemKH();
+                    if (kh != null) {
+                        System.out.println("Thong tin nhan vien tim thay:");
+                        kh.Xuat();
+                    } else {
+                        System.out.println("Khong tim thay nhan vien.");
+                    }
                     break;
                 case 5:
                     dskh.Xuat();

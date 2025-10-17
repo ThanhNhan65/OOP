@@ -143,7 +143,7 @@ public class DanhSachNhanVien {
         }
     }
 
-    public NhanVien TimkiemNV(NhanVien[] dsnv) {
+    public NhanVien TimkiemNV() {
         Scanner sc = new Scanner(System.in);
         boolean found = false;
         System.out.println("-----TIM KIEM NHAN VIEN-----");
