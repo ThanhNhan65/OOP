@@ -1,3 +1,5 @@
+package code;
+
 import java.util.Scanner;
 import java.util.Arrays;
 import java.io.Reader;
@@ -138,17 +140,7 @@ public class DanhSachNhanVien {
 
         if (!found) {
             System.out.println("Không tìm thấy nhân viên");
-        } /*
-           * else {
-           * NhanVien.dem = 0;
-           * for (int i = 0; i < n; i++) {
-           * int so = Integer.parseInt(dsnv[i].getMaNV().substring(2));
-           * if (so > NhanVien.dem) {
-           * NhanVien.dem = so;
-           * }
-           * }
-           * }
-           */
+        }
     }
 
     public void TimkiemNV() {
@@ -165,7 +157,7 @@ public class DanhSachNhanVien {
         switch (c) {
             case 1:
                 System.out.print("Nhap ma nhan vien muon tim kiem: ");
-                int maNV = sc.nextInt();
+                String maNV = sc.nextLine();
                 for (int i = 0; i < n; i++) {
                     if (dsnv[i].getMaNV().equals(maNV)) {
                         dsnv[i].Xuat();

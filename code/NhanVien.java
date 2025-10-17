@@ -1,3 +1,5 @@
+package code;
+
 import java.util.Scanner;
 
 public class NhanVien extends ConNguoi {
@@ -17,7 +19,7 @@ public class NhanVien extends ConNguoi {
 
     public NhanVien(String Hoten, String Diachi, long Sdt, String Chucvu, int ChamCong, String MaNV, long Luong) {
         super(Hoten, Diachi, Sdt);
-        this.MaNV = String.format("NV%03d", dem);
+        this.MaNV = MaNV;
         this.Chucvu = Chucvu;
         this.ChamCong = ChamCong;
         this.Luong = getLuong();
