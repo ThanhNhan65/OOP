@@ -1,3 +1,5 @@
+package code;
+
 public class KhachHang extends ConNguoi {
     public String MaKH;
     public static int dem = 0;
