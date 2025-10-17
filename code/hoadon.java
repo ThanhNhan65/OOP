@@ -109,7 +109,6 @@ class Hoadonban extends GiaoDich{
                                    " | Don gia: " + ct.getSP().getDongia() +
                                    " | Gia tien: " + ct.Tinhtien());   
             }
-
         }
     }
 }
