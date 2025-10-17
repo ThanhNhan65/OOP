@@ -143,7 +143,7 @@ public class DanhSachNhanVien {
         }
     }
 
-    public void TimkiemNV() {
+    public NhanVien TimkiemNV(NhanVien[] dsnv) {
         Scanner sc = new Scanner(System.in);
         boolean found = false;
         System.out.println("-----TIM KIEM NHAN VIEN-----");
@@ -160,8 +160,8 @@ public class DanhSachNhanVien {
                 String maNV = sc.nextLine();
                 for (int i = 0; i < n; i++) {
                     if (dsnv[i].getMaNV().equals(maNV)) {
-                        dsnv[i].Xuat();
                         found = true;
+                        return dsnv[i];
                     }
                 }
                 break;
@@ -170,8 +170,8 @@ public class DanhSachNhanVien {
                 String hoten = sc.nextLine();
                 for (int i = 0; i < n; i++) {
                     if (dsnv[i].getHoten().equals(hoten)) {
-                        dsnv[i].Xuat();
                         found = true;
+                        return dsnv[i];
                     }
                 }
                 break;
@@ -180,19 +180,21 @@ public class DanhSachNhanVien {
                 String chucvu = sc.nextLine();
                 for (int i = 0; i < n; i++) {
                     if (dsnv[i].getChucVu().equals(chucvu)) {
-                        dsnv[i].Xuat();
                         found = true;
+                        return dsnv[i];
                     }
                 }
                 break;
             default:
                 System.out.println("Khong tim kiem nhan vien.");
+                break;
         }
         if (!found)
             System.out.println("Khong tim thay nhan vien.");
+        return null;
     }
 
-    public void Sua_Chi_Tiet(String MaKH) {
+    public void Sua_Chi_Tiet(String MaNV) {
         boolean found = false;
         Scanner sc = new Scanner(System.in);
         System.out.println("-----SUA THONG TIN NHAN VIEN-----");
@@ -206,7 +208,7 @@ public class DanhSachNhanVien {
         int chon = sc.nextInt();
         sc.nextLine();
         for (int i = 0; i < n; i++) {
-            if (dsnv[i].getMaNV().equals(MaKH)) {
+            if (dsnv[i].getMaNV().equals(MaNV)) {
                 switch (chon) {
                     case 1:
                         System.out.println("Nhap ho va ten moi: ");

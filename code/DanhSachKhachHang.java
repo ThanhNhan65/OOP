@@ -173,11 +173,11 @@ public class DanhSachKhachHang {
         }
         if (!found)
             System.out.println("Khong tim thay khach hang");
-        if (found)
+        else
             System.out.println("Da sua thong tin khach hang ");
     }
 
-    public void TimkiemKH() {
+    public KhachHang TimkiemKH(KhachHang[] dskh) {
         boolean found = false;
         Scanner sc = new Scanner(System.in);
         System.out.println("-----TIM KIEM KHACH HANG-----");
@@ -192,23 +192,28 @@ public class DanhSachKhachHang {
                 System.out.println("Nhap ho ten khach hang ban muon tim kiem: ");
                 String hoten = sc.nextLine();
                 for (int i = 0; i < n; i++) {
-                    if (dskh[i].getHoten().equals(hoten))
-                        dskh[i].Xuat();
+                    if (dskh[i].getHoten().equals(hoten)) {
+                        found = true;
+                        return dskh[i];
+                    }
                 }
                 break;
             case 2:
                 System.out.println("Nhap ma khach hang ban muon tim kiem: ");
                 String maKH = sc.nextLine();
                 for (int i = 0; i < n; i++) {
-                    if (dskh[i].getMaKH().equals(maKH))
-                        dskh[i].Xuat();
+                    if (dskh[i].getMaKH().equals(maKH)) {
+                        found = true;
+                        return dskh[i];
+                    }
                 }
                 break;
             default:
                 System.out.println("Thoat chuong trinh");
-                return;
-
+                break;
         }
+        if (!found)
+            System.out.println("Khong tim thay khach hang.");
+        return null;
     }
-
 }
