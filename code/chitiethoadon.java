@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 
 /* Chi tiết hóa đơn bán */
@@ -136,7 +137,7 @@ class DSCT{
         // -----------------Ghi file --------------------------
     public void WriteFile(){
         try{
-            FileWriter fw = new FileWriter("data\\chitiethoadon.txt");
+            FileWriter fw = new BufferedWriter("data\\chitiethoadon.txt");
             for(int i=0; i<n ;i++){
                 fw.write(ds[i].hd.getMaHD() + ","+ds[i].sp.getMaSP() + ","+ds[i].getSL());
                 fw.newLine();
