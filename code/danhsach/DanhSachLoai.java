@@ -1,8 +1,11 @@
-package code;
+package code.danhsach;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import code.doituong.*;
+
 public class DanhSachLoai{
     private ArrayList<Loai> ds= new ArrayList<>();
     public void them(Scanner sc){

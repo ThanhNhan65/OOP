@@ -1,13 +1,16 @@
-package NhacCu;
+package code.danhsach;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import code.doituong.*;
+
 public class DanhSachSanPham{
     private ArrayList<SanPham> ds= new ArrayList<>();
     public void them(Scanner sc, DanhSachLoai dsl){
         SanPham sp= new SanPham();
-        sp.nhap(sc, dsl);
+        sp.Nhap(sc);
         ds.add(sp);
         System.out.println("Ok roi");
     }
@@ -50,7 +53,7 @@ public class DanhSachSanPham{
         SanPham sp= timkiem(ma);
         if (sp!= null){
             System.out.println("Nhap lai tt");
-            sp.nhap(sc,dsl);
+            sp.Nhap(sc);
             System.out.println("ok roi");
         } else {
             System.out.println("Kh thay ma");
@@ -127,4 +130,5 @@ public class DanhSachSanPham{
             System.out.println("Loi ghi file!");
         }
     }
+    public void TimKiem(String ma);
 }

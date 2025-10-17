@@ -1,6 +1,10 @@
-package NhacCu;
+package code.doituong;
 import java.util.Scanner;
-public class SanPham{
+import code.giaodien.*;
+import code.doituong.*;
+
+
+public class SanPham implements INhapXuat {
     private String ma, ten, hang;
     private Loai loai;
     private double gia;
@@ -51,7 +55,7 @@ public class SanPham{
         this.soluong=soluong;
     }
 
-    public void nhap(Scanner sc, DanhSachLoai dsl){
+    public void nhap(Scanner sc){
         System.out.print("Nhap ma sp: ");
         ma= sc.nextLine();
         System.out.print("Nhap ten sp: ");

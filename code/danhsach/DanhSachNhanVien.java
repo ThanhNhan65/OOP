@@ -1,4 +1,4 @@
-package code;
+package code.danhsach;
 
 import java.util.Scanner;
 import java.util.Arrays;
@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+
+import code.doituong.*;
 
 public class DanhSachNhanVien {
     public NhanVien[] dsnv;
@@ -30,7 +32,7 @@ public class DanhSachNhanVien {
         dsnv = new NhanVien[n];
         for (int i = 0; i < n; i++) {
             dsnv[i] = new NhanVien();
-            dsnv[i].Nhap();
+            dsnv[i].Nhap(sc);
         }
     }
 
@@ -69,7 +71,7 @@ public class DanhSachNhanVien {
             dsnv[i] = dsnv[i - 1];
         }
         dsnv[k] = new NhanVien();
-        dsnv[k].Nhap();
+        dsnv[k].Nhap(sc);
         n++;
     }
 

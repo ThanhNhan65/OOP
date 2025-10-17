@@ -1,6 +1,8 @@
-package NhacCu;
+package code.doituong;
 import java.util.Scanner;
-public class Loai{
+import code.giaodien.*;
+
+public class Loai implements INhapXuat{
     private String maLoai, tenLoai;
     public Loai(){}
     public Loai(String maLoai, String tenLoai){
