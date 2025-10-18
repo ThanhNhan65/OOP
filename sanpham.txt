@@ -1,0 +1,10 @@
+SP001,Guitar Acoustic Yamaha F310,Yamaha,L01,2990000.0
+SP002,Guitar Classic Cordoba C3M,Cordoba,L01,5200000.0
+SP003,Piano Đien Casio CDP-S110,Casio,L02,1.199E7
+SP004,Piano Co Kawai K-300,Kawai,L02,1.42E8
+SP005,Ukulele Concert Kala KA-15C,Kala,L03,1890000.0
+SP006,Ukulele Soprano Flight TUS35,Flight,L03,990000.0
+SP007,Drum Set Pearl Roadshow,Pearl,L04,9500000.0
+SP008,Cajon Meinl Headliner,Meinl,L04,2800000.0
+SP009,Sao truc thu cong,Local,L05,150000.0
+SP010,Sáo ngang Yamaha YRS-23,Yamaha,L05,280000.0
