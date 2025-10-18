@@ -1,12 +1,7 @@
-package code;
+package code.kethua;
 
 import java.util.Scanner;
-
-interface INhapXuat {
-    void Nhap();
-
-    void Xuat();
-}
+import code.giaodien.*;
 
 public abstract class ConNguoi implements INhapXuat {
     public String Hoten;
@@ -50,8 +45,7 @@ public abstract class ConNguoi implements INhapXuat {
     }
 
     @Override
-    public void Nhap() {
-        Scanner sc = new Scanner(System.in);
+    public void Nhap(Scanner sc) {
         System.out.print("Nhap ho va ten: ");
         Hoten = sc.nextLine();
         System.out.print("Nhap dia chi: ");

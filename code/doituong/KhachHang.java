@@ -1,4 +1,7 @@
-package code;
+package code.doituong;
+import java.util.Scanner;
+
+import code.kethua.*;
 
 public class KhachHang extends ConNguoi {
     public String MaKH;
@@ -14,8 +17,8 @@ public class KhachHang extends ConNguoi {
     }
 
     @Override
-    public void Nhap() {
-        super.Nhap();
+    public void Nhap(Scanner sc) {
+        super.Nhap(sc);
         dem++;
         MaKH = String.format("KH%03d", dem);
     }

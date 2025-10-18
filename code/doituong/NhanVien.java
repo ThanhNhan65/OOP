@@ -1,6 +1,7 @@
-package code;
+package code.doituong;
 
 import java.util.Scanner;
+import code.kethua.*;
 
 public class NhanVien extends ConNguoi {
     public String MaNV;
@@ -60,9 +61,8 @@ public class NhanVien extends ConNguoi {
     }
 
     @Override
-    public void Nhap() {
-        Scanner sc = new Scanner(System.in);
-        super.Nhap();
+    public void Nhap(Scanner sc) {
+        super.Nhap(sc);
         System.out.print("Nhap chuc vu nhan vien: ");
         Chucvu = sc.nextLine();
         System.out.print("Nhap so ngay nhan vien di lam: ");

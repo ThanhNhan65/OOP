@@ -1,27 +1,22 @@
-package code;
+package code.menu;
 
 import java.util.Scanner;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.Writer;
-import java.io.Reader;
-import java.io.BufferedReader;
+import code.danhsach.*;
 
-public class MainKH {
+public class Main {
     public static void main(String[] args) {
-        DanhSachKhachHang dskh = new DanhSachKhachHang();
-        dskh.DocTuFile("danhsachKH.txt");
-        dskh.Xuat();
-        dskh.GhiVaoFile("danhsachKH.txt");
+        DanhSachNhanVien dsnv = new DanhSachNhanVien();
+        dsnv.DocTuFile("data/danhsachNV.txt");
+        dsnv.Xuat();
+        dsnv.GhiVaoFile("data/danhsachNV.txt");
         Scanner sc = new Scanner(System.in);
         String op;
         do {
             System.out.println("-----DANH SACH CAC CHUC NANG-----");
-            System.out.println("1.Them khach hang.");
-            System.out.println("2.Xoa khach hang.");
-            System.out.println("3.Sua thong tin khach hang.");
-            System.out.println("4.Tim kiem thong tin khach hang.");
+            System.out.println("1.Them nhan vien.");
+            System.out.println("2.Xoa nhan vien.");
+            System.out.println("3.Sua thong tin nhan vien.");
+            System.out.println("4.Tim kiem thong tin nhan vien.");
             System.out.println("5.Hien danh sach.");
             System.out.println("0.Thoat chuong trinh.");
             System.out.println("----------------------------------");
@@ -31,33 +26,32 @@ public class MainKH {
             switch (chon) {
                 case 1:
                     System.out.println("Them nhan vien vao danh sach");
-                    dskh.Them();
-                    dskh.Xuat();
-                    dskh.GhiVaoFile("danhsachKH.txt");
+                    dsnv.Them();
+                    dsnv.Xuat();
+                    dsnv.GhiVaoFile("data/danhsachNV.txt");
                     break;
                 case 2:
                     System.out.print("Chon ma nhan vien muon xoa: ");
-                    dskh.Xoa(sc.nextLine());
-                    dskh.Xuat();
-                    dskh.GhiVaoFile("danhsachKH.txt");
+                    dsnv.Xoa(sc.nextLine());
+                    dsnv.Xuat();
+                    dsnv.GhiVaoFile("data/danhsachNV.txt");
                     break;
                 case 3:
                     System.out.println("Chon ma nhan vien ban muon sua");
-                    dskh.SuaKH(sc.nextLine());
-                    sc.nextLine();
-                    dskh.GhiVaoFile("danhsachKH.txt");
+                    dsnv.Sua_Chi_Tiet(sc.nextLine());
+                    dsnv.GhiVaoFile("data/danhsachNV.txt");
                     break;
                 case 4:
-                    KhachHang kh = dskh.TimkiemKH();
-                    if (kh != null) {
+                    NhanVien nv = dsnv.TimkiemNV();
+                    if (nv != null) {
                         System.out.println("Thong tin nhan vien tim thay:");
-                        kh.Xuat();
+                        nv.Xuat();
                     } else {
                         System.out.println("Khong tim thay nhan vien.");
                     }
                     break;
                 case 5:
-                    dskh.Xuat();
+                    dsnv.Xuat();
                     break;
                 case 0:
                     System.out.println("Thoat chuong trinh.");
