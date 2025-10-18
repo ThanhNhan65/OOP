@@ -11,16 +11,13 @@ import code.danhsach.*;
         /*Lớp hóa đơn bán */
 public class HoaDon extends GiaoDich{
     private String MaHDB;
-
     private DanhSachChitietHoaDon dsct;
-    private DanhSachKhachHang dskh;
-    private DanhSachKhachHang dsnv;
-
-    public static int  MaHDNext = 1;
+    private static int  MaHDNext = 1;
     
     public HoaDon(){
         super();
-        MaHDB="";
+        this.dsct = new DanhSachChitietHoaDon();
+        this.MaHDB = "HD" + String.format("%03d", MaHDNext++);
     }
     public HoaDon(String MaHDB, Date ngayGD, NhanVien nv, KhachHang kh, DanhSachChitietHoaDon dsct ){
         super(ngayGD, nv, kh);
@@ -42,6 +39,9 @@ public class HoaDon extends GiaoDich{
     public static int getMaHDNext(){
         return MaHDNext;
     }
+    public static void setMaHDNext(int value){
+            MaHDNext= value;
+    }
     public double Thanhtien(){
         double thanhtien = 0;
         for(int i = 0; i < dsct.getN(); i++){
@@ -53,8 +53,6 @@ public class HoaDon extends GiaoDich{
         return thanhtien;
     }
     public  void Nhap(Scanner sc){
-        System.out.println("Nhap ma hoa don: ");
-        this.MaHDB = sc.nextLine();
 
         System.out.println("Nhap ngay giao dich: ");
         String str = sc.nextLine();
@@ -68,21 +66,25 @@ public class HoaDon extends GiaoDich{
 
         System.out.println("Nhap ma khach hang: ");
         String MaKH = sc.nextLine();
-        this.setKh(dskh.Timkiem_MaKH(MaKH)); 
+        KhachHang kh= new DanhSachKhachHang().Timkiem_MaKH(MaKH);
+        this.setKh(kh); 
         while(getKh() == null){
             System.out.println("Khong tim thay khach hang: " + MaKH);
             System.out.println("Vui long nhap lai! ");
             MaKH = sc.nextLine();
-            this.setKh(dskh.Timkiem_MaKH(MaKH)); 
+            kh= new DanhSachKhachHang().Timkiem_MaKH(MaKH);
+            this.setKh(kh); 
         }
         System.out.println("Nhap ma Nhan vien: ");
         String MaNV = sc.nextLine();
-        this.setNV(dsnv.TimKiem_MaNV(MaNV));
+        NhanVien nv = new DanhSachNhanVien().TimKiemNhanVienTheoMa(MaNV);
+        this.setNv(nv);
         while(getKh() == null){
             System.out.println("Khong tim thay nhan vien: " + MaNV);
             System.out.println("Vui long nhap lai! ");
             MaNV = sc.nextLine();
-            this.setNV(dsnv.TimKiem_MaNV(MaNV));
+            nv = new DanhSachNhanVien().TimKiemNhanVienTheoMa(MaNV);
+            this.setNv(nv);
         }
     }
     public void Xuat(){

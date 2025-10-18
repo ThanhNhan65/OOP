@@ -10,7 +10,9 @@ public class KhachHang extends ConNguoi {
     public KhachHang() {
         MaKH = "";
     }
-
+    public String getMaKH() {
+        return MaKH;
+    }
     public KhachHang(String Hoten, String Diachi, long Sdt, String MaKH) {
         super(Hoten, Diachi, Sdt);
         this.MaKH = MaKH;
@@ -28,8 +30,5 @@ public class KhachHang extends ConNguoi {
         System.out.printf("| %-6s | %-21s | %-20s | %-15s |\n", MaKH, Hoten, Diachi, Sdt);
     }
 
-    public String getMaKH() {
-        return MaKH;
-    }
 
 }

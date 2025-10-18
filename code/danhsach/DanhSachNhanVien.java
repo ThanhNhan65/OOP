@@ -145,7 +145,7 @@ public class DanhSachNhanVien {
         }
     }
 
-    public void TimkiemNV() {
+    public NhanVien TimkiemNV() {
         Scanner sc = new Scanner(System.in);
         boolean found = false;
         System.out.println("-----TIM KIEM NHAN VIEN-----");
@@ -162,8 +162,8 @@ public class DanhSachNhanVien {
                 String maNV = sc.nextLine();
                 for (int i = 0; i < n; i++) {
                     if (dsnv[i].getMaNV().equals(maNV)) {
-                        dsnv[i].Xuat();
                         found = true;
+                        return dsnv[i];
                     }
                 }
                 break;
@@ -172,8 +172,8 @@ public class DanhSachNhanVien {
                 String hoten = sc.nextLine();
                 for (int i = 0; i < n; i++) {
                     if (dsnv[i].getHoten().equals(hoten)) {
-                        dsnv[i].Xuat();
                         found = true;
+                        return dsnv[i];
                     }
                 }
                 break;
@@ -182,19 +182,21 @@ public class DanhSachNhanVien {
                 String chucvu = sc.nextLine();
                 for (int i = 0; i < n; i++) {
                     if (dsnv[i].getChucVu().equals(chucvu)) {
-                        dsnv[i].Xuat();
                         found = true;
+                        return dsnv[i];
                     }
                 }
                 break;
             default:
                 System.out.println("Khong tim kiem nhan vien.");
+                break;
         }
         if (!found)
             System.out.println("Khong tim thay nhan vien.");
+        return null;
     }
 
-    public void Sua_Chi_Tiet(String MaKH) {
+    public void Sua_Chi_Tiet(String MaNV) {
         boolean found = false;
         Scanner sc = new Scanner(System.in);
         System.out.println("-----SUA THONG TIN NHAN VIEN-----");
@@ -208,7 +210,7 @@ public class DanhSachNhanVien {
         int chon = sc.nextInt();
         sc.nextLine();
         for (int i = 0; i < n; i++) {
-            if (dsnv[i].getMaNV().equals(MaKH)) {
+            if (dsnv[i].getMaNV().equals(MaNV)) {
                 switch (chon) {
                     case 1:
                         System.out.println("Nhap ho va ten moi: ");
@@ -247,5 +249,114 @@ public class DanhSachNhanVien {
         }
         if (!found)
             System.out.println("Khong tim thay nhan vien ");
+    }
+
+    public NhanVien TimKiemNhanVienTheoMa(String MaNV) {
+        boolean found = false;
+        for (int i = 0; i < n; i++) {
+            if (dsnv[i].getMaNV().equals(MaNV)) {
+                found = true;
+                return dsnv[i];
+            }
+        }
+        if (!found)
+            System.out.println("Khong tim thay nhan vien.");
+        return null;
+    }
+
+    public NhanVien TimKiemNhanVienTheoHoTen(String HoTen) {
+        boolean found = false;
+        for (int i = 0; i < n; i++) {
+            if (dsnv[i].getHoten().equals(HoTen)) {
+                found = true;
+                return dsnv[i];
+            }
+        }
+        if (!found)
+            System.out.println("Khong tim thay nhan vien.");
+        return null;
+    }
+
+    public NhanVien TimKiemNhanVienTheoChucVu(String ChucVu) {
+        boolean found = false;
+        for (int i = 0; i < n; i++) {
+            if (dsnv[i].getChucVu().equals(ChucVu)) {
+                found = true;
+                return dsnv[i];
+            }
+        }
+        if (!found)
+            System.out.println("Khong tim thay nhan vien.");
+        return null;
+    }
+
+    public NhanVien SuaTheoMa(String Chucvu_moi, String MaNV_moi) {
+        boolean found = false;
+        for (int i = 0; i < n; i++) {
+            if (dsnv[i].getMaNV().equals(MaNV_moi)) {
+                found = true;
+                dsnv[i].setChucvu(Chucvu_moi);
+                return dsnv[i];
+            }
+        }
+        if (!found)
+            System.out.println("Khong tim thay nhan vien.");
+        return null;
+    }
+
+    public NhanVien SuaTheoHoTen(String HoTen_moi, String MaNV_moi) {
+        boolean found = false;
+        for (int i = 0; i < n; i++) {
+            if (dsnv[i].getMaNV().equals(MaNV_moi)) {
+                found = true;
+                dsnv[i].setHoten(HoTen_moi);
+                return dsnv[i];
+            }
+        }
+        if (!found)
+            System.out.println("Khong tim thay nhan vien.");
+        return null;
+    }
+
+    public NhanVien SuaSoLanChamCong(int SoLanChamCong_moi, String MaNV_moi) {
+        boolean found = false;
+        for (int i = 0; i < n; i++) {
+            if (dsnv[i].getMaNV().equals(MaNV_moi)) {
+                found = true;
+                dsnv[i].setChamCong(SoLanChamCong_moi);
+                return dsnv[i];
+            }
+        }
+        if (!found)
+            System.out.println("Khong tim thay nhan vien.");
+        return null;
+    }
+
+    public NhanVien SuaTheoDiaChi(String DiaChi_moi, String MaNV_moi) {
+        boolean found = false;
+        for (int i = 0; i < n; i++) {
+            if (dsnv[i].getMaNV().equals(MaNV_moi)) {
+                found = true;
+                dsnv[i].setDiachi(DiaChi_moi);
+                return dsnv[i];
+            }
+        }
+        if (!found)
+            System.out.println("Khong tim thay nhan vien.");
+        return null;
+    }
+
+    public NhanVien SuaTheoSDT(long Sdt_moi, String MaNV_moi) {
+        boolean found = false;
+        for (int i = 0; i < n; i++) {
+            if (dsnv[i].getMaNV().equals(MaNV_moi)) {
+                found = true;
+                dsnv[i].setSdt(Sdt_moi);
+                return dsnv[i];
+            }
+        }
+        if (!found)
+            System.out.println("Khong tim thay nhan vien.");
+        return null;
     }
 }

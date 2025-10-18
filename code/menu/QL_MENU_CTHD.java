@@ -4,7 +4,7 @@ import code.danhsach.*;
 import java.util.Scanner;
 
 public class QL_MENU_CTHD{
-    DSCT ds1= new DSCT();
+    DanhSachChitietHoaDon ds1= new DanhSachChitietHoaDon();
     public void menu_cthd(Scanner sc){
         int choice;
         do{
