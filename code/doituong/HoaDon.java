@@ -9,18 +9,20 @@ import code.danhsach.*;
 
     
         /*Lớp hóa đơn bán */
-public class Hoadonban extends GiaoDich{
+public class HoaDon extends GiaoDich{
     private String MaHDB;
-    private DSCT dsct;
+
+    private DanhSachChitietHoaDon dsct;
     private DanhSachKhachHang dskh;
+    private DanhSachKhachHang dsnv;
+
     public static int  MaHDNext = 1;
     
-    public Hoadonban(){
+    public HoaDon(){
         super();
         MaHDB="";
-        dsct= new DSCT();
     }
-    public Hoadonban(String MaHDB, Date ngayGD, NhanVien nv, KhachHang kh, DSCT dsct ){
+    public HoaDon(String MaHDB, Date ngayGD, NhanVien nv, KhachHang kh, DanhSachChitietHoaDon dsct ){
         super(ngayGD, nv, kh);
         this.MaHDB = MaHDB;
         this.dsct = dsct;
@@ -31,10 +33,10 @@ public class Hoadonban extends GiaoDich{
     public String getMaHDB(){
         return MaHDB;
     }
-    public void setdsct(DSCT dsct){
+    public void setdsct(DanhSachChitietHoaDon dsct){
         this.dsct = dsct;
     }
-    public DSCT getdsct(){
+    public DanhSachChitietHoaDon getdsct(){
         return dsct;
     }
     public static int getMaHDNext(){
@@ -43,7 +45,7 @@ public class Hoadonban extends GiaoDich{
     public double Thanhtien(){
         double thanhtien = 0;
         for(int i = 0; i < dsct.getN(); i++){
-            Chitiethoadonban ct = dsct.getDSCT(i);
+            ChiTietHoaDon ct = dsct.getDSCT(i);
             if(ct.getHDB().getMaHDB().equals(this.MaHDB)){
                 thanhtien += ct.Tinhtien();
             }
@@ -75,12 +77,12 @@ public class Hoadonban extends GiaoDich{
         }
         System.out.println("Nhap ma Nhan vien: ");
         String MaNV = sc.nextLine();
-        this.setNV(TimKiem_MaNV(MaNV));
+        this.setNV(dsnv.TimKiem_MaNV(MaNV));
         while(getKh() == null){
             System.out.println("Khong tim thay nhan vien: " + MaNV);
             System.out.println("Vui long nhap lai! ");
             MaNV = sc.nextLine();
-            this.setNV(TimKiem_MaNV(MaNV));
+            this.setNV(dsnv.TimKiem_MaNV(MaNV));
         }
     }
     public void Xuat(){
@@ -92,7 +94,7 @@ public class Hoadonban extends GiaoDich{
                            " | Thanh tien: " + Thanhtien());
         System.out.println("Chi tiet:");
          for(int i=0; i<dsct.getN(); i++){
-            Chitiethoadonban ct = dsct.getDSCT(i);
+            ChiTietHoaDon ct = dsct.getDSCT(i);
             if(ct.getHDB().getMaHDB().equals(this.MaHDB)){
                 System.out.println("San pham: " + ct.getSP().getTen() +
                                    " | So luong: " + ct.getSL() +

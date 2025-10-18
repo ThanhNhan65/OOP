@@ -12,16 +12,17 @@ import java.util.Date;
 import code.doituong.*;
 import code.danhsach.*;
 
-public class DSHD{
-    private Hoadonban[] dshd;
+public class DanhSachHoaDon{
+    private HoaDon[] dshd;
     private int n;
 
+    private DanhSachChitietHoaDon dsct;
     private DanhSachSanPham dssp;   
     private DanhSachKhachHang dskh;  
     private DanhSachNhanVien dsnv;  
-    public DSHD(){
+    public DanhSachHoaDon(){
         n=0;
-        dshd= new Hoadonban[0];
+        dshd= new HoaDon[0];
     }
     public int getN() {
         return n;
@@ -43,8 +44,11 @@ public class DSHD{
                     KhachHang kh = dskh.Timkiem_MaKH(maKH); 
                     NhanVien nv = dsnv.Timkiem_MaNV(maNV);
                     
-                    Hoadonban hd = new Hoadonban(maHD, ngayGD, kh, nv, dsct);
+                    HoaDon hd = new HoaDon();
                     
+                    hd.setKh(kh);
+                    hd.setNv(nv);
+                    hd.setNgayGD(ngayGD);
                     dshd = Arrays.copyOf(dshd, n+ 1);
                     dshd[n]= hd;
                     n++;
@@ -71,14 +75,14 @@ public class DSHD{
         }
         public void Them(Scanner sc){
             dshd = Arrays.copyOf(dshd, n+1);
-            dshd[n]= new Hoadonban();
+            dshd[n]= new HoaDon();
             dshd[n].Nhap(sc);
             n++;
             WriteFile();
         }
-    public Hoadonban Timkiem_MaHD(String MaHD){
+    public HoaDon Timkiem_MaHD(String MaHD){
         boolean found=false;
-        Hoadonban hd= new Hoadonban();
+        HoaDon hd= new HoaDon();
         for(int i=0; i<n; i++){
             if(dshd[i].getMaHDB().equals(MaHD)){
                 hd=dshd[i];

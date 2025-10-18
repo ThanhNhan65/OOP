@@ -4,32 +4,29 @@ import java.util.Scanner;
 import code.danhsach.*;
 import code.giaodien.*;
 
-public class Chitiethoadonban implements INhapXuat {
-    private Hoadonban hd;
+public class ChiTietHoaDon implements INhapXuat {
+    private HoaDon hd;
     private SanPham sp;
     private int soluong;
+    
+    private DanhSachHoaDon dshd;
     private DanhSachSanPham dssp;
-    private DSHD dshd;
 
-    public Chitiethoadonban() {
-        hd = new Hoadonban();
+    public ChiTietHoaDon() {
+        hd = new HoaDon();
         sp = new SanPham();
         soluong = 0;
-        dssp = new DanhSachSanPham();
-        dshd = new DSHD();
     }
 
-    public Chitiethoadonban(Hoadonban hd, SanPham sp, int soluong) {
-        this.hd = hd;
-        this.sp = sp;
-        this.soluong = soluong;
+    public void setDanhsach(DanhSachHoaDon dshd, DanhSachSanPham dssp){
+        this.dshd = dshd;
+        this.dssp = dssp;
     }
-
-    public void setHDB(Hoadonban hd) {
+    public void setHDB(HoaDon hd) {
         this.hd = hd;
     }
 
-    public Hoadonban getHDB() {
+    public HoaDon getHDB() {
         return hd;
     }
 
@@ -41,21 +38,6 @@ public class Chitiethoadonban implements INhapXuat {
         return sp;
     }
 
-    public void setDSHD(DSHD dshd) {
-        this.dshd = dshd;
-    }
-
-    public DSHD getDSHD() {
-        return dshd;
-    }
-
-    public void setDSSP(DanhSachSanPham dssp) {
-        this.dssp = dssp;
-    }
-
-    public DanhSachSanPham getDSSP() {
-        return dssp;
-    }
 
     public void setSL(int soluong) {
         this.soluong = soluong;
@@ -82,12 +64,12 @@ public class Chitiethoadonban implements INhapXuat {
 
         System.out.println("Vui long nhap ma san pham: ");
         String MaSP = sc.nextLine();
-        this.sp = dssp.Timkiem(MaSP);
+        this.sp = dssp.TimKiem(MaSP);
         while (sp == null) {
             System.out.println("Khong tim thay san pham: " + MaSP);
             System.out.println("Vui long nhap lai: ");
             MaSP = sc.nextLine();
-            this.sp = dssp.Timkiem(MaSP);
+            this.sp = dssp.TimKiem(MaSP);
         }
 
         System.out.println("Vui long nhap so luong: ");

@@ -5,21 +5,21 @@ import java.io.*;
 import code.doituong.*;
 import code.danhsach.*;
 
-public class DSCT {
-    private Chitiethoadonban[] ds;
+public class DanhSachChitietHoaDon {
+    private ChiTietHoaDon[] dsct;
     private int n;
-    private DSHD dshd;
+    private DanhSachHoaDon dshd;
     private DanhSachSanPham dssp;
 
-    public DSCT() {
+    public DanhSachChitietHoaDon() {
         n = 0;
-        ds = new Chitiethoadonban[0];
-        dssp = new DanhSachSanPham();
-        dshd = new DSHD();
+        dsct = new ChiTietHoaDon[0];
+        dssp = null;
+        dshd = null;
 
     }
 
-    public void setDSHD(DSHD dshd) {
+    public void setDSHD(DanhSachHoaDon dshd) {
         this.dshd = dshd;
     }
 
@@ -27,8 +27,8 @@ public class DSCT {
         this.dssp = dssp;
     }
 
-    public Chitiethoadonban getDSCT(int index) {
-        return ds[index];
+    public ChiTietHoaDon getDSCT(int index) {
+        return dsct[index];
     }
 
     public int getN() {
@@ -47,12 +47,17 @@ public class DSCT {
                 String maSP = arr[1].trim();
                 int soluong = Integer.parseInt(arr[2].trim());
 
-                Hoadonban hd = dshd.Timkiem_MaHD(maHD);
+                HoaDon hd = dshd.Timkiem_MaHD(maHD);
                 SanPham sp = dssp.TimKiem(maSP);
 
-                Chitiethoadonban ct = new Chitiethoadonban(hd, sp, soluong);
-                ds = Arrays.copyOf(ds, n + 1);
-                ds[n] = ct;
+                ChiTietHoaDon ct = new ChiTietHoaDon();
+                ct.setDanhsach(dshd, dssp);
+                ct.setHDB(hd);
+                ct.setSP(sp);
+                ct.setSL(soluong);
+
+                dsct = Arrays.copyOf(dsct, n + 1);
+                dsct[n] = ct;
                 n++;
 
                 line = input.readLine();
@@ -68,7 +73,7 @@ public class DSCT {
         try {
             BufferedWriter fw = new BufferedWriter(new FileWriter("data/chitiethoadon.txt"));
             for (int i = 0; i < n; i++) {
-                fw.write(ds[i].getHDB().getMaHDB() + "," + ds[i].getSP().getMa() + "," + ds[i].getSL());
+                fw.write(dsct[i].getHDB().getMaHDB() + "," + dsct[i].getSP().getMa() + "," + dsct[i].getSL());
                 fw.newLine();
             }
             fw.close();
@@ -79,12 +84,11 @@ public class DSCT {
 
     // ----------------Them chi tiet -------------------
     public void Them(Scanner sc) {
-        Chitiethoadonban ct = new Chitiethoadonban();
-        ct.setDSHD(dshd);
-        ct.setDSSP(dssp);
+        ChiTietHoaDon ct = new ChiTietHoaDon();
+        ct.setDanhsach(dshd, dssp);
         ct.Nhap(sc);
-        ds = Arrays.copyOf(ds, n + 1);
-        ds[n] = ct;
+        dsct = Arrays.copyOf(dsct, n + 1);
+        dsct[n] = ct;
         n++;
         WriteFile();
     }
@@ -93,7 +97,7 @@ public class DSCT {
     public void Sua(Scanner sc) {
         System.out.println("Nhap ma hoa don can sua:");
         String MaHD = sc.nextLine();
-        Hoadonban hd = dshd.Timkiem_MaHD(MaHD);
+        HoaDon hd = dshd.Timkiem_MaHD(MaHD);
         while (hd == null) {
             System.out.println("Khong tim thay chi tiet hoa don: " + MaHD);
             System.out.println("Vui long nhap lai! ");
@@ -101,13 +105,13 @@ public class DSCT {
             hd = dshd.Timkiem_MaHD(MaHD);
         }
 
-        Chitiethoadonban[] arr = new Chitiethoadonban[0];
+        ChiTietHoaDon[] arr = new ChiTietHoaDon[0];
         int count = 0;
         for (int i = 0; i < n; i++) {
-            if (MaHD.equals(ds[i].getHDB().getMaHDB())) {
-                ds[i].Xuat();
+            if (MaHD.equals(dsct[i].getHDB().getMaHDB())) {
+                dsct[i].Xuat();
                 arr = Arrays.copyOf(arr, count + 1);
-                arr[count] = ds[i];
+                arr[count] = dsct[i];
                 count++;
             }
         }
@@ -134,7 +138,7 @@ public class DSCT {
         } while (choice != 3);
     }
 
-    public void Suaspsl(Scanner sc, Chitiethoadonban[] arr, int count) {
+    public void Suaspsl(Scanner sc, ChiTietHoaDon[] arr, int count) {
         System.out.println("Nhap ma san pham can sua:");
         String MaSP = sc.nextLine();
         SanPham sp = dssp.TimKiem(MaSP);
@@ -171,7 +175,7 @@ public class DSCT {
         WriteFile();
     }
 
-    public void Suasl(Scanner sc, Chitiethoadonban[] arr, int count) {
+    public void Suasl(Scanner sc, ChiTietHoaDon[] arr, int count) {
         System.out.println("Nhap ma san pham can sua:");
         String MaSP = sc.nextLine();
         SanPham sp = dssp.TimKiem(MaSP);
@@ -197,7 +201,7 @@ public class DSCT {
     public void Xoa(Scanner sc) {
         System.out.println("Nhap ma hoa don can xoa:");
         String MaHD = sc.nextLine();
-        Hoadonban hd = dshd.Timkiem_MaHD(MaHD);
+        HoaDon hd = dshd.Timkiem_MaHD(MaHD);
         while (hd == null) {
             System.out.println("Khong tim thay chi tiet hoa don: " + MaHD);
             System.out.println("Vui long nhap lai! ");
@@ -205,13 +209,13 @@ public class DSCT {
             hd = dshd.Timkiem_MaHD(MaHD);
         }
 
-        Chitiethoadonban[] arr = new Chitiethoadonban[0];
+        ChiTietHoaDon[] arr = new ChiTietHoaDon[0];
         int count = 0;
         for (int i = 0; i < n; i++) {
-            if (MaHD.equals(ds[i].getHDB().getMaHDB())) {
-                ds[i].Xuat();
+            if (MaHD.equals(dsct[i].getHDB().getMaHDB())) {
+                dsct[i].Xuat();
                 arr = Arrays.copyOf(arr, count + 1);
-                arr[count] = ds[i];
+                arr[count] = dsct[i];
                 count++;
             }
         }
@@ -241,11 +245,11 @@ public class DSCT {
     public void XoaTB(String MaHD) {
         boolean bool = false;
         for (int i = 0; i < n;) {
-            if (ds[i].getHDB().getMaHDB().equals(MaHD)) {
+            if (dsct[i].getHDB().getMaHDB().equals(MaHD)) {
                 for (int j = i; j < n - 1; j++) {
-                    ds[j] = ds[j + 1];
+                    dsct[j] = dsct[j + 1];
                 }
-                ds = Arrays.copyOf(ds, n - 1);
+                dsct = Arrays.copyOf(dsct, n - 1);
                 n--;
                 bool = true;
             } else i++;
@@ -254,7 +258,7 @@ public class DSCT {
         WriteFile();
     }
 
-    public void Xoasphd(Scanner sc, Chitiethoadonban[] arr, int count, String MaHD) {
+    public void Xoasphd(Scanner sc, ChiTietHoaDon[] arr, int count, String MaHD) {
         boolean bool = false;
         System.out.println("Nhap ma san pham can xoa:");
         String MaSP = sc.nextLine();
@@ -267,12 +271,12 @@ public class DSCT {
         }
 
         for (int i = 0; i < n;) {
-            if (ds[i].getHDB().getMaHDB().equals(MaHD) &&
-                ds[i].getSP().getMa().equals(MaSP)) {
+            if (dsct[i].getHDB().getMaHDB().equals(MaHD) &&
+                dsct[i].getSP().getMa().equals(MaSP)) {
                 for (int j = i; j < n - 1; j++) {
-                    ds[j] = ds[j + 1];
+                    dsct[j] = dsct[j + 1];
                 }
-                ds = Arrays.copyOf(ds, n - 1);
+                dsct = Arrays.copyOf(dsct, n - 1);
                 n--;
                 bool = true;
             } else i++;
@@ -286,14 +290,14 @@ public class DSCT {
     public void TimKiem(Scanner sc) {
         System.out.println("Nhap ma hoa don:");
         String MaHD = sc.nextLine();
-        Hoadonban hd = dshd.Timkiem_MaHD(MaHD);
+        HoaDon hd = dshd.Timkiem_MaHD(MaHD);
         if (hd == null) {
             System.out.println("Khong tim thay hoa don!");
             return;
         }
         for (int i = 0; i < n; i++) {
-            if (MaHD.equals(ds[i].getHDB().getMaHDB())) {
-                ds[i].Xuat();
+            if (MaHD.equals(dsct[i].getHDB().getMaHDB())) {
+                dsct[i].Xuat();
             }
         }
     }
