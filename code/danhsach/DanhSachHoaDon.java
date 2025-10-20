@@ -10,16 +10,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import code.doituong.*;
-import code.danhsach.*;
 
 public class DanhSachHoaDon{
     private HoaDon[] dshd;
     private int n;
 
-    private DanhSachChitietHoaDon dsct;
-    private DanhSachSanPham dssp;   
-    private DanhSachKhachHang dskh;  
-    private DanhSachNhanVien dsnv;  
     public DanhSachHoaDon(){
         n=0;
         dshd= new HoaDon[0];
@@ -28,7 +23,7 @@ public class DanhSachHoaDon{
         return n;
     }
 
-    public void ReadFile(){
+    public void ReadFile(DanhSachKhachHang dskh, DanhSachNhanVien dsnv){
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         int Maxid=0;
         try{
@@ -44,11 +39,10 @@ public class DanhSachHoaDon{
                     String maNV = arr[2].trim();
                     Date ngayGD = df.parse(arr[3].trim());
 
+                    HoaDon hd = new HoaDon();
 
                     KhachHang kh = dskh.Timkiem_MaKH(maKH); 
                     NhanVien nv = dsnv.TimKiemNhanVienTheoMa(maNV);
-                    
-                    HoaDon hd = new HoaDon();
                     
                     hd.setKh(kh);
                     hd.setNv(nv);
@@ -59,6 +53,7 @@ public class DanhSachHoaDon{
 
                     line = input.readLine();
             }
+            input.close();
             HoaDon.setMaHDNext(Maxid + 1);
         }catch(Exception ex){
                     ex.printStackTrace();
@@ -86,6 +81,58 @@ public class DanhSachHoaDon{
             n++;
             WriteFile();
         }
+
+    public void Timkiem(Scanner sc, DanhSachHoaDon dshd, DanhSachKhachHang dskh, DanhSachNhanVien dsnv){
+        int choice;
+        do {
+            System.out.println("1. Tim kiem theo ma hoa don");
+            System.out.println("2. Tim kiem theo ma khach hang");
+            System.out.println("3. Tim kiem theo ma nhan vien");
+            System.out.println("0. Thoat");
+            System.out.print("Chon: ");
+            choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice) {
+                case 1:
+                    System.out.print("Nhap ma hoa don: ");
+                    String mahd = sc.nextLine();
+                    HoaDon hd = dshd.Timkiem_MaHD(mahd);
+                    while (hd == null) {
+                        System.out.println("Khong tim thay hoa don: " + mahd);
+                        System.out.println("Vui long nhap lai: ");
+                        mahd = sc.nextLine();
+                        hd = dshd.Timkiem_MaHD(mahd);
+                    }
+                    Timkiem_MaHD(mahd).Xuat();            
+                    break;
+                case 2:
+                    System.out.print("Nhap ma khach hang: ");
+                    String makh = sc.nextLine();
+                    KhachHang kh = dskh.Timkiem_MaKH(makh);
+                    while (kh == null) {
+                        System.out.println("Khong tim thay khach hang: " + makh);
+                        System.out.println("Vui long nhap lai: ");
+                        makh = sc.nextLine();
+                        kh = dskh.Timkiem_MaKH(makh);
+                    }
+                    Timkiem_MaKH(makh);            
+                    break;
+                case 3:
+                    System.out.print("Nhap ma nhan vien: ");
+                    String manv = sc.nextLine();
+                    NhanVien nv = dsnv.TimKiemNhanVienTheoMa(manv);
+                    while (nv == null) {
+                        System.out.println("Khong tim thay nhan vien: " + manv);
+                        System.out.println("Vui long nhap lai: ");
+                        manv = sc.nextLine();
+                        nv = dsnv.TimKiemNhanVienTheoMa(manv);
+                    }
+                    Timkiem_MaNV(manv);            
+                    break;
+            }
+        } while (choice != 0);
+    }
+
     public HoaDon Timkiem_MaHD(String MaHD){
         boolean found=false;
         HoaDon hd= new HoaDon();
@@ -116,36 +163,80 @@ public class DanhSachHoaDon{
         }
     }
 
-    public void Xoa_MaHD(String MaHD){
+    public void Xoa(Scanner sc, DanhSachHoaDon dshd, DanhSachKhachHang dskh, DanhSachChitietHoaDon dsct){
+        int choice;
+        do {
+            System.out.println("1. Xoa theo ma hoa don");
+            System.out.println("2. Xoa theo ma khach hang");
+            System.out.println("0. Thoat");
+            System.out.print("Chon: ");
+            choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice) {
+                case 1:
+                    System.out.print("Nhap ma hoa don: ");
+                    String mahd = sc.nextLine();
+                    HoaDon hd = dshd.Timkiem_MaHD(mahd);
+                    while (hd == null) {
+                        System.out.println("Khong tim thay hoa don: " + mahd);
+                        System.out.println("Vui long nhap lai: ");
+                        mahd = sc.nextLine();
+                        hd = dshd.Timkiem_MaHD(mahd);
+                    }
+                    Xoa_MaHD(mahd, dsct);            
+                    break;
+                case 2:
+                    System.out.print("Nhap ma khach hang: ");
+                    String makh = sc.nextLine();
+                    KhachHang kh = dskh.Timkiem_MaKH(makh);
+                    while (kh == null) {
+                        System.out.println("Khong tim thay khach hang: " + makh);
+                        System.out.println("Vui long nhap lai: ");
+                        makh = sc.nextLine();
+                        kh = dskh.Timkiem_MaKH(makh);
+                    }
+                    Xoa_MaKH(makh, dsct);          
+                    break;
+            }
+        } while (choice != 0);
+    }
+
+    public void Xoa_MaHD(String MaHD, DanhSachChitietHoaDon dsct){
         boolean bool=false;
         for(int i=0 ; i<n ;){
             if(dshd[i].getMaHDB().equals(MaHD)){
+                if(dsct != null){
+                    dsct.XoaTB(MaHD);
+                }
+
                 for(int j= i; j < n-1; j++){
                     dshd[j]=dshd[j+1];
                 }
                 dshd = Arrays.copyOf(dshd, n-1);
                 n--;
                 bool = true;
-                dsct.XoaTB(MaHD);
             }else 
                 i++;   
         }
         System.out.println(bool ? "Xoa thanh cong!" : "That bai!");
         WriteFile();
     }
-    public void Xoa_MaKH(String MaKH){
+    public void Xoa_MaKH(String MaKH, DanhSachChitietHoaDon dsct){
         boolean bool=false;
         for(int i=0 ; i<n ;){
             if(dshd[i].getKh().getMaKH().equals(MaKH)){
-                HoaDon hd = new HoaDon();
-                hd= dshd[i];
+                HoaDon hd = dshd[i];
+
+                if(dsct != null){
+                    dsct.XoaTB(hd.getMaHDB());
+                }
+
                 for(int j= i; j < n-1; j++){
                     dshd[j]=dshd[j+1];
                 }
                 dshd = Arrays.copyOf(dshd, n-1);
                 n--;
                 bool = true;
-                dsct.XoaTB(hd.getMaHDB());;
             }else 
                 i++;   
         }
@@ -158,6 +249,7 @@ public class DanhSachHoaDon{
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         for(int i=0 ; i<n ;i++){
             if(df.format(dshd[i].getNgayGD()).equals(df.format(NgayGD))){
+                System.out.print("Nhap ngay giao dich moi (dd/MM/yyyy): ");
                 String newngay = sc.nextLine();
                 try{
                     dshd[i].setNgayGD(df.parse(newngay));
@@ -173,10 +265,49 @@ public class DanhSachHoaDon{
         WriteFile();
     }
 
-    public void Sua_MaKH(Scanner sc, String MaKH  ){
+    
+    public void Sua(Scanner sc, DanhSachNhanVien dsnv, DanhSachKhachHang dskh, DanhSachChitietHoaDon dsct){
+        int choice;
+        do {
+            System.out.println("1. Sua theo ma khach hang");
+            System.out.println("2. Sua theo ma nhan vien");
+            System.out.println("0. Thoat");
+            System.out.print("Chon: ");
+            choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice) {
+                case 1:
+                    System.out.print("Nhap ma khach hang: ");
+                    String makh = sc.nextLine();
+                    KhachHang kh = dskh.Timkiem_MaKH(makh);
+                    while (kh == null) {
+                        System.out.println("Khong tim thay khach hang: " + makh);
+                        System.out.println("Vui long nhap lai: ");
+                        makh = sc.nextLine();
+                        kh = dskh.Timkiem_MaKH(makh);
+                    }
+                    Sua_MaKH(sc, makh, dskh);
+                    break;
+                case 2:       
+                    System.out.print("Nhap ma nhan vien: ");
+                    String manv = sc.nextLine();
+                    NhanVien nv = dsnv.TimKiemNhanVienTheoMa(manv);
+                    while (nv == null) {
+                        System.out.println("Khong tim thay nhan vien: " + manv);
+                        System.out.println("Vui long nhap lai: ");
+                        manv = sc.nextLine();
+                        nv = dsnv.TimKiemNhanVienTheoMa(manv);
+                    }
+                    Sua_MaNV(sc, manv, dsnv);            
+                    break;
+            }
+        } while (choice != 0);
+    }
+    public void Sua_MaKH(Scanner sc, String MaKH, DanhSachKhachHang dskh){
         boolean bool=false;
         for(int i=0 ; i<n ;i++){
             if(dshd[i].getKh().getMaKH().equals(MaKH)){
+                System.out.print("Nhap ma khach hang moi: ");
                 String newma = sc.nextLine();
                 KhachHang kh= dskh.Timkiem_MaKH(newma);
                 while(kh==null){
@@ -192,10 +323,11 @@ public class DanhSachHoaDon{
         System.out.println(bool ? "Xoa thanh cong!" : "That bai!");
         WriteFile();
     }
-    public void Sua_MaNV(Scanner sc, String MaNV  ){
+    public void Sua_MaNV(Scanner sc, String MaNV, DanhSachNhanVien dsnv ){
         boolean bool=false;
         for(int i=0 ; i<n ;i++){
             if(dshd[i].getNv().getMaNV().equals(MaNV)){
+                System.out.print("Nhap ma nhan vien moi: ");
                 String newma = sc.nextLine();
                 NhanVien nv= dsnv.TimKiemNhanVienTheoMa(newma);
                 while(nv==null){

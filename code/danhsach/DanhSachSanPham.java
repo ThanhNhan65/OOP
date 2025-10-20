@@ -93,7 +93,7 @@ public class DanhSachSanPham{
         }
     }
 
-    public void docFile(DanhSachLoai dsl){
+    public void docFile(){
         ds.clear();
         try{
             File f= new File("sanpham.txt");

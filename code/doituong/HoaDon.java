@@ -1,91 +1,96 @@
 package code.doituong;
 
-import java.util.Arrays;
-import java.util.Scanner;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
+
 import code.kethua.*;
 import code.danhsach.*;
 
-    
-        /*Lớp hóa đơn bán */
-public class HoaDon extends GiaoDich{
+public class HoaDon extends GiaoDich {
     private String MaHDB;
     private DanhSachChitietHoaDon dsct;
-    private static int  MaHDNext = 1;
-    
-    public HoaDon(){
+    private DanhSachSanPham dssp;
+    private DanhSachKhachHang dskh;
+    private DanhSachNhanVien dsnv;
+    private static int MaHDNext = 1;
+
+    public HoaDon() {
         super();
-        this.dsct = new DanhSachChitietHoaDon();
         this.MaHDB = "HD" + String.format("%03d", MaHDNext++);
     }
-    public HoaDon(String MaHDB, Date ngayGD, NhanVien nv, KhachHang kh, DanhSachChitietHoaDon dsct ){
-        super(ngayGD, nv, kh);
-        this.MaHDB = MaHDB;
-        this.dsct = dsct;
+
+    public HoaDon(DanhSachKhachHang dskh, DanhSachNhanVien dsnv, DanhSachSanPham dssp) {
+        super();
+        this.dsct = new DanhSachChitietHoaDon();
+        this.dskh = dskh;
+        this.dsnv = dsnv;
+        this.dssp = dssp;
+        this.MaHDB = "HD" + String.format("%03d", MaHDNext++);
     }
-    public void setMaHD(String MaHDB){
-        this.MaHDB= MaHDB;
+
+    public String getMaHDB(){ 
+        return MaHDB; }
+    public void setMaHD(String MaHDB){ 
+        this.MaHDB = MaHDB; }
+
+    public DanhSachChitietHoaDon getdsct(){ 
+        return dsct; }
+    public void setdsct(DanhSachChitietHoaDon dsct){ 
+        this.dsct = dsct; 
     }
-    public String getMaHDB(){
-        return MaHDB;
-    }
-    public void setdsct(DanhSachChitietHoaDon dsct){
-        this.dsct = dsct;
-    }
-    public DanhSachChitietHoaDon getdsct(){
-        return dsct;
-    }
+
     public static int getMaHDNext(){
-        return MaHDNext;
+         return MaHDNext; 
+        }
+    public static void setMaHDNext(int value){ 
+        MaHDNext = value; 
     }
-    public static void setMaHDNext(int value){
-            MaHDNext= value;
-    }
-    public double Thanhtien(){
+
+    public double Thanhtien() {
         double thanhtien = 0;
-        for(int i = 0; i < dsct.getN(); i++){
+        if (dsct == null) return 0;
+        for (int i = 0; i < dsct.getN(); i++) {
             ChiTietHoaDon ct = dsct.getDSCT(i);
-            if(ct.getHDB().getMaHDB().equals(this.MaHDB)){
+            if (ct.getHDB().getMaHDB().equals(this.MaHDB)) {
                 thanhtien += ct.Tinhtien();
             }
         }
         return thanhtien;
     }
-    public  void Nhap(Scanner sc){
 
-        System.out.println("Nhap ngay giao dich: ");
-        String str = sc.nextLine();
+    public void Nhap(Scanner sc) {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        try{
+
+        System.out.print("Nhap ngay giao dich (dd/MM/yyyy): ");
+        String str = sc.nextLine();
+        try {
             this.setNgayGD(df.parse(str));
-        }catch(Exception ex){
-            System.out.println("Loi dinh dang ngay. Su dung dd/MM/yyyy\nDat mac dinh la ngay hien tai.");
+        } catch (Exception ex) {
+            System.out.println("Loi dinh dang ngay, dat mac dinh la ngay hien tai.");
             this.setNgayGD(new Date());
         }
 
-        System.out.println("Nhap ma khach hang: ");
+
+        System.out.print("Nhap ma khach hang: ");
         String MaKH = sc.nextLine();
-        KhachHang kh= new DanhSachKhachHang().Timkiem_MaKH(MaKH);
-        this.setKh(kh); 
-        while(getKh() == null){
-            System.out.println("Khong tim thay khach hang: " + MaKH);
-            System.out.println("Vui long nhap lai! ");
+        KhachHang kh = (dskh != null) ? dskh.Timkiem_MaKH(MaKH) : null;
+        while (kh == null) {
+            System.out.println("Khong tim thay khach hang, nhap lai: ");
             MaKH = sc.nextLine();
-            kh= new DanhSachKhachHang().Timkiem_MaKH(MaKH);
-            this.setKh(kh); 
+            kh = (dskh != null) ? dskh.Timkiem_MaKH(MaKH) : null;
         }
-        System.out.println("Nhap ma Nhan vien: ");
+        this.setKh(kh);
+
+        System.out.print("Nhap ma nhan vien: ");
         String MaNV = sc.nextLine();
-        NhanVien nv = new DanhSachNhanVien().TimKiemNhanVienTheoMa(MaNV);
-        this.setNv(nv);
-        while(getKh() == null){
-            System.out.println("Khong tim thay nhan vien: " + MaNV);
-            System.out.println("Vui long nhap lai! ");
+        NhanVien nv = (dsnv != null) ? dsnv.TimKiemNhanVienTheoMa(MaNV) : null;
+        while (nv == null) {
+            System.out.println("Khong tim thay nhan vien, nhap lai: ");
             MaNV = sc.nextLine();
-            nv = new DanhSachNhanVien().TimKiemNhanVienTheoMa(MaNV);
-            this.setNv(nv);
+            nv = (dsnv != null) ? dsnv.TimKiemNhanVienTheoMa(MaNV) : null;
         }
+        this.setNv(nv);
     }
     public void Xuat(){
         SimpleDateFormat df= new SimpleDateFormat("dd/MM/yyyy");

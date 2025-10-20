@@ -3,28 +3,15 @@ package code.danhsach;
 import java.util.*;
 import java.io.*;
 import code.doituong.*;
-import code.danhsach.*;
 
 public class DanhSachChitietHoaDon {
     private ChiTietHoaDon[] dsct;
     private int n;
-    private DanhSachHoaDon dshd;
-    private DanhSachSanPham dssp;
+
 
     public DanhSachChitietHoaDon() {
         n = 0;
         dsct = new ChiTietHoaDon[0];
-        dssp = null;
-        dshd = null;
-
-    }
-
-    public void setDSHD(DanhSachHoaDon dshd) {
-        this.dshd = dshd;
-    }
-
-    public void setDSSP(DanhSachSanPham dssp) {
-        this.dssp = dssp;
     }
 
     public ChiTietHoaDon getDSCT(int index) {
@@ -35,40 +22,35 @@ public class DanhSachChitietHoaDon {
         return n;
     }
 
+
     // -----------------Đọc file----------------------
-    public void ReadFile() {
-        try {
-            BufferedReader input = new BufferedReader(new FileReader("data/chitiethoadon.txt"));
-            String line = input.readLine();
-            while (line != null) {
-                String[] arr = line.split(",");
+    public void ReadFile(DanhSachHoaDon dshd, DanhSachSanPham dssp) {
+    try {
+        BufferedReader input = new BufferedReader(new FileReader("data/chitiethoadon.txt"));
+        String line;
+        while ((line = input.readLine()) != null) {
+            String[] arr = line.split(",");
+            String maHD = arr[0].trim();
+            String maSP = arr[1].trim();
+            int soluong = Integer.parseInt(arr[2].trim());
 
-                String maHD = arr[0].trim();
-                String maSP = arr[1].trim();
-                int soluong = Integer.parseInt(arr[2].trim());
+            ChiTietHoaDon ct = new ChiTietHoaDon(dshd, dssp);
+            HoaDon hd = dshd.Timkiem_MaHD(maHD);
+            SanPham sp = dssp.timkiem(maSP);
 
-                HoaDon hd = dshd.Timkiem_MaHD(maHD);
-                SanPham sp = dssp.TimKiem(maSP);
+            ct.setHDB(hd);
+            ct.setSP(sp);
+            ct.setSL(soluong);
 
-                ChiTietHoaDon ct = new ChiTietHoaDon();
-                ct.setDanhsach(dshd, dssp);
-                ct.setHDB(hd);
-                ct.setSP(sp);
-                ct.setSL(soluong);
-
-                dsct = Arrays.copyOf(dsct, n + 1);
-                dsct[n] = ct;
-                n++;
-
-                line = input.readLine();
-            }
-            input.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            dsct = Arrays.copyOf(dsct, n + 1);
+            dsct[n++] = ct;
         }
+        input.close();
+    } catch (Exception ex) {
+        ex.printStackTrace();
     }
+}
 
-    // -----------------Ghi file --------------------------
     public void WriteFile() {
         try {
             BufferedWriter fw = new BufferedWriter(new FileWriter("data/chitiethoadon.txt"));
@@ -82,10 +64,8 @@ public class DanhSachChitietHoaDon {
         }
     }
 
-    // ----------------Them chi tiet -------------------
-    public void Them(Scanner sc) {
-        ChiTietHoaDon ct = new ChiTietHoaDon();
-        ct.setDanhsach(dshd, dssp);
+    public void Them(Scanner sc,DanhSachHoaDon dshd, DanhSachSanPham dssp) {
+        ChiTietHoaDon ct = new ChiTietHoaDon(dshd, dssp);
         ct.Nhap(sc);
         dsct = Arrays.copyOf(dsct, n + 1);
         dsct[n] = ct;
@@ -93,8 +73,7 @@ public class DanhSachChitietHoaDon {
         WriteFile();
     }
 
-    // -----------------Sửa chi tiết----------------
-    public void Sua(Scanner sc) {
+    public void Sua(Scanner sc,DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         System.out.println("Nhap ma hoa don can sua:");
         String MaHD = sc.nextLine();
         HoaDon hd = dshd.Timkiem_MaHD(MaHD);
@@ -126,10 +105,10 @@ public class DanhSachChitietHoaDon {
             sc.nextLine();
             switch (choice) {
                 case 1:
-                    Suaspsl(sc, arr, count);
+                    Suaspsl(sc, arr, count, dshd, dssp);;
                     break;
                 case 2:
-                    Suasl(sc, arr, count);
+                    Suasl(sc, arr, count, dshd, dssp);;
                     break;
                 case 3:
                     System.out.println("Thoat menu sua.");
@@ -138,26 +117,26 @@ public class DanhSachChitietHoaDon {
         } while (choice != 3);
     }
 
-    public void Suaspsl(Scanner sc, ChiTietHoaDon[] arr, int count) {
+    public void Suaspsl(Scanner sc, ChiTietHoaDon[] arr, int count,DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         System.out.println("Nhap ma san pham can sua:");
         String MaSP = sc.nextLine();
-        SanPham sp = dssp.TimKiem(MaSP);
+        SanPham sp = dssp.timkiem(MaSP);
         while (sp == null) {
             System.out.println("Khong tim thay san pham: " + MaSP);
             System.out.println("Vui long nhap lai! ");
             MaSP = sc.nextLine();
-            sp = dssp.TimKiem(MaSP);
+            sp = dssp.timkiem(MaSP);
         }
 
         for (int i = 0; i < count; i++) {
             if (MaSP.equals(arr[i].getSP().getMa())) {
                 System.out.println("Nhap ma san pham moi:");
                 String newSP = sc.nextLine();
-                SanPham newsp = dssp.TimKiem(newSP);
+                SanPham newsp = dssp.timkiem(newSP);
                 while (newsp == null) {
                     System.out.println("Nhap lai ma san pham moi:");
                     newSP = sc.nextLine();
-                    newsp = dssp.TimKiem(newSP);
+                    newsp = dssp.timkiem(newSP);
                 }
 
                 arr[i].setSP(newsp);
@@ -175,15 +154,15 @@ public class DanhSachChitietHoaDon {
         WriteFile();
     }
 
-    public void Suasl(Scanner sc, ChiTietHoaDon[] arr, int count) {
+    public void Suasl(Scanner sc, ChiTietHoaDon[] arr, int count,DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         System.out.println("Nhap ma san pham can sua:");
         String MaSP = sc.nextLine();
-        SanPham sp = dssp.TimKiem(MaSP);
+        SanPham sp = dssp.timkiem(MaSP);
         while (sp == null) {
             System.out.println("Khong tim thay san pham: " + MaSP);
             System.out.println("Vui long nhap lai! ");
             MaSP = sc.nextLine();
-            sp = dssp.TimKiem(MaSP);
+            sp = dssp.timkiem(MaSP);
         }
 
         for (int i = 0; i < count; i++) {
@@ -197,8 +176,7 @@ public class DanhSachChitietHoaDon {
         WriteFile();
     }
 
-    // --------------Xoa ------------------
-    public void Xoa(Scanner sc) {
+    public void Xoa(Scanner sc,DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         System.out.println("Nhap ma hoa don can xoa:");
         String MaHD = sc.nextLine();
         HoaDon hd = dshd.Timkiem_MaHD(MaHD);
@@ -233,7 +211,7 @@ public class DanhSachChitietHoaDon {
                     XoaTB(MaHD);
                     break;
                 case 2:
-                    Xoasphd(sc, arr, count, MaHD);
+                    Xoasphd(sc, arr, count, MaHD, dshd, dssp);
                     break;
                 case 3:
                     System.out.println("Thoat menu xoa.");
@@ -258,16 +236,16 @@ public class DanhSachChitietHoaDon {
         WriteFile();
     }
 
-    public void Xoasphd(Scanner sc, ChiTietHoaDon[] arr, int count, String MaHD) {
+    public void Xoasphd(Scanner sc, ChiTietHoaDon[] arr, int count, String MaHD,DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         boolean bool = false;
         System.out.println("Nhap ma san pham can xoa:");
         String MaSP = sc.nextLine();
-        SanPham sp = dssp.TimKiem(MaSP);
+        SanPham sp = dssp.timkiem(MaSP);
         while (sp == null) {
             System.out.println("Khong tim thay san pham: " + MaSP);
             System.out.println("Vui long nhap lai! ");
             MaSP = sc.nextLine();
-            sp = dssp.TimKiem(MaSP);
+            sp = dssp.timkiem(MaSP);
         }
 
         for (int i = 0; i < n;) {
@@ -286,8 +264,7 @@ public class DanhSachChitietHoaDon {
         WriteFile();
     }
 
-    //----------------Tìm kiếm---------------------------
-    public void TimKiem(Scanner sc) {
+    public void TimKiem(Scanner sc,DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         System.out.println("Nhap ma hoa don:");
         String MaHD = sc.nextLine();
         HoaDon hd = dshd.Timkiem_MaHD(MaHD);

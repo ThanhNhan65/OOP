@@ -16,12 +16,18 @@ public class ChiTietHoaDon implements INhapXuat {
         hd = new HoaDon();
         sp = new SanPham();
         soluong = 0;
+        dshd= null;
+        dssp = null;
     }
-
-    public void setDanhsach(DanhSachHoaDon dshd, DanhSachSanPham dssp){
+    public ChiTietHoaDon(DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         this.dshd = dshd;
         this.dssp = dssp;
+        this.hd = new HoaDon();
+        this.sp = new SanPham();
+        this.soluong = 0;
     }
+
+
     public void setHDB(HoaDon hd) {
         this.hd = hd;
     }
@@ -32,6 +38,7 @@ public class ChiTietHoaDon implements INhapXuat {
 
     public void setSP(SanPham sp) {
         this.sp = sp;
+        
     }
 
     public SanPham getSP() {
@@ -64,12 +71,12 @@ public class ChiTietHoaDon implements INhapXuat {
 
         System.out.println("Vui long nhap ma san pham: ");
         String MaSP = sc.nextLine();
-        this.sp = dssp.TimKiem(MaSP);
+        this.sp = dssp.timkiem(MaSP);
         while (sp == null) {
             System.out.println("Khong tim thay san pham: " + MaSP);
             System.out.println("Vui long nhap lai: ");
             MaSP = sc.nextLine();
-            this.sp = dssp.TimKiem(MaSP);
+            this.sp = dssp.timkiem(MaSP);
         }
 
         System.out.println("Vui long nhap so luong: ");
@@ -87,8 +94,7 @@ public class ChiTietHoaDon implements INhapXuat {
             " | Ma san pham: " + sp.getMa() +
             " | Ten san pham: " + sp.getTen() +
             " | So luong: " + soluong +
-            " | Thanh tien: " + Tinhtien()
-        );
+            " | Thanh tien: " + Tinhtien());
     }
 }
 
