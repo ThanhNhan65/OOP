@@ -115,6 +115,7 @@ class Hoadonban extends GiaoDich{
 
 
 /*Lớp danh sách hóa đơn*/
+<<<<<<< HEAD:code/hoadon.java
 class DSHD{
     Hoadonban[] dshd;
     int n;
@@ -123,3 +124,81 @@ class DSHD{
         dshd= new hoadonban[0];
     }
 }
+=======
+    class DSHD{
+        Hoadonban[] dshd;
+        int n;
+        public DSHD(){
+            n=0;
+            dshd= new Hoadonban[0];
+        }
+        public int getN() {
+            return n;
+        }
+
+        public void ReadFile(){
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            try{
+                BufferedReader input = new BufferedReader(new FileReader(data\\hoadonban.txt));
+                String line = input.readLine();
+                while(line != null){
+                    String[] arr = line.split(",");
+
+                    String maHD = arr[0].trim();
+                    String maKH = arr[1].trim();
+                    String maNV = arr[2].trim();
+                    Date ngayGD = df.parse(arr[3].trim());
+
+                    Khachhang kh = dskh.TimKiem(maKH);
+                    Nhanvien nv = dsnv.Timkem(maNV);
+
+                    Hoadonban hd = new Hoadonban(maHD, ngayGD, kh, nv, new DSCT());
+                    
+                    dshd = Arrays.copyOf(dshd, n+ 1);
+                    dshd[n]= hd;
+                    n++;
+
+                    line = input.readLine();
+                }
+            }catch(Exception ex){
+                        ex.printStackTrace();
+                    }
+        }
+
+        public void WriteFile(){
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            try{
+                FileWriter fw = new BufferedWriter("data\\chitiethoadon.txt");
+                for(int i=0; i<n ;i++){
+                    fw.write(dshd[i].getMaHDB() + ","+dshd[i].kh.getMaKH() + ","+dshd[i].nv.getMaNV());
+                    fw.newLine();   
+                }
+                fw.close();
+            }catch (Exception e) {
+                    System.out.println(e);
+                }
+        }
+        public void Them(Scanner sc){
+            dshd = Arrays.copyOf(dshd, n+1);
+            dshd[n]= new Hoadonban();
+            dshd[n].Nhap(sc);
+            n++;
+            WriteFile();
+        }
+        public Hoadonban Timkiem_MaHD(Hoadonban MaHD){
+            boolean found=false;
+            Hoadonban hd= new Hoadonban();
+            for(int i=0; i<n;; i++){
+                if(ds[i].getMaHDB().equals(MaHD)){
+                    hd=ds[i];
+                    found=true;
+                    break;
+                }   
+            }
+            if(found)
+                return hd;
+            else
+                return null;
+        }
+    }
+>>>>>>> da98180 (Thay đổi cách trình bày):code/doituong/hoadon.java
