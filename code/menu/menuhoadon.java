@@ -15,7 +15,7 @@ public class menuhoadon {
         DanhSachSanPham dssp= new DanhSachSanPham();
 
         dskh.DocTuFile("data/danhsachKH.txt");
-        dsnv.DocTuFile("data/danhsachNV");
+        dsnv.DocTuFile("data/danhsachNV.txt");
         dssp.docFile();
         dsct.ReadFile(dshd, dssp);
         dshd.ReadFile(dskh, dsnv);
