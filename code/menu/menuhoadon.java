@@ -13,10 +13,11 @@ public class menuhoadon {
         DanhSachChitietHoaDon dsct = new DanhSachChitietHoaDon();
         DanhSachHoaDon dshd = new DanhSachHoaDon();
         DanhSachSanPham dssp= new DanhSachSanPham();
+        DanhSachLoai dsl= new DanhSachLoai();
 
         dskh.DocTuFile("data/danhsachKH.txt");
         dsnv.DocTuFile("data/danhsachNV.txt");
-        dssp.docFile();
+        dssp.docFile(dsl);
         dsct.ReadFile(dshd, dssp);
         dshd.ReadFile(dskh, dsnv);
 
