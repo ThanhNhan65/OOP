@@ -1,99 +1,291 @@
 package code.danhsach;
 
-import java.io.File;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.Arrays;
 import java.util.Scanner;
 import code.doituong.*;
 
-public class DanhSachLoai{
-    private ArrayList<Loai> ds= new ArrayList<>();
-    public void them(Scanner sc){
-        Loai l= new Loai();
-        l.nhap(sc);
-        ds.add(l);
-        System.out.println("Ok roi");
+public class DanhSachLoai {
+    private Loai[] ds = new Loai[0];
+    private int n = 0;
+
+    public void docFile(){
+        ds = new Loai[0];
+        n = 0;
+        try{
+            BufferedReader br = new BufferedReader(new FileReader("data/loai.txt"));
+            String line = br.readLine();
+            while(line != null){
+                line = line.trim();
+                if(!line.isEmpty()){
+                    String[] a = line.split(",", -1);
+                    if(a.length >= 2){
+                        String ma  = a[0].trim();
+                        String ten = a[1].trim();
+                        if(!ma.isEmpty() && !TonTaiMa(ma)){
+                            Loai l = new Loai();
+                            l.setMaloai(ma);
+                            l.setTenloai(ten);
+                            ds = Arrays.copyOf(ds, n + 1);
+                            ds[n++] = l;
+                        }
+                    }
+                }
+                line = br.readLine();
+            }
+            br.close();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
-    public void xem(){
-        System.out.printf("%-10s %-20s%n","MaLoai", "TenLoai");
-        for(Loai l: ds) l.xuat();
+
+    public void ghiFile(){
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter("data/loai.txt"));
+            for(int i = 0; i < n; i++){
+                Loai l = ds[i];
+                if(l == null) continue;
+                String ma  = (l.getMaloai()  == null ? "" : l.getMaloai());
+                String ten = (l.getTenloai() == null ? "" : l.getTenloai());
+                bw.write(ma + "," + ten);
+                bw.newLine();
+            }
+            bw.close();
+        }catch(Exception e){
+            System.out.println(e);
+        }
     }
-    public void xoa(Scanner sc){
-        System.out.print("Nhap ma loai de xoa: ");
-        String ma= sc.nextLine().trim();
-        int vt=-1;
-        for(int i=0; i<ds.size(); i++){
-            Loai l= ds.get(i);
-            if(l.getMaloai()!= null && l.getMaloai().equalsIgnoreCase(ma)){
-                vt=i;
+
+    public void Them(Scanner sc){
+        Loai l = new Loai();
+        l.Nhap(sc);
+        String ma = l.getMaloai();
+        if(ma == null || ma.trim().isEmpty()){
+            System.out.println("Ma khong hop le");
+            return;
+        }
+        if(TonTaiMa(ma)){
+            System.out.println("Ma nay da ton tai");
+            return;
+        }
+        ds = Arrays.copyOf(ds, n + 1);
+        ds[n++] = l;
+        System.out.println("Da them loai");
+        ghiFile();
+    }
+
+    private boolean TonTaiMa(String ma){
+        if(ma == null || ma.isEmpty()) return false;
+        for(int i = 0; i < n; i++){
+            Loai l = ds[i];
+            if(l != null && ma.equalsIgnoreCase(l.getMaloai()))
+                return true;
+        }
+        return false;
+    }
+
+    public void Xem(){
+        if(n == 0){
+            System.out.println("Danh sach loai rong");
+            return;
+        }
+        System.out.printf("%-10s %-20s%n", "MaLoai", "TenLoai");
+        for(int i = 0; i < n; i++){
+            Loai l = ds[i];
+            if(l != null) l.Xuat();
+        }
+    }
+
+    public void Xoa(Scanner sc){
+        int c;
+        do{
+            System.out.println("1. Xoa loai theo ma");
+            System.out.println("2. Xoa toan bo loai");
+            System.out.println("0. Thoat");
+            c= sc.nextInt();
+            sc.nextLine();
+            switch(c){
+                case 1:{
+                    System.out.print("Nhap ma loai muon xoa: ");
+                    String ma = sc.nextLine().trim();
+                    boolean ok = XoaTheoMa(ma);
+                    System.out.println(ok ? "Da xoa" : "Khong thay ma nay");
+                    break;
+                }
+                case 2:{
+                    System.out.println("Hien co " + n + " loai");
+                    System.out.println("Nhap OK de xac nhan xoa het:");
+                    if("OK".equalsIgnoreCase(sc.nextLine().trim())){
+                        XoaTatCa();
+                        System.out.println("Da xoa tat ca");
+                    }
+                    break;
+                }
+                case 0: break;
+                default: System.out.println("Khong hop le");
+            }
+        }while(c != 0);
+    }
+
+    private boolean XoaTheoMa(String ma){
+        if(ma == null) return false;
+        for(int i = 0; i < n; i++){
+            if(ds[i] != null && ma.equalsIgnoreCase(ds[i].getMaloai())){
+                for(int j = i; j < n - 1; j++) ds[j] = ds[j + 1];
+                ds[n - 1] = null;
+                n--;
+                ds = Arrays.copyOf(ds, n);
+                ghiFile();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void XoaTatCa(){
+        ds = new Loai[0];
+        n = 0;
+        ghiFile();
+    }
+
+    public void Sua(Scanner sc){
+        System.out.print("Nhap ma loai muon sua: ");
+        String ma = sc.nextLine().trim();
+        Loai l = TimTheoMa(ma);
+        if(l == null){
+            System.out.println("Khong tim thay");
+            return;
+        }
+        int c;
+        do{
+            System.out.println("Dang sua [" + l.getMaloai() + "]");
+            System.out.println("1. Sua ma");
+            System.out.println("2. Sua ten");
+            System.out.println("3. Sua toan bo");
+            System.out.println("0. Thoat");
+            c= sc.nextInt();
+            sc.nextLine();
+            switch(c){
+                case 1: SuaMa(sc, l); 
+                break;
+                case 2: SuaTen(sc, l); 
+                break;
+                case 3: SuaToanBo(sc, l); 
+                break;
+                case 0: break;
+                default: System.out.println("Khong hop le");
+            }
+        }while(c != 0);
+    }
+
+    private void SuaMa(Scanner sc, Loai l){
+        System.out.println("Ma hien tai: " + l.getMaloai());
+        System.out.print("Ma moi: ");
+        String m = sc.nextLine().trim();
+        if(m.isEmpty()){ 
+            System.out.println("Khong hop le"); 
+            return; 
+        }
+        if(TonTaiMa(m)){ 
+            System.out.println("Ma da ton tai"); 
+            return; 
+        }
+        l.setMaloai(m);
+        ghiFile();
+    }
+
+    private void SuaTen(Scanner sc, Loai l){
+        System.out.println("Ten hien tai: " + l.getTenloai());
+        System.out.print("Ten moi: ");
+        String t = sc.nextLine().trim();
+        if(t.isEmpty()){ 
+            System.out.println("Khong hop le"); 
+            return; 
+        }
+        l.setTenloai(t);
+        ghiFile();
+    }
+
+    private void SuaToanBo(Scanner sc, Loai l){
+        System.out.println("Ma hien tai: " + l.getMaloai());
+        System.out.print("Ma moi: ");
+        String m = sc.nextLine().trim();
+        if(!m.isEmpty()){
+            if(TonTaiMa(m)) System.out.println("Ma da ton tai");
+            else l.setMaloai(m);
+        }
+
+        System.out.println("Ten hien tai: " + l.getTenloai());
+        System.out.print("Ten moi: ");
+        String t = sc.nextLine().trim();
+        if(!t.isEmpty())
+        l.setTenloai(t);
+
+        ghiFile();
+    }
+
+    public void TimKiem(Scanner sc){
+    int c;
+    do{
+        System.out.println("1. Tim theo ma");
+        System.out.println("2. Tim theo ten (chua chuoi)");
+        System.out.println("0. Thoat");
+        System.out.print("Chon: ");
+        c = sc.nextInt();
+        sc.nextLine(); 
+
+        switch(c){
+            case 1: {
+                System.out.print("Nhap MA loai: ");
+                String ma = sc.nextLine().trim();
+                Loai l = TimTheoMa(ma);  
+                if(l == null){
+                    System.out.println("Khong tim thay!");
+                }else{
+                    System.out.printf("%-10s %-20s%n","MaLoai","TenLoai");
+                    l.Xuat();
+                }
                 break;
             }
-        }
-        if(vt>=0){
-            ds.remove(vt);
-            System.out.println("Xoa roi");
-        } else {
-            System.out.println("D co de xoa");
-        }
-    }
-    public Loai timkiem(String ma){
-        if(ma== null) return null;
-        String k= ma.trim();
-        for(int i=0; i<ds.size(); i++){
-            Loai l= ds.get(i);
-            if(l.getMaloai()!= null && l.getMaloai().equalsIgnoreCase(k)){
-                return l;
+            case 2: {
+                System.out.print("Nhap TEN can tim: ");
+                String ten = sc.nextLine().trim();
+                int d = TimTheoTen(ten);  
+                if(d == 0) System.out.println("Khong tim thay!");
+                break;
             }
+            case 0: break;
+            default: System.out.println("Khong hop le!");
+        }
+    }while(c != 0);
+}
+
+    public Loai TimTheoMa(String ma){
+        if(ma == null) return null;
+        for(int i = 0; i < n; i++){
+            Loai l = ds[i];
+            if(l != null && ma.equalsIgnoreCase(l.getMaloai()))
+                return l;
         }
         return null;
     }
-    public void sua(Scanner sc){
-        System.out.print("Nhap ma loai can sua: ");
-        String ma= sc.nextLine().trim();
-        Loai l= timkiem(ma);
-        if(l!= null){
-            System.out.println("Nhap lai tt");
-            l.nhap(sc);
-            System.out.println("ok roi");
-        } else {
-            System.out.println("Kh thay ma");
-        }
-    }
-    public void docFile(){
-        ds.clear();
-        try{
-            File f= new File("loai.txt");
-            if(!f.exists()){
-                PrintWriter w= new PrintWriter("loai.txt");
-                w.close();
-            }
-            Scanner sc= new Scanner(f);
-            while(sc.hasNextLine()){
-                String line= sc.nextLine().trim();
-                if(line.isEmpty()) continue;
-                String[] p= line.split(",", -1);
-                if(p.length!=2) continue;
-                Loai l= new Loai(p[0], p[1]);
-                ds.add(l);
-            }
-            sc.close();
-        }catch(Exception e){
-            System.out.println("Khong doc duoc file!");
-        }
-    }
-    public void ghiFile(){
-        try{
-            PrintWriter w= new PrintWriter("loai.txt");
-            for(int i=0; i<ds.size(); i++){
-                Loai l= ds.get(i);
-                String ma= l.getMaloai()==null? "": l.getMaloai();
-                String ten= l.getTenloai()==null? "": l.getTenloai();
-                w.println(ma+","+ten);
-            }
-            w.close();
-        }catch(Exception e){
-            System.out.println("Loi ghi file!");
-        }
-    }
-}
 
+    public int TimTheoTen(String ten){
+        if(ten == null) return 0;
+        String k = ten.toLowerCase();
+        int d = 0;
+        for(int i = 0; i < n; i++){
+            Loai l = ds[i];
+            if(l != null && l.getTenloai() != null && l.getTenloai().toLowerCase().contains(k)){
+                l.Xuat();
+                d++;
+            }
+        }
+        return d;
+    }
+
+    
+}
