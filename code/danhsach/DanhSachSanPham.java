@@ -179,7 +179,7 @@ public class DanhSachSanPham{
     } while (c != 0);
 }
 
-    private SanPham TimTheoMa(String ma){
+    public SanPham TimTheoMa(String ma){
         if(ma == null) return null;
         for(int i = 0; i < n; i++){
             SanPham sp = ds[i];
