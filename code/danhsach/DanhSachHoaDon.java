@@ -22,6 +22,10 @@ public class DanhSachHoaDon{
     public int getN() {
         return n;
     }
+    public HoaDon getHoaDon(int index) {
+        return dshd[index];
+    }
+
 
     public void ReadFile(DanhSachKhachHang dskh, DanhSachNhanVien dsnv){
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -40,6 +44,7 @@ public class DanhSachHoaDon{
                     Date ngayGD = df.parse(arr[3].trim());
 
                     HoaDon hd = new HoaDon();
+                    hd.setMaHD(maHD);
 
                     KhachHang kh = dskh.Timkiem_MaKH(maKH); 
                     NhanVien nv = dsnv.TimKiemNhanVienTheoMa(maNV);

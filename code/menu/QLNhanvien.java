@@ -3,8 +3,8 @@ package code.menu;
 import java.util.Scanner;
 import code.danhsach.*;
 
-public class Main {
-    public static void main(String[] args) {
+public class QLNhanvien {
+    public void menu() {
         DanhSachNhanVien dsnv = new DanhSachNhanVien();
         dsnv.DocTuFile("data/danhsachNV.txt");
         dsnv.Xuat();

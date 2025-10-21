@@ -72,6 +72,12 @@ public class DanhSachChitietHoaDon {
         n++;
         WriteFile();
     }
+    public void ThemChiTiet(ChiTietHoaDon ct) {
+    if(ct != null) {
+        dsct = Arrays.copyOf(dsct, n + 1);
+        dsct[n++] = ct;
+    }
+}
 
     public void Sua(Scanner sc,DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         System.out.println("Nhap ma hoa don can sua:");
@@ -276,6 +282,11 @@ public class DanhSachChitietHoaDon {
             if (MaHD.equals(dsct[i].getHDB().getMaHDB())) {
                 dsct[i].Xuat();
             }
+        }
+    }
+    public void Hienthidanhsach(){
+        for(int i=0 ; i < n ;i++){
+            dsct[i].Xuat();
         }
     }
 }

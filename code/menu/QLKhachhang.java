@@ -1,10 +1,18 @@
-package code.main;
-import java.util.Scanner;
+package code.menu;
 
 import code.danhsach.*;
 
-public class Run {
-    public static void main(String[] args) {
+
+import java.util.Scanner;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.Writer;
+import java.io.Reader;
+import java.io.BufferedReader;
+
+public class QLKhachhang {
+    public void menu() {
         DanhSachKhachHang dskh = new DanhSachKhachHang();
         dskh.DocTuFile("data/danhsachKH.txt");
         dskh.Xuat();
@@ -28,22 +36,19 @@ public class Run {
                     System.out.println("Them nhan vien vao danh sach");
                     dskh.Them();
                     dskh.Xuat();
-                    dskh.GhiVaoFile("danhsachKH.txt");
-                        dskh.GhiVaoFile("data/danhsachKH.txt");
+                    dskh.GhiVaoFile("data/danhsachKH.txt");
                     break;
                 case 2:
                     System.out.print("Chon ma nhan vien muon xoa: ");
                     dskh.Xoa(sc.nextLine());
                     dskh.Xuat();
-                    dskh.GhiVaoFile("danhsachKH.txt");
-                        dskh.GhiVaoFile("data/danhsachKH.txt");
+                    dskh.GhiVaoFile("data/danhsachKH.txt");
                     break;
-                case 3: 
+                case 3:
                     System.out.println("Chon ma nhan vien ban muon sua");
                     dskh.SuaKH(sc.nextLine());
                     sc.nextLine();
-                    dskh.GhiVaoFile("danhsachKH.txt");
-                        dskh.GhiVaoFile("data/danhsachKH.txt");
+                    dskh.GhiVaoFile("data/danhsachKH.txt");
                     break;
                 case 4:
                     dskh.TimkiemKH();
