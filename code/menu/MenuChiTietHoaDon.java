@@ -10,9 +10,10 @@ public class MenuChiTietHoaDon {
         DanhSachHoaDon dshd = new DanhSachHoaDon();
         DanhSachSanPham dssp = new DanhSachSanPham();
         DanhSachChitietHoaDon dsct = new DanhSachChitietHoaDon();
+        DanhSachLoai dsl= new DanhSachLoai();
 
         dshd.ReadFile(new DanhSachKhachHang(), new DanhSachNhanVien());
-        dssp.docFile();
+        dssp.docFile(dsl);
         dsct.ReadFile(dshd, dssp);
 
         int choice;
