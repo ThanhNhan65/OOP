@@ -48,7 +48,8 @@ public class SanPham implements INhapXuat {
         this.gia= gia;
     }
 
-    public void Nhap(Scanner sc, DanhSachLoai dsl){
+    public void Nhap(Scanner sc){
+        DanhSachLoai dsl= new DanhSachLoai();
         System.out.print("Nhap ma sp: ");
         ma= sc.nextLine();
         System.out.print("Nhap ten sp: ");
