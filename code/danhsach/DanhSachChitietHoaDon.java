@@ -36,7 +36,7 @@ public class DanhSachChitietHoaDon {
 
             ChiTietHoaDon ct = new ChiTietHoaDon(dshd, dssp);
             HoaDon hd = dshd.Timkiem_MaHD(maHD);
-            SanPham sp = dssp.timkiem(maSP);
+            SanPham sp = dssp.TimTheoMa(maSP);
 
             ct.setHDB(hd);
             ct.setSP(sp);
@@ -120,23 +120,23 @@ public class DanhSachChitietHoaDon {
     public void Suaspsl(Scanner sc, ChiTietHoaDon[] arr, int count,DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         System.out.println("Nhap ma san pham can sua:");
         String MaSP = sc.nextLine();
-        SanPham sp = dssp.timkiem(MaSP);
+        SanPham sp = dssp.TimTheoMa(MaSP);
         while (sp == null) {
             System.out.println("Khong tim thay san pham: " + MaSP);
             System.out.println("Vui long nhap lai! ");
             MaSP = sc.nextLine();
-            sp = dssp.timkiem(MaSP);
+            sp = dssp.TimTheoMa(MaSP);
         }
 
         for (int i = 0; i < count; i++) {
             if (MaSP.equals(arr[i].getSP().getMa())) {
                 System.out.println("Nhap ma san pham moi:");
                 String newSP = sc.nextLine();
-                SanPham newsp = dssp.timkiem(newSP);
+                SanPham newsp = dssp.TimTheoMa(newSP);
                 while (newsp == null) {
                     System.out.println("Nhap lai ma san pham moi:");
                     newSP = sc.nextLine();
-                    newsp = dssp.timkiem(newSP);
+                    newsp = dssp.TimTheoMa(newSP);
                 }
 
                 arr[i].setSP(newsp);
@@ -157,12 +157,12 @@ public class DanhSachChitietHoaDon {
     public void Suasl(Scanner sc, ChiTietHoaDon[] arr, int count,DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         System.out.println("Nhap ma san pham can sua:");
         String MaSP = sc.nextLine();
-        SanPham sp = dssp.timkiem(MaSP);
+        SanPham sp = dssp.TimTheoMa(MaSP);
         while (sp == null) {
             System.out.println("Khong tim thay san pham: " + MaSP);
             System.out.println("Vui long nhap lai! ");
             MaSP = sc.nextLine();
-            sp = dssp.timkiem(MaSP);
+            sp = dssp.TimTheoMa(MaSP);
         }
 
         for (int i = 0; i < count; i++) {
@@ -240,12 +240,12 @@ public class DanhSachChitietHoaDon {
         boolean bool = false;
         System.out.println("Nhap ma san pham can xoa:");
         String MaSP = sc.nextLine();
-        SanPham sp = dssp.timkiem(MaSP);
+        SanPham sp = dssp.TimTheoMa(MaSP);
         while (sp == null) {
             System.out.println("Khong tim thay san pham: " + MaSP);
             System.out.println("Vui long nhap lai! ");
             MaSP = sc.nextLine();
-            sp = dssp.timkiem(MaSP);
+            sp = dssp.TimTheoMa(MaSP);
         }
 
         for (int i = 0; i < n;) {
