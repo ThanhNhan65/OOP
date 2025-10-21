@@ -1,2 +1,10 @@
-H101,Dan gita,hung,L01,560000,5
-
+SP001,Dan guitar Acoustic,Yamaha,L01,2500000,10
+SP002,Dan guitar Classic,Fender,L01,3200000,5
+SP003,Organ Yamaha PSR,Yamaha,L02,5000000,3
+SP004,Trong Cajon,Meinl,L03,1200000,8
+SP005,Trong Jazz,Pearl,L03,8500000,2
+SP006,Ken Saxophone Alto,Selmer,L04,15000000,1
+SP007,Day dan guitar,Ernie Ball,L05,150000,50
+SP008,Metronome dien tu,Korg,L05,300000,20
+SP009,Dan Piano dien,Casio,L02,12000000,3
+SP010,Trong Bongo,Latin Percussion,L03,950000,6

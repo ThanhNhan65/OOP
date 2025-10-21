@@ -286,6 +286,9 @@ public class DanhSachLoai {
         }
         return d;
     }
+    public int getN(){
+        return n;
+    }
 
     
 }

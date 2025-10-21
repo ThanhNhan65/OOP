@@ -17,7 +17,8 @@ public class HoaDon extends GiaoDich {
 
     public HoaDon() {
         super();
-        this.MaHDB = "HD" + String.format("%03d", MaHDNext++);
+        this.MaHDB = null;
+        this.dsct = new DanhSachChitietHoaDon();
     }
 
     public HoaDon(DanhSachKhachHang dskh, DanhSachNhanVien dsnv, DanhSachSanPham dssp) {
@@ -32,7 +33,8 @@ public class HoaDon extends GiaoDich {
     public String getMaHDB(){ 
         return MaHDB; }
     public void setMaHD(String MaHDB){ 
-        this.MaHDB = MaHDB; }
+        this.MaHDB = MaHDB; 
+    }
 
     public DanhSachChitietHoaDon getdsct(){ 
         return dsct; }
@@ -94,7 +96,7 @@ public class HoaDon extends GiaoDich {
     }
     public void Xuat(){
         SimpleDateFormat df= new SimpleDateFormat("dd/MM/yyyy");
-        System.out.println("Hoa đơn: " + MaHDB +
+        System.out.println("Hoa don: " + MaHDB +
                            " | Ngay: " + df.format(getNgayGD())+
                            " | Ma Khach hang: " + getKh().getMaKH() +
                            " | Ten Kh: " + getKh().getHoten()+
@@ -103,10 +105,10 @@ public class HoaDon extends GiaoDich {
          for(int i=0; i<dsct.getN(); i++){
             ChiTietHoaDon ct = dsct.getDSCT(i);
             if(ct.getHDB().getMaHDB().equals(this.MaHDB)){
-                System.out.println("San pham: " + ct.getSP().getTen() +
+                System.out.println("  San pham: " + ct.getSP().getTen() +
                                    " | So luong: " + ct.getSL() +
                                    " | Don gia: " + ct.getSP().getGia() +
-                                   " | Gia tien: " + ct.Tinhtien());   
+                                   " | Thanh tien: " + ct.Tinhtien());   
             }
         }
     }

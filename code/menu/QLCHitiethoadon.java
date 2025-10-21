@@ -70,7 +70,5 @@ public class QLCHitiethoadon {
                     System.out.println("Lua chon khong hop le! Vui long chon lai.");
             }
         } while (choice != 0);
-
-        sc.close();
     }
 }

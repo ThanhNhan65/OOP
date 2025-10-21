@@ -22,7 +22,7 @@ public class DanhSachSanPham{
                 line = line.trim();
                 if(!line.isEmpty()){
                     String[] a = line.split(",", -1);
-                    if(a.length == 5){
+                    if(a.length >= 5){
                         String ma     = a[0].trim();
                         String ten    = a[1].trim();
                         String hang   = a[2].trim();
@@ -398,6 +398,11 @@ private void SuaToanBo(Scanner sc, DanhSachLoai dsl, SanPham sp){
                 if (g >= min && g <= max) sp.Xuat();
             }
         }catch(Exception ignored){}
+    }
+
+    // expose count for diagnostics
+    public int getN(){
+        return n;
     }
 
 }
