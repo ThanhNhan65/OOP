@@ -1,0 +1,8 @@
+Ma Gia Vy,Binh Phu,909457300,NV000,Nhan vien,26,7800000
+Duong Chi Tai,Hau Giang,19012912,NV001,Quan ly,26,13000000
+Nguyen Khanh Hung,Tran Phu,10470127,NV002,Nhan vien,20,6000000
+Nguyen Thanh Nhan,Binh Chanh,10840172,NV003,Quan ly,1,500000
+Tran Ngoc Kim Ngan,hong iet,912460,NV004,Nhan vien,26,7800000
+Thu Trang,ai biet,12461486,NV005,Nhan vien,26,7800000
+Huong Giang,hong biet,19247091,NV006,Nhan vien,26,7800000
+Thu Trang,ai biet,1460146,NV007,Nhan vien,25,7500000

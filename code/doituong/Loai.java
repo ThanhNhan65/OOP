@@ -1,0 +1,37 @@
+package code.doituong;
+
+import java.util.Scanner;
+import code.giaodien.*;
+
+public class Loai implements INhapXuat{
+    private String maLoai, tenLoai;
+    public Loai(){}
+    public Loai(String maLoai, String tenLoai){
+        this.maLoai= maLoai;
+        this.tenLoai= tenLoai;
+    }
+    public String getMaloai(){
+        return maLoai;
+    }
+    public void setMaloai(String maLoai){
+        this.maLoai= maLoai;
+    }
+    public String getTenloai(){
+        return tenLoai;
+    }
+    public void setTenloai(String tenLoai){
+        this.tenLoai= tenLoai;
+    }
+    public void Nhap(Scanner sc){
+        System.out.print("Nhap ma loai: ");
+        maLoai= sc.nextLine();
+        System.out.print("Nhap ten loai: ");
+        tenLoai= sc.nextLine();
+    }
+    public void Xuat(){
+        System.out.printf("%-10s | %-20s%n", maLoai, tenLoai);
+    }
+    public String toFile(){
+        return maLoai+","+tenLoai;
+    }
+}

@@ -1,0 +1,3 @@
+Ma Gia Vy,Binh Phu,0909457300,NV001,Nhan vien,26,0
+Duong Chi Tai,Hau Giang,019012912,NV002,Quan ly,26,0
+Nguyen Khanh Hung,Tran Phu,10470127,NV003,Nhan vien,20,0
