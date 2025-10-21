@@ -82,7 +82,7 @@ public class DanhSachHoaDon{
             WriteFile();
         }
 
-    public void Timkiem(Scanner sc, DanhSachHoaDon dshd, DanhSachKhachHang dskh, DanhSachNhanVien dsnv){
+    public void Timkiem(Scanner sc, DanhSachKhachHang dskh, DanhSachNhanVien dsnv){
         int choice;
         do {
             System.out.println("1. Tim kiem theo ma hoa don");
@@ -96,14 +96,14 @@ public class DanhSachHoaDon{
                 case 1:
                     System.out.print("Nhap ma hoa don: ");
                     String mahd = sc.nextLine();
-                    HoaDon hd = dshd.Timkiem_MaHD(mahd);
+                    HoaDon hd = Timkiem_MaHD(mahd);
                     while (hd == null) {
                         System.out.println("Khong tim thay hoa don: " + mahd);
                         System.out.println("Vui long nhap lai: ");
                         mahd = sc.nextLine();
-                        hd = dshd.Timkiem_MaHD(mahd);
+                        hd = Timkiem_MaHD(mahd);
                     }
-                    Timkiem_MaHD(mahd).Xuat();            
+                    hd.Xuat();            
                     break;
                 case 2:
                     System.out.print("Nhap ma khach hang: ");
@@ -163,7 +163,7 @@ public class DanhSachHoaDon{
         }
     }
 
-    public void Xoa(Scanner sc, DanhSachHoaDon dshd, DanhSachKhachHang dskh, DanhSachChitietHoaDon dsct){
+    public void Xoa(Scanner sc, DanhSachHoaDon dshd, DanhSachKhachHang dskh){
         int choice;
         do {
             System.out.println("1. Xoa theo ma hoa don");
@@ -183,7 +183,7 @@ public class DanhSachHoaDon{
                         mahd = sc.nextLine();
                         hd = dshd.Timkiem_MaHD(mahd);
                     }
-                    Xoa_MaHD(mahd, dsct);            
+                    Xoa_MaHD(mahd);            
                     break;
                 case 2:
                     System.out.print("Nhap ma khach hang: ");
@@ -195,19 +195,17 @@ public class DanhSachHoaDon{
                         makh = sc.nextLine();
                         kh = dskh.Timkiem_MaKH(makh);
                     }
-                    Xoa_MaKH(makh, dsct);          
+                    Xoa_MaKH(makh);          
                     break;
             }
         } while (choice != 0);
     }
 
-    public void Xoa_MaHD(String MaHD, DanhSachChitietHoaDon dsct){
+    public void Xoa_MaHD(String MaHD){
         boolean bool=false;
         for(int i=0 ; i<n ;){
             if(dshd[i].getMaHDB().equals(MaHD)){
-                if(dsct != null){
-                    dsct.XoaTB(MaHD);
-                }
+                    dshd[i].getdsct().XoaTB(MaHD);
 
                 for(int j= i; j < n-1; j++){
                     dshd[j]=dshd[j+1];
@@ -221,15 +219,13 @@ public class DanhSachHoaDon{
         System.out.println(bool ? "Xoa thanh cong!" : "That bai!");
         WriteFile();
     }
-    public void Xoa_MaKH(String MaKH, DanhSachChitietHoaDon dsct){
+    public void Xoa_MaKH(String MaKH){
         boolean bool=false;
         for(int i=0 ; i<n ;){
             if(dshd[i].getKh().getMaKH().equals(MaKH)){
                 HoaDon hd = dshd[i];
 
-                if(dsct != null){
-                    dsct.XoaTB(hd.getMaHDB());
-                }
+                    dshd[i].getdsct().XoaTB(hd.getMaHDB());
 
                 for(int j= i; j < n-1; j++){
                     dshd[j]=dshd[j+1];
@@ -266,7 +262,7 @@ public class DanhSachHoaDon{
     }
 
     
-    public void Sua(Scanner sc, DanhSachNhanVien dsnv, DanhSachKhachHang dskh, DanhSachChitietHoaDon dsct){
+    public void Sua(Scanner sc, DanhSachNhanVien dsnv, DanhSachKhachHang dskh){
         int choice;
         do {
             System.out.println("1. Sua theo ma khach hang");

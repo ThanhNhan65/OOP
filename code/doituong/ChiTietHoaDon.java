@@ -71,12 +71,12 @@ public class ChiTietHoaDon implements INhapXuat {
 
         System.out.println("Vui long nhap ma san pham: ");
         String MaSP = sc.nextLine();
-        this.sp = dssp.timkiem(MaSP);
+        this.sp = dssp.TimTheoMa(MaSP);
         while (sp == null) {
             System.out.println("Khong tim thay san pham: " + MaSP);
             System.out.println("Vui long nhap lai: ");
             MaSP = sc.nextLine();
-            this.sp = dssp.timkiem(MaSP);
+            this.sp = dssp.TimTheoMa(MaSP);
         }
 
         System.out.println("Vui long nhap so luong: ");

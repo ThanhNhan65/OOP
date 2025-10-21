@@ -13,10 +13,11 @@ public class menuhoadon {
         DanhSachChitietHoaDon dsct = new DanhSachChitietHoaDon();
         DanhSachHoaDon dshd = new DanhSachHoaDon();
         DanhSachSanPham dssp= new DanhSachSanPham();
+        DanhSachLoai dSloai=new DanhSachLoai();
 
         dskh.DocTuFile("data/danhsachKH.txt");
         dsnv.DocTuFile("data/danhsachNV.txt");
-        dssp.docFile();
+        dssp.docFile(dSloai);
         dsct.ReadFile(dshd, dssp);
         dshd.ReadFile(dskh, dsnv);
 
@@ -38,13 +39,13 @@ public class menuhoadon {
                     dshd.Them(sc);
                     break;
                 case 2:
-                    dshd.Sua(sc, dsnv, dskh, dsct);
+                    dshd.Sua(sc, dsnv, dskh);
                     break;
                 case 3:
-                    dshd.Xoa(sc, dshd, dskh, dsct);
+                    dshd.Xoa(sc, dshd, dskh);
                     break;
                 case 4:
-                    dshd.Timkiem(sc, dshd, dskh, dsnv);
+                    dshd.Timkiem(sc,dskh,dsnv);
                     break;
                 case 5:
                     dshd.Showlist();
