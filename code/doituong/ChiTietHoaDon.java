@@ -60,22 +60,22 @@ public class ChiTietHoaDon implements INhapXuat {
 
     public void Nhap(Scanner sc) {
         System.out.println("Vui long nhap ma hoa don: ");
-        String MaHD = sc.nextLine();
+        String MaHD = sc.nextLine().trim();
         this.hd = dshd.Timkiem_MaHD(MaHD);
         while (hd == null) {
             System.out.println("Khong tim thay hoa don: " + MaHD);
             System.out.println("Vui long nhap lai: ");
-            MaHD = sc.nextLine();
+            MaHD = sc.nextLine().trim();
             this.hd = dshd.Timkiem_MaHD(MaHD);
         }
 
         System.out.println("Vui long nhap ma san pham: ");
-        String MaSP = sc.nextLine();
+        String MaSP = sc.nextLine().trim();
         this.sp = dssp.TimTheoMa(MaSP);
         while (sp == null) {
             System.out.println("Khong tim thay san pham: " + MaSP);
             System.out.println("Vui long nhap lai: ");
-            MaSP = sc.nextLine();
+            MaSP = sc.nextLine().trim();
             this.sp = dssp.TimTheoMa(MaSP);
         }
 

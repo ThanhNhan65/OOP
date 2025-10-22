@@ -14,6 +14,10 @@ public class DanhSachSanPham{
     private SanPham[] ds = new SanPham[0];
     private int n = 0;
 
+    public int getN(){
+        return n;
+    }
+
     public void docFile(DanhSachLoai dsl){
         try{
             BufferedReader br = new BufferedReader(new FileReader("data/sanpham.txt"));
@@ -69,6 +73,7 @@ public class DanhSachSanPham{
 
     public void Them(Scanner sc, DanhSachLoai dsl){
         SanPham sp = new SanPham();
+        sp.setDanhSachLoai(dsl);
         sp.Nhap(sc);
         String ma = sp.getMa();
         if (ma == null || ma.trim().isEmpty()){
@@ -117,7 +122,7 @@ public class DanhSachSanPham{
                 break;
             }
             case 2: {
-                System.out.println("Hien co" + n + "san pham");
+                System.out.println("Hien co " + n + " san pham");
                 System.out.println("Ban muon xoa het chu, nhap OK de xac nhan: ");
                 if ("OK".equalsIgnoreCase(sc.nextLine().trim())){
                     XoaTatCa();
@@ -139,6 +144,7 @@ public class DanhSachSanPham{
                 ds[n - 1] = null;
                 n--;
                 ds = java.util.Arrays.copyOf(ds, n);
+                ghiFile();
                 return true;
             }
         }
@@ -148,6 +154,7 @@ public class DanhSachSanPham{
     private void XoaTatCa(){
         ds = new SanPham[0];
         n = 0;
+        ghiFile();
     }
     public void TimKiem(Scanner sc){
     int c;
@@ -219,6 +226,7 @@ public class DanhSachSanPham{
             System.out.println("5.Sua gia");
             System.out.println("6.Sua toan bo");
             System.out.println("0. Thoat");
+            System.out.print("-----Chon------");
             c= sc.nextInt();
             sc.nextLine();
             switch(c){
@@ -400,9 +408,6 @@ private void SuaToanBo(Scanner sc, DanhSachLoai dsl, SanPham sp){
         }catch(Exception ignored){}
     }
 
-    // expose count for diagnostics
-    public int getN(){
-        return n;
-    }
+    
 
 }

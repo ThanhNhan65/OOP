@@ -78,9 +78,10 @@ public class DanhSachHoaDon{
                     System.out.println(e);
                 }
     }
-        public void Them(Scanner sc){
+
+        public void Them(Scanner sc, DanhSachKhachHang dskh, DanhSachNhanVien dsnv, DanhSachSanPham dssp){
             dshd = Arrays.copyOf(dshd, n+1);
-            dshd[n]= new HoaDon();
+            dshd[n]= new HoaDon(dskh, dsnv, dssp);
             dshd[n].Nhap(sc);
             dshd[n].getdsct();
             n++;

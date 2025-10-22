@@ -72,6 +72,7 @@ public class DanhSachChitietHoaDon {
         n++;
         WriteFile();
     }
+
     public void ThemChiTiet(ChiTietHoaDon ct) {
     if(ct != null) {
         dsct = Arrays.copyOf(dsct, n + 1);

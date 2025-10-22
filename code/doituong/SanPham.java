@@ -9,6 +9,8 @@ public class SanPham implements INhapXuat {
     private String ma, ten, hang;
     private Loai loai;
     private double gia;
+    private DanhSachLoai dsl;
+    
     public SanPham(){}
     public SanPham(String ma, String ten, String hang, Loai loai, double gia){
         this.ma= ma;
@@ -16,6 +18,10 @@ public class SanPham implements INhapXuat {
         this.hang= hang;
         this.loai= loai;
         this.gia= gia;
+    }
+    
+    public void setDanhSachLoai(DanhSachLoai dsl){
+        this.dsl = dsl;
     }
     public String getMa(){
         return ma;
@@ -49,7 +55,6 @@ public class SanPham implements INhapXuat {
     }
 
     public void Nhap(Scanner sc){
-        DanhSachLoai dsl= new DanhSachLoai();
         System.out.print("Nhap ma sp: ");
         ma= sc.nextLine();
         System.out.print("Nhap ten sp: ");
@@ -59,19 +64,22 @@ public class SanPham implements INhapXuat {
         System.out.print("Nhap gia: ");
         gia= sc.nextDouble();
         sc.nextLine();
-        Loai l;
-        do{
-            System.out.print("Nhap ma loai: ");
-            String maLoai= sc.nextLine().trim();
-            l= dsl.TimTheoMa(maLoai);
-            if(l==null){
-                System.out.println("Ma loai  co");
-            }
-        }while(l==null);
-        this.loai= l;
+        
+        if(dsl != null){
+            Loai l = null;
+            do{
+                System.out.print("Nhap ma loai: ");
+                String maLoai= sc.nextLine().trim();
+                l= dsl.TimTheoMa(maLoai);
+                if(l==null){
+                    System.out.println("Ma loai khong co");
+                }
+            }while(l==null);
+            this.loai= l;
+        }
     }
     public void Xuat(){
-        System.out.printf("%-10s | %-20s | %-12s | %-12s | %10.2f | %6d%n",
+        System.out.printf("%-10s | %-20s | %-12s | %-12s | %10.2f%n",
                                    ma, ten, hang, loai.getMaloai(), gia);
     }
     public String tofile(){

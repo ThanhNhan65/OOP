@@ -51,7 +51,7 @@ public class QLHoadon{
     
                 switch (choice) {
                     case 1:
-                        dshd.Them(sc);
+                        dshd.Them(sc, dskh, dsnv, dssp);
                         break;
                     case 2:
                         dshd.Sua(sc, dsnv, dskh);

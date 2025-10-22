@@ -21,7 +21,7 @@ public class main{
                 System.out.println("3. Quan ly san pham");
                 System.out.println("4. Quan ly loai");
                 System.out.println("5. Quan ly hoa don");
-                System.out.println("6. Quan ly chi tiet5 hoa don");
+                System.out.println("6. Quan ly chi tiet hoa don");
                 System.out.println("0. Thoat");
                 System.out.print("Chon: ");
                 choice = sc.nextInt();

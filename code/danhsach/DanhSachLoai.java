@@ -267,7 +267,7 @@ public class DanhSachLoai {
         if(ma == null) return null;
         for(int i = 0; i < n; i++){
             Loai l = ds[i];
-            if(l != null && ma.equalsIgnoreCase(l.getMaloai()))
+            if(l != null && l.getMaloai().equals(ma))
                 return l;
         }
         return null;
