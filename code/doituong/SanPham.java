@@ -1,22 +1,27 @@
 package code.doituong;
+
 import java.util.Scanner;
 import code.giaodien.*;
 import code.doituong.*;
-
+import code.danhsach.*;
 
 public class SanPham implements INhapXuat {
     private String ma, ten, hang;
     private Loai loai;
     private double gia;
-    private int soluong;
+    private DanhSachLoai dsl;
+    
     public SanPham(){}
-    public SanPham(String ma, String ten, String hang, Loai loai, double gia, int soluong){
+    public SanPham(String ma, String ten, String hang, Loai loai, double gia){
         this.ma= ma;
         this.ten= ten;
         this.hang= hang;
         this.loai= loai;
         this.gia= gia;
-        this.soluong= soluong;
+    }
+    
+    public void setDanhSachLoai(DanhSachLoai dsl){
+        this.dsl = dsl;
     }
     public String getMa(){
         return ma;
@@ -48,14 +53,8 @@ public class SanPham implements INhapXuat {
     public void setGia(double gia){
         this.gia= gia;
     }
-    public int getSoluong(){
-        return soluong;
-    }
-    public void setSoluong(int soluong){
-        this.soluong=soluong;
-    }
 
-    public void nhap(Scanner sc){
+    public void Nhap(Scanner sc){
         System.out.print("Nhap ma sp: ");
         ma= sc.nextLine();
         System.out.print("Nhap ten sp: ");
@@ -64,24 +63,26 @@ public class SanPham implements INhapXuat {
         hang= sc.nextLine();
         System.out.print("Nhap gia: ");
         gia= sc.nextDouble();
-        System.out.print("Nhap so luong: ");
-        soluong= sc.nextInt();
         sc.nextLine();
-        Loai l;
-        do{
-            System.out.print("Nhap ma loai: ");
-            String maloai= sc.nextLine().trim();
-            l= dsl.timkiem(maloai);
-            if(l==null){
-                System.out.println("Ma loai kh co");
-            }
-        }while(l==null);
-        this.loai= l;
+        
+        if(dsl != null){
+            Loai l = null;
+            do{
+                System.out.print("Nhap ma loai: ");
+                String maLoai= sc.nextLine().trim();
+                l= dsl.TimTheoMa(maLoai);
+                if(l==null){
+                    System.out.println("Ma loai khong co");
+                }
+            }while(l==null);
+            this.loai= l;
+        }
     }
-    public void xuat(){
-        System.out.printf("%-10s %-20s %-12s %-12s %10.2f %6d%n", ma, ten, hang, loai.getTenloai(), gia, soluong);
+    public void Xuat(){
+        System.out.printf("%-10s | %-20s | %-12s | %-12s | %10.2f%n",
+                                   ma, ten, hang, loai.getMaloai(), gia);
     }
     public String tofile(){
-        return ma+","+ten+","+hang+","+loai.getTenloai()+","+gia+","+soluong;
+        return ma+","+ten+","+hang+","+loai.getMaloai()+","+gia;
     }
 }

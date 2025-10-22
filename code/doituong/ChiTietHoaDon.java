@@ -4,58 +4,47 @@ import java.util.Scanner;
 import code.danhsach.*;
 import code.giaodien.*;
 
-public class Chitiethoadonban implements INhapXuat {
-    private Hoadonban hd;
+public class ChiTietHoaDon implements INhapXuat {
+    private HoaDon hd;
     private SanPham sp;
     private int soluong;
+    
+    private DanhSachHoaDon dshd;
     private DanhSachSanPham dssp;
-    private DSHD dshd;
 
-    public Chitiethoadonban() {
-        hd = new Hoadonban();
+    public ChiTietHoaDon() {
+        hd = new HoaDon();
         sp = new SanPham();
         soluong = 0;
-        dssp = new DanhSachSanPham();
-        dshd = new DSHD();
+        dshd= null;
+        dssp = null;
+    }
+    public ChiTietHoaDon(DanhSachHoaDon dshd, DanhSachSanPham dssp) {
+        this.dshd = dshd;
+        this.dssp = dssp;
+        this.hd = new HoaDon();
+        this.sp = new SanPham();
+        this.soluong = 0;
     }
 
-    public Chitiethoadonban(Hoadonban hd, SanPham sp, int soluong) {
+
+    public void setHDB(HoaDon hd) {
         this.hd = hd;
-        this.sp = sp;
-        this.soluong = soluong;
     }
 
-    public void setHDB(Hoadonban hd) {
-        this.hd = hd;
-    }
-
-    public Hoadonban getHDB() {
+    public HoaDon getHDB() {
         return hd;
     }
 
     public void setSP(SanPham sp) {
         this.sp = sp;
+        
     }
 
     public SanPham getSP() {
         return sp;
     }
 
-    public void setDSHD(DSHD dshd) {
-        this.dshd = dshd;
-    }
-
-    public DSHD getDSHD() {
-        return dshd;
-    }
-
-    public void setDSSP(DanhSachSanPham dssp) {
-        this.dssp = dssp;
-    }
-
-    public DanhSachSanPham getDSSP() {
-        return dssp;
-    }
 
     public void setSL(int soluong) {
         this.soluong = soluong;
@@ -71,23 +60,23 @@ public class Chitiethoadonban implements INhapXuat {
 
     public void Nhap(Scanner sc) {
         System.out.println("Vui long nhap ma hoa don: ");
-        String MaHD = sc.nextLine();
+        String MaHD = sc.nextLine().trim();
         this.hd = dshd.Timkiem_MaHD(MaHD);
         while (hd == null) {
             System.out.println("Khong tim thay hoa don: " + MaHD);
             System.out.println("Vui long nhap lai: ");
-            MaHD = sc.nextLine();
+            MaHD = sc.nextLine().trim();
             this.hd = dshd.Timkiem_MaHD(MaHD);
         }
 
         System.out.println("Vui long nhap ma san pham: ");
-        String MaSP = sc.nextLine();
-        this.sp = dssp.Timkiem(MaSP);
+        String MaSP = sc.nextLine().trim();
+        this.sp = dssp.TimTheoMa(MaSP);
         while (sp == null) {
             System.out.println("Khong tim thay san pham: " + MaSP);
             System.out.println("Vui long nhap lai: ");
-            MaSP = sc.nextLine();
-            this.sp = dssp.Timkiem(MaSP);
+            MaSP = sc.nextLine().trim();
+            this.sp = dssp.TimTheoMa(MaSP);
         }
 
         System.out.println("Vui long nhap so luong: ");
@@ -105,8 +94,7 @@ public class Chitiethoadonban implements INhapXuat {
             " | Ma san pham: " + sp.getMa() +
             " | Ten san pham: " + sp.getTen() +
             " | So luong: " + soluong +
-            " | Thanh tien: " + Tinhtien()
-        );
+            " | Thanh tien: " + Tinhtien());
     }
 }
 

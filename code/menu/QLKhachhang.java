@@ -1,7 +1,7 @@
 package code.menu;
 
 import code.danhsach.*;
-
+import code.doituong.KhachHang;
 
 import java.util.Scanner;
 import java.io.FileReader;
@@ -11,8 +11,8 @@ import java.io.Writer;
 import java.io.Reader;
 import java.io.BufferedReader;
 
-public class MainKH {
-    public static void main(String[] args) {
+public class QLKhachhang {
+    public void menu() {
         DanhSachKhachHang dskh = new DanhSachKhachHang();
         dskh.DocTuFile("data/danhsachKH.txt");
         dskh.Xuat();
@@ -51,13 +51,7 @@ public class MainKH {
                     dskh.GhiVaoFile("data/danhsachKH.txt");
                     break;
                 case 4:
-                    KhachHang kh = dskh.TimkiemKH();
-                    if (kh != null) {
-                        System.out.println("Thong tin nhan vien tim thay:");
-                        kh.Xuat();
-                    } else {
-                        System.out.println("Khong tim thay nhan vien.");
-                    }
+                    dskh.TimkiemKH();
                     break;
                 case 5:
                     dskh.Xuat();

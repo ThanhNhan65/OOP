@@ -3,8 +3,8 @@ package code.menu;
 import java.util.Scanner;
 import code.danhsach.*;
 
-public class Main {
-    public static void main(String[] args) {
+public class QLNhanvien {
+    public void menu() {
         DanhSachNhanVien dsnv = new DanhSachNhanVien();
         dsnv.DocTuFile("data/danhsachNV.txt");
         dsnv.Xuat();
@@ -36,7 +36,7 @@ public class Main {
                     dsnv.GhiVaoFile("data/danhsachNV.txt");
                     break;
                 case 3:
-                    System.out.println("Chon ma nhan vien ban muon sua");
+                    System.out.println("Chon ma nhan vien ban muon sua: ");
                     dsnv.Sua_Chi_Tiet(sc.nextLine());
                     dsnv.Xuat();
                     dsnv.GhiVaoFile("data/danhsachNV.txt");

@@ -1,4 +1,5 @@
 package code.doituong;
+
 import java.util.Scanner;
 import code.giaodien.*;
 
@@ -21,14 +22,14 @@ public class Loai implements INhapXuat{
     public void setTenloai(String tenLoai){
         this.tenLoai= tenLoai;
     }
-    public void nhap(Scanner sc){
+    public void Nhap(Scanner sc){
         System.out.print("Nhap ma loai: ");
         maLoai= sc.nextLine();
         System.out.print("Nhap ten loai: ");
         tenLoai= sc.nextLine();
     }
-    public void xuat(){
-        System.out.printf("%-10s %-20s%n", maLoai, tenLoai);
+    public void Xuat(){
+        System.out.printf("%-10s | %-20s%n", maLoai, tenLoai);
     }
     public String toFile(){
         return maLoai+","+tenLoai;
