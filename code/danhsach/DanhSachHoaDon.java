@@ -22,6 +22,13 @@ public class DanhSachHoaDon{
     public int getN() {
         return n;
     }
+<<<<<<< HEAD
+=======
+    public HoaDon getHoaDon(int index) {
+        return dshd[index];
+    }
+
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
 
     public void ReadFile(DanhSachKhachHang dskh, DanhSachNhanVien dsnv){
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -40,6 +47,10 @@ public class DanhSachHoaDon{
                     Date ngayGD = df.parse(arr[3].trim());
 
                     HoaDon hd = new HoaDon();
+<<<<<<< HEAD
+=======
+                    hd.setMaHD(maHD);
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
 
                     KhachHang kh = dskh.Timkiem_MaKH(maKH); 
                     NhanVien nv = dsnv.TimKiemNhanVienTheoMa(maNV);
@@ -73,16 +84,27 @@ public class DanhSachHoaDon{
                     System.out.println(e);
                 }
     }
+<<<<<<< HEAD
         public void Them(Scanner sc){
             dshd = Arrays.copyOf(dshd, n+1);
             dshd[n]= new HoaDon();
+=======
+
+        public void Them(Scanner sc, DanhSachKhachHang dskh, DanhSachNhanVien dsnv, DanhSachSanPham dssp){
+            dshd = Arrays.copyOf(dshd, n+1);
+            dshd[n]= new HoaDon(dskh, dsnv, dssp);
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
             dshd[n].Nhap(sc);
             dshd[n].getdsct();
             n++;
             WriteFile();
         }
 
+<<<<<<< HEAD
     public void Timkiem(Scanner sc, DanhSachHoaDon dshd, DanhSachKhachHang dskh, DanhSachNhanVien dsnv){
+=======
+    public void Timkiem(Scanner sc, DanhSachKhachHang dskh, DanhSachNhanVien dsnv){
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
         int choice;
         do {
             System.out.println("1. Tim kiem theo ma hoa don");
@@ -96,14 +118,24 @@ public class DanhSachHoaDon{
                 case 1:
                     System.out.print("Nhap ma hoa don: ");
                     String mahd = sc.nextLine();
+<<<<<<< HEAD
                     HoaDon hd = dshd.Timkiem_MaHD(mahd);
+=======
+                    HoaDon hd = Timkiem_MaHD(mahd);
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
                     while (hd == null) {
                         System.out.println("Khong tim thay hoa don: " + mahd);
                         System.out.println("Vui long nhap lai: ");
                         mahd = sc.nextLine();
+<<<<<<< HEAD
                         hd = dshd.Timkiem_MaHD(mahd);
                     }
                     Timkiem_MaHD(mahd).Xuat();            
+=======
+                        hd = Timkiem_MaHD(mahd);
+                    }
+                    hd.Xuat();            
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
                     break;
                 case 2:
                     System.out.print("Nhap ma khach hang: ");
@@ -163,7 +195,11 @@ public class DanhSachHoaDon{
         }
     }
 
+<<<<<<< HEAD
     public void Xoa(Scanner sc, DanhSachHoaDon dshd, DanhSachKhachHang dskh, DanhSachChitietHoaDon dsct){
+=======
+    public void Xoa(Scanner sc, DanhSachHoaDon dshd, DanhSachKhachHang dskh){
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
         int choice;
         do {
             System.out.println("1. Xoa theo ma hoa don");
@@ -183,7 +219,11 @@ public class DanhSachHoaDon{
                         mahd = sc.nextLine();
                         hd = dshd.Timkiem_MaHD(mahd);
                     }
+<<<<<<< HEAD
                     Xoa_MaHD(mahd, dsct);            
+=======
+                    Xoa_MaHD(mahd);            
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
                     break;
                 case 2:
                     System.out.print("Nhap ma khach hang: ");
@@ -195,12 +235,17 @@ public class DanhSachHoaDon{
                         makh = sc.nextLine();
                         kh = dskh.Timkiem_MaKH(makh);
                     }
+<<<<<<< HEAD
                     Xoa_MaKH(makh, dsct);          
+=======
+                    Xoa_MaKH(makh);          
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
                     break;
             }
         } while (choice != 0);
     }
 
+<<<<<<< HEAD
     public void Xoa_MaHD(String MaHD, DanhSachChitietHoaDon dsct){
         boolean bool=false;
         for(int i=0 ; i<n ;){
@@ -208,6 +253,13 @@ public class DanhSachHoaDon{
                 if(dsct != null){
                     dsct.XoaTB(MaHD);
                 }
+=======
+    public void Xoa_MaHD(String MaHD){
+        boolean bool=false;
+        for(int i=0 ; i<n ;){
+            if(dshd[i].getMaHDB().equals(MaHD)){
+                    dshd[i].getdsct().XoaTB(MaHD);
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
 
                 for(int j= i; j < n-1; j++){
                     dshd[j]=dshd[j+1];
@@ -221,15 +273,23 @@ public class DanhSachHoaDon{
         System.out.println(bool ? "Xoa thanh cong!" : "That bai!");
         WriteFile();
     }
+<<<<<<< HEAD
     public void Xoa_MaKH(String MaKH, DanhSachChitietHoaDon dsct){
+=======
+    public void Xoa_MaKH(String MaKH){
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
         boolean bool=false;
         for(int i=0 ; i<n ;){
             if(dshd[i].getKh().getMaKH().equals(MaKH)){
                 HoaDon hd = dshd[i];
 
+<<<<<<< HEAD
                 if(dsct != null){
                     dsct.XoaTB(hd.getMaHDB());
                 }
+=======
+                    dshd[i].getdsct().XoaTB(hd.getMaHDB());
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
 
                 for(int j= i; j < n-1; j++){
                     dshd[j]=dshd[j+1];
@@ -266,7 +326,11 @@ public class DanhSachHoaDon{
     }
 
     
+<<<<<<< HEAD
     public void Sua(Scanner sc, DanhSachNhanVien dsnv, DanhSachKhachHang dskh, DanhSachChitietHoaDon dsct){
+=======
+    public void Sua(Scanner sc, DanhSachNhanVien dsnv, DanhSachKhachHang dskh){
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
         int choice;
         do {
             System.out.println("1. Sua theo ma khach hang");

@@ -1,1 +1,9 @@
+<<<<<<< HEAD
 L01,Dan
+=======
+L01,Dan
+L02,Organ
+L03,Trong
+L04,Hoi
+L05,Phu kien
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2

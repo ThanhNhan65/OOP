@@ -267,7 +267,11 @@ public class DanhSachLoai {
         if(ma == null) return null;
         for(int i = 0; i < n; i++){
             Loai l = ds[i];
+<<<<<<< HEAD
             if(l != null && ma.equalsIgnoreCase(l.getMaloai()))
+=======
+            if(l != null && l.getMaloai().equals(ma))
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
                 return l;
         }
         return null;
@@ -286,6 +290,12 @@ public class DanhSachLoai {
         }
         return d;
     }
+<<<<<<< HEAD
+=======
+    public int getN(){
+        return n;
+    }
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
 
     
 }

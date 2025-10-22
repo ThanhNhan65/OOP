@@ -9,6 +9,11 @@ public class SanPham implements INhapXuat {
     private String ma, ten, hang;
     private Loai loai;
     private double gia;
+<<<<<<< HEAD
+=======
+    private DanhSachLoai dsl;
+    
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
     public SanPham(){}
     public SanPham(String ma, String ten, String hang, Loai loai, double gia){
         this.ma= ma;
@@ -17,6 +22,13 @@ public class SanPham implements INhapXuat {
         this.loai= loai;
         this.gia= gia;
     }
+<<<<<<< HEAD
+=======
+    
+    public void setDanhSachLoai(DanhSachLoai dsl){
+        this.dsl = dsl;
+    }
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
     public String getMa(){
         return ma;
     }
@@ -49,7 +61,10 @@ public class SanPham implements INhapXuat {
     }
 
     public void Nhap(Scanner sc){
+<<<<<<< HEAD
         DanhSachLoai dsl= new DanhSachLoai();
+=======
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
         System.out.print("Nhap ma sp: ");
         ma= sc.nextLine();
         System.out.print("Nhap ten sp: ");
@@ -59,6 +74,7 @@ public class SanPham implements INhapXuat {
         System.out.print("Nhap gia: ");
         gia= sc.nextDouble();
         sc.nextLine();
+<<<<<<< HEAD
         Loai l;
         do{
             System.out.print("Nhap ma loai: ");
@@ -72,6 +88,24 @@ public class SanPham implements INhapXuat {
     }
     public void Xuat(){
         System.out.printf("%-10s | %-20s | %-12s | %-12s | %10.2f | %6d%n",
+=======
+        
+        if(dsl != null){
+            Loai l = null;
+            do{
+                System.out.print("Nhap ma loai: ");
+                String maLoai= sc.nextLine().trim();
+                l= dsl.TimTheoMa(maLoai);
+                if(l==null){
+                    System.out.println("Ma loai khong co");
+                }
+            }while(l==null);
+            this.loai= l;
+        }
+    }
+    public void Xuat(){
+        System.out.printf("%-10s | %-20s | %-12s | %-12s | %10.2f%n",
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
                                    ma, ten, hang, loai.getMaloai(), gia);
     }
     public String tofile(){

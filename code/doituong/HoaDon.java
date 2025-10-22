@@ -17,7 +17,12 @@ public class HoaDon extends GiaoDich {
 
     public HoaDon() {
         super();
+<<<<<<< HEAD
         this.MaHDB = "HD" + String.format("%03d", MaHDNext++);
+=======
+        this.MaHDB = null;
+        this.dsct = new DanhSachChitietHoaDon();
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
     }
 
     public HoaDon(DanhSachKhachHang dskh, DanhSachNhanVien dsnv, DanhSachSanPham dssp) {
@@ -32,7 +37,12 @@ public class HoaDon extends GiaoDich {
     public String getMaHDB(){ 
         return MaHDB; }
     public void setMaHD(String MaHDB){ 
+<<<<<<< HEAD
         this.MaHDB = MaHDB; }
+=======
+        this.MaHDB = MaHDB; 
+    }
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
 
     public DanhSachChitietHoaDon getdsct(){ 
         return dsct; }
@@ -94,7 +104,11 @@ public class HoaDon extends GiaoDich {
     }
     public void Xuat(){
         SimpleDateFormat df= new SimpleDateFormat("dd/MM/yyyy");
+<<<<<<< HEAD
         System.out.println("Hoa đơn: " + MaHDB +
+=======
+        System.out.println("Hoa don: " + MaHDB +
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
                            " | Ngay: " + df.format(getNgayGD())+
                            " | Ma Khach hang: " + getKh().getMaKH() +
                            " | Ten Kh: " + getKh().getHoten()+
@@ -103,10 +117,17 @@ public class HoaDon extends GiaoDich {
          for(int i=0; i<dsct.getN(); i++){
             ChiTietHoaDon ct = dsct.getDSCT(i);
             if(ct.getHDB().getMaHDB().equals(this.MaHDB)){
+<<<<<<< HEAD
                 System.out.println("San pham: " + ct.getSP().getTen() +
                                    " | So luong: " + ct.getSL() +
                                    " | Don gia: " + ct.getSP().getGia() +
                                    " | Gia tien: " + ct.Tinhtien());   
+=======
+                System.out.println("  San pham: " + ct.getSP().getTen() +
+                                   " | So luong: " + ct.getSL() +
+                                   " | Don gia: " + ct.getSP().getGia() +
+                                   " | Thanh tien: " + ct.Tinhtien());   
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
             }
         }
     }

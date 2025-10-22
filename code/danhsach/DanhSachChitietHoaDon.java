@@ -73,6 +73,16 @@ public class DanhSachChitietHoaDon {
         WriteFile();
     }
 
+<<<<<<< HEAD
+=======
+    public void ThemChiTiet(ChiTietHoaDon ct) {
+    if(ct != null) {
+        dsct = Arrays.copyOf(dsct, n + 1);
+        dsct[n++] = ct;
+    }
+}
+
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
     public void Sua(Scanner sc,DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         System.out.println("Nhap ma hoa don can sua:");
         String MaHD = sc.nextLine();
@@ -278,4 +288,12 @@ public class DanhSachChitietHoaDon {
             }
         }
     }
+<<<<<<< HEAD
+=======
+    public void Hienthidanhsach(){
+        for(int i=0 ; i < n ;i++){
+            dsct[i].Xuat();
+        }
+    }
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
 }

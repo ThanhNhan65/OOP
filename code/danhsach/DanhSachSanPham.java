@@ -2,15 +2,31 @@ package code.danhsach;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+<<<<<<< HEAD
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Scanner;
+=======
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.Scanner;
+import java.util.Arrays;
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
 import code.doituong.*;
 
 public class DanhSachSanPham{
     private SanPham[] ds = new SanPham[0];
     private int n = 0;
 
+<<<<<<< HEAD
+=======
+    public int getN(){
+        return n;
+    }
+
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
     public void docFile(DanhSachLoai dsl){
         try{
             BufferedReader br = new BufferedReader(new FileReader("data/sanpham.txt"));
@@ -19,7 +35,11 @@ public class DanhSachSanPham{
                 line = line.trim();
                 if(!line.isEmpty()){
                     String[] a = line.split(",", -1);
+<<<<<<< HEAD
                     if(a.length == 5){
+=======
+                    if(a.length >= 5){
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
                         String ma     = a[0].trim();
                         String ten    = a[1].trim();
                         String hang   = a[2].trim();
@@ -58,7 +78,11 @@ public class DanhSachSanPham{
                 bw.write(sp.getMa() + "," + sp.getTen() + "," + sp.getHang() + "," + maLoai + "," + sp.getGia());
                 bw.newLine();
             }
+<<<<<<< HEAD
             bw.close(); 
+=======
+            bw.close();
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
         }catch(Exception e){
             System.out.println(e);
         }
@@ -66,6 +90,10 @@ public class DanhSachSanPham{
 
     public void Them(Scanner sc, DanhSachLoai dsl){
         SanPham sp = new SanPham();
+<<<<<<< HEAD
+=======
+        sp.setDanhSachLoai(dsl);
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
         sp.Nhap(sc);
         String ma = sp.getMa();
         if (ma == null || ma.trim().isEmpty()){
@@ -114,7 +142,11 @@ public class DanhSachSanPham{
                 break;
             }
             case 2: {
+<<<<<<< HEAD
                 System.out.println("Hien co" + n + "san pham");
+=======
+                System.out.println("Hien co " + n + " san pham");
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
                 System.out.println("Ban muon xoa het chu, nhap OK de xac nhan: ");
                 if ("OK".equalsIgnoreCase(sc.nextLine().trim())){
                     XoaTatCa();
@@ -136,6 +168,10 @@ public class DanhSachSanPham{
                 ds[n - 1] = null;
                 n--;
                 ds = java.util.Arrays.copyOf(ds, n);
+<<<<<<< HEAD
+=======
+                ghiFile();
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
                 return true;
             }
         }
@@ -145,6 +181,10 @@ public class DanhSachSanPham{
     private void XoaTatCa(){
         ds = new SanPham[0];
         n = 0;
+<<<<<<< HEAD
+=======
+        ghiFile();
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
     }
     public void TimKiem(Scanner sc){
     int c;
@@ -216,6 +256,10 @@ public class DanhSachSanPham{
             System.out.println("5.Sua gia");
             System.out.println("6.Sua toan bo");
             System.out.println("0. Thoat");
+<<<<<<< HEAD
+=======
+            System.out.print("-----Chon------");
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
             c= sc.nextInt();
             sc.nextLine();
             switch(c){
@@ -397,4 +441,9 @@ private void SuaToanBo(Scanner sc, DanhSachLoai dsl, SanPham sp){
         }catch(Exception ignored){}
     }
 
+<<<<<<< HEAD
+=======
+    
+
+>>>>>>> d607751381c78685c1758c54456ad1535aba5bb2
 }
