@@ -12,7 +12,7 @@ import java.io.Reader;
 import java.io.BufferedReader;
 
 public class QLKhachhang {
-    public void menu() {
+    public static void main(String[] args) {
         DanhSachKhachHang dskh = new DanhSachKhachHang();
         dskh.DocTuFile("data/danhsachKH.txt");
         dskh.Xuat();
@@ -47,7 +47,6 @@ public class QLKhachhang {
                 case 3:
                     System.out.println("Chon ma nhan vien ban muon sua");
                     dskh.SuaKH(sc.nextLine());
-                    sc.nextLine();
                     dskh.GhiVaoFile("data/danhsachKH.txt");
                     break;
                 case 4:

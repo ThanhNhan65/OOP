@@ -209,43 +209,39 @@ public class DanhSachNhanVien {
             System.out.println("Khong tim thay nhan vien ");
     }
 
-    public DanhSachNhanVien TimKiemNhanVienTheoMa(String MaNV) {
-        DanhSachNhanVien ketQua = new DanhSachNhanVien();
-
+    public NhanVien TimKiemNhanVienTheoMa(String MaNV) {
+        boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dsnv[i].getMaNV().equals(MaNV)) {
-                ketQua.dsnv = Arrays.copyOf(ketQua.dsnv, ketQua.n + 1);
-                ketQua.dsnv[ketQua.n] = dsnv[i];
-                ketQua.n++;
+                found = true;
+                return dsnv[i];
             }
         }
-        return ketQua;
+        return null;
     }
 
-    public DanhSachNhanVien TimKiemNhanVienTheoHoTen(String HoTen) {
-        DanhSachNhanVien ketQua = new DanhSachNhanVien();
-
+    public NhanVien TimKiemNhanVienTheoHoTen(String HoTen) {
+        boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dsnv[i].getHoten().equals(HoTen)) {
-                ketQua.dsnv = Arrays.copyOf(ketQua.dsnv, ketQua.n + 1);
-                ketQua.dsnv[ketQua.n] = dsnv[i];
-                ketQua.n++;
+                return dsnv[i];
             }
         }
-        return ketQua;
+        if (!found)
+            System.out.println("Khong tim thay nhan vien");
+        return null;
     }
 
-    public DanhSachNhanVien TimKiemNhanVienTheoChucVu(String ChucVu) {
-        DanhSachNhanVien ketQua = new DanhSachNhanVien();
-
+    public void TimKiemNhanVienTheoChucVu(String ChucVu) {
+        boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dsnv[i].getChucVu().equals(ChucVu)) {
-                ketQua.dsnv = Arrays.copyOf(ketQua.dsnv, ketQua.n + 1);
-                ketQua.dsnv[ketQua.n] = dsnv[i];
-                ketQua.n++;
+                found = true;
+                dsnv[i].Xuat();
             }
         }
-        return ketQua;
+        if (!found)
+            System.out.println("Khong tim thay nhan vien.");
     }
 
     public NhanVien SuaTheoHoTen(String HoTen_moi, String MaNV_moi) {
@@ -319,7 +315,7 @@ public class DanhSachNhanVien {
     }
 
     public void TimkiemNV() {
-        DanhSachNhanVien dsnv = null;
+        NhanVien nv = null;
         System.out.println("-----TIM KIEM NHAN VIEN-----");
         System.out.println("1.Tim kiem nhan vien theo ma");
         System.out.println("2.Tim kiem nhan vien theo ho va ten");
@@ -331,23 +327,23 @@ public class DanhSachNhanVien {
         switch (c) {
             case 1:
                 System.out.print("Nhap ma nhan vien muon tim kiem: ");
-                dsnv = TimKiemNhanVienTheoMa(sc.nextLine());
+                nv = TimKiemNhanVienTheoMa(sc.nextLine());
                 break;
             case 2:
                 System.out.print("Nhap ho va ten nhan vien muon tim kiem: ");
-                dsnv = TimKiemNhanVienTheoHoTen(sc.nextLine());
+                nv = TimKiemNhanVienTheoHoTen(sc.nextLine());
                 break;
             case 3:
                 System.out.print("Nhap chuc vu nhan vien muon tim kiem: ");
-                dsnv = TimKiemNhanVienTheoChucVu(sc.nextLine());
+                TimKiemNhanVienTheoChucVu(sc.nextLine());
                 break;
             default:
                 System.out.println("Khong tim kiem nhan vien.");
                 break;
         }
-        if (dsnv != null) {
+        if (nv != null) {
             System.out.println("Thong tin nhan vien tim thay: ");
-            dsnv.Xuat();
+            nv.Xuat();
         }
     }
 }

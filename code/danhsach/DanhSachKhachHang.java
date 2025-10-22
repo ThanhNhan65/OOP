@@ -135,40 +135,32 @@ public class DanhSachKhachHang {
 
     public void SuaKH(String MaKH) {
         KhachHang kh = null;
-        boolean found = false;
         System.out.println("-----SUA THONG TIN KHACH HANG-----");
         System.out.println("1.Sua ten khach hang.");
         System.out.println("2.Sua dia chi khach hang.");
         System.out.println("3.Sua so dien thoai khach hang.");
         System.out.println("-----------------------------------");
-        System.out.print("Hay chon 1 so");
+        System.out.print("Hay chon 1 so: ");
         int c = sc.nextInt();
         sc.nextLine();
         for (int i = 0; i < n; i++) {
             if (dskh[i].getMaKH().equals(MaKH)) {
-                found = true;
                 switch (c) {
                     case 1:
                         System.out.print("Sua ten khach hang: ");
                         String ten_moi = sc.nextLine();
                         kh = SuaTheoHoTen(MaKH, ten_moi);
-                        if (kh != null)
-                            kh.Xuat();
                         break;
                     case 2:
                         System.out.print("Sua dia chi khach hang: ");
                         String diachi_moi = sc.nextLine();
                         kh = SuaTheoDiaChi(MaKH, diachi_moi);
-                        if (kh != null)
-                            kh.Xuat();
                         break;
                     case 3:
                         System.out.print("Sua so dien thoai khach hang: ");
                         long sdt_moi = sc.nextLong();
                         sc.nextLine();
                         kh = SuaTheoSDT(MaKH, sdt_moi);
-                        if (kh != null)
-                            kh.Xuat();
                         break;
                     default:
                         System.out.println("Thoat chuong trinh.");
@@ -176,14 +168,14 @@ public class DanhSachKhachHang {
                 }
             }
         }
-        if (!found)
-            System.out.println("Khong tim thay khach hang");
-        else
-            System.out.println("Da sua thong tin khach hang ");
+        if (kh != null) {
+            System.out.println("Da sua thong tin khach hang.");
+            kh.Xuat();
+        }
     }
 
     public void TimkiemKH() {
-        DanhSachKhachHang ds = null;
+        KhachHang kh = null;
         System.out.println("-----TIM KIEM KHACH HANG-----");
         System.out.println("1.Tim kiem theo ten.");
         System.out.println("2.Tim kiem theo Ma khach hang.");
@@ -194,46 +186,47 @@ public class DanhSachKhachHang {
         switch (c) {
             case 1:
                 System.out.println("Nhap ho ten khach hang ban muon tim kiem: ");
-                ds = Timkiem_HoTen(sc.nextLine());
+                kh = Timkiem_HoTen(sc.nextLine());
                 break;
             case 2:
                 System.out.println("Nhap ma khach hang ban muon tim kiem: ");
-                ds = Timkiem_MaKH(sc.nextLine());
+                kh = Timkiem_MaKH(sc.nextLine());
                 break;
             default:
                 System.out.println("Thoat chuong trinh");
                 break;
         }
-        if (ds != null) {
+        if (kh != null) {
             System.out.println("Da tim thay khach hang: ");
-            ds.Xuat();
+            kh.Xuat();
         }
     }
 
-    public DanhSachKhachHang Timkiem_MaKH(String MaKH) {
-        DanhSachKhachHang ketQua = new DanhSachKhachHang();
+    public KhachHang Timkiem_MaKH(String MaKH) {
+        boolean found = false;
 
         for (int i = 0; i < n; i++) {
-            if (this.dskh[i].getMaKH().equals(MaKH)) {
-                ketQua.dskh = Arrays.copyOf(ketQua.dskh, ketQua.n + 1);
-                ketQua.dskh[ketQua.n] = this.dskh[i];
-                ketQua.n++;
+            if (dskh[i].getMaKH().equals(MaKH)) {
+                found = true;
+                return dskh[i];
             }
         }
-        return ketQua;
+        if (!found)
+            System.out.println("Khong tim thay khach hang");
+        return null;
     }
 
-    public DanhSachKhachHang Timkiem_HoTen(String hoten) {
-        DanhSachKhachHang ketQua = new DanhSachKhachHang();
-
+    public KhachHang Timkiem_HoTen(String hoten) {
+        boolean found = false;
         for (int i = 0; i < n; i++) {
-            if (this.dskh[i].getHoten().equals(hoten)) {
-                ketQua.dskh = Arrays.copyOf(ketQua.dskh, ketQua.n + 1);
-                ketQua.dskh[ketQua.n] = this.dskh[i];
-                ketQua.n++;
+            if (dskh[i].getHoten().equals(hoten)) {
+                found = true;
+                return dskh[i];
             }
         }
-        return ketQua;
+        if (!found)
+            System.out.println("Khong tim thay khach hang");
+        return null;
     }
 
     public KhachHang SuaTheoHoTen(String MaKH, String hoten_moi) {
