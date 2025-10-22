@@ -1,7 +1,7 @@
 package code.menu;
 
 import code.danhsach.*;
-
+import code.doituong.KhachHang;
 
 import java.util.Scanner;
 import java.io.FileReader;
