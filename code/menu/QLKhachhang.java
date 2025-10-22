@@ -12,7 +12,7 @@ import java.io.Reader;
 import java.io.BufferedReader;
 
 public class QLKhachhang {
-    public static void main(String[] args) {
+    public void menu() {
         DanhSachKhachHang dskh = new DanhSachKhachHang();
         dskh.DocTuFile("data/danhsachKH.txt");
         dskh.Xuat();
