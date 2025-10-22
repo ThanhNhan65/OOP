@@ -1,4 +1,5 @@
 package code.main;
+
 import java.util.Scanner;
 
 import code.danhsach.*;
@@ -8,7 +9,6 @@ public class Run {
         DanhSachKhachHang dskh = new DanhSachKhachHang();
         dskh.DocTuFile("data/danhsachKH.txt");
         dskh.Xuat();
-        dskh.GhiVaoFile("data/danhsachKH.txt");
         Scanner sc = new Scanner(System.in);
         String op;
         do {
@@ -25,25 +25,23 @@ public class Run {
             sc.nextLine();
             switch (chon) {
                 case 1:
-                    System.out.println("Them nhan vien vao danh sach");
+                    System.out.println("Them khach hang vao danh sach");
                     dskh.Them();
                     dskh.Xuat();
-                    dskh.GhiVaoFile("danhsachKH.txt");
-                        dskh.GhiVaoFile("data/danhsachKH.txt");
+                    dskh.GhiVaoFile("data/danhsachKH.txt");
                     break;
                 case 2:
-                    System.out.print("Chon ma nhan vien muon xoa: ");
+                    System.out.print("Chon ma khach hang muon xoa: ");
                     dskh.Xoa(sc.nextLine());
                     dskh.Xuat();
-                    dskh.GhiVaoFile("danhsachKH.txt");
-                        dskh.GhiVaoFile("data/danhsachKH.txt");
+                    dskh.GhiVaoFile("data/danhsachKH.txt");
                     break;
-                case 3: 
-                    System.out.println("Chon ma nhan vien ban muon sua");
+                case 3:
+                    System.out.println("Chon ma khach hang ban muon sua: ");
                     dskh.SuaKH(sc.nextLine());
                     sc.nextLine();
-                    dskh.GhiVaoFile("danhsachKH.txt");
-                        dskh.GhiVaoFile("data/danhsachKH.txt");
+                    dskh.Xuat();
+                    dskh.GhiVaoFile("data/danhsachKH.txt");
                     break;
                 case 4:
                     dskh.TimkiemKH();
@@ -59,6 +57,6 @@ public class Run {
             }
             System.out.println("Co muon tiep tuc khong ?(y/n)");
             op = sc.nextLine();
-        } while (op.equals("y"));
+        } while (op.equalsIgnoreCase("y"));
     }
 }
