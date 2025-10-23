@@ -70,7 +70,7 @@ public class DanhSachHoaDon{
             try{
                 BufferedWriter fw = new BufferedWriter(new FileWriter("data/hoadonban.txt"));
                 for(int i=0; i<n ;i++){
-                    fw.write(dshd[i].getMaHDB() + ","+dshd[i].getKh().getMaKH() + ","+dshd[i].getNv().getMaNV()+ ","+ df.format(dshd[i].getNgayGD()));
+                    fw.write(dshd[i].getMaHD() + ","+dshd[i].getKh().getMaKH() + ","+dshd[i].getNv().getMaNV()+ ","+ df.format(dshd[i].getNgayGD()));
                     fw.newLine();   
                 }
                 fw.close();
@@ -79,9 +79,9 @@ public class DanhSachHoaDon{
                 }
     }
 
-        public void Them(Scanner sc, DanhSachKhachHang dskh, DanhSachNhanVien dsnv, DanhSachSanPham dssp){
-            dshd = Arrays.copyOf(dshd, n+1);
-            dshd[n]= new HoaDon(dskh, dsnv, dssp);
+        public void Them(Scanner sc, DanhSachKhachHang dskh, DanhSachNhanVien dsnv){
+            dshd = Arrays.copyOf(dshd, n +1);
+            dshd[n]= new HoaDon(dskh, dsnv);
             dshd[n].Nhap(sc);
             dshd[n].getdsct();
             n++;
@@ -143,7 +143,7 @@ public class DanhSachHoaDon{
         boolean found=false;
         HoaDon hd= new HoaDon();
         for(int i=0; i<n; i++){
-            if(dshd[i].getMaHDB().equals(MaHD)){
+            if(dshd[i].getMaHD().equals(MaHD)){
                 hd=dshd[i];
                 found=true;
                 break;
@@ -210,7 +210,7 @@ public class DanhSachHoaDon{
     public void Xoa_MaHD(String MaHD){
         boolean bool=false;
         for(int i=0 ; i<n ;){
-            if(dshd[i].getMaHDB().equals(MaHD)){
+            if(dshd[i].getMaHD().equals(MaHD)){
                     dshd[i].getdsct().XoaTB(MaHD);
 
                 for(int j= i; j < n-1; j++){
@@ -231,7 +231,7 @@ public class DanhSachHoaDon{
             if(dshd[i].getKh().getMaKH().equals(MaKH)){
                 HoaDon hd = dshd[i];
 
-                    dshd[i].getdsct().XoaTB(hd.getMaHDB());
+                    dshd[i].getdsct().XoaTB(hd.getMaHD());
 
                 for(int j= i; j < n-1; j++){
                     dshd[j]=dshd[j+1];

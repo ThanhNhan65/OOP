@@ -23,18 +23,6 @@ public class QLHoadon{
             dshd.ReadFile(dskh, dsnv);
             dsct.ReadFile(dshd, dssp);
             
-            for (int i = 0; i < dshd.getN(); i++) {
-                HoaDon hd = dshd.getHoaDon(i);
-                if(hd != null && hd.getdsct() != null) {
-                    for (int j = 0; j < dsct.getN(); j++) {
-                        ChiTietHoaDon ct = dsct.getDSCT(j);
-                        if (ct != null && ct.getHDB() != null && ct.getHDB().getMaHDB().equals(hd.getMaHDB())) {
-                            hd.getdsct().ThemChiTiet(ct);
-                        }
-                    }
-                }
-            }
-            
     
             int choice;
             do {
@@ -51,7 +39,7 @@ public class QLHoadon{
     
                 switch (choice) {
                     case 1:
-                        dshd.Them(sc, dskh, dsnv, dssp);
+                        dshd.Them(sc, dskh, dsnv);
                         break;
                     case 2:
                         dshd.Sua(sc, dsnv, dskh);

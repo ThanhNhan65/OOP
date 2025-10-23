@@ -14,8 +14,7 @@ public class main{
         QLCHitiethoadon ql6 = new QLCHitiethoadon();
 
         int choice;
-            do {
-                System.out.println("\n===== QUAN LY BAN NHAC CU =====");
+            do {System.out.println("\n===== QUAN LY BAN NHAC CU =====");
                 System.out.println("1. Quan ly khach hang");
                 System.out.println("2. Quan ly nhan vien");
                 System.out.println("3. Quan ly san pham");

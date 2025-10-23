@@ -19,6 +19,7 @@ public class ChiTietHoaDon implements INhapXuat {
         dshd= null;
         dssp = null;
     }
+    
     public ChiTietHoaDon(DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         this.dshd = dshd;
         this.dssp = dssp;
@@ -26,13 +27,12 @@ public class ChiTietHoaDon implements INhapXuat {
         this.sp = new SanPham();
         this.soluong = 0;
     }
-
-
-    public void setHDB(HoaDon hd) {
+    
+    public void setHD(HoaDon hd) {
         this.hd = hd;
     }
 
-    public HoaDon getHDB() {
+    public HoaDon getHD() {
         return hd;
     }
 
@@ -89,12 +89,12 @@ public class ChiTietHoaDon implements INhapXuat {
     }
 
     public void Xuat() {
-        System.out.println(
-            "Hoa don: " + hd.getMaHDB() +
-            " | Ma san pham: " + sp.getMa() +
-            " | Ten san pham: " + sp.getTen() +
-            " | So luong: " + soluong +
-            " | Thanh tien: " + Tinhtien());
+        System.out.printf("%-15s | %-14s | %-31s | %10d | %15.2f |%n",
+            hd.getMaHD(),
+            sp.getMa(),
+            sp.getTen(),
+            soluong,
+            Tinhtien());
     }
 }
 
