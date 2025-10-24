@@ -12,8 +12,7 @@ public abstract class GiaoDich implements INhapXuat{
     private KhachHang kh;
 
     public GiaoDich(){
-        SimpleDateFormat 
-         = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         nv = new NhanVien();
         kh = new KhachHang();
     }
