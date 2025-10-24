@@ -5,4 +5,4 @@ Nguyen Thanh Nhan,Binh Chanh,10840172,NV003,Quan ly,1,500000
 Tran Ngoc Kim Ngan,hong iet,912460,NV004,Nhan vien,26,7800000
 Thu Trang,ai biet,12461486,NV005,Nhan vien,26,7800000
 Huong Giang,hong biet,19247091,NV006,Nhan vien,26,7800000
-Thu Trang,ai biet,1460146,NV007,Nhan vien,25,7500000
+khung,ai biet,1460146,NV007,Nhan vien,25,7500000

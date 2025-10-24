@@ -29,7 +29,7 @@ public class DanhSachKhachHang {
             for (int i = 0; i < n; i++) {
                 KhachHang kh = dskh[i];
                 writer.write(kh.Hoten + "," + kh.Diachi + "," + kh.Sdt + "," + kh.MaKH);
-                writer.newLine();
+                writer.newLine();   
             }
             writer.close();
             System.out.println("Da cap nhat danh sach vao file thanh cong");
@@ -65,16 +65,6 @@ public class DanhSachKhachHang {
             input.close();
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
-    }
-
-    public void Nhap(Scanner sc) {
-        System.out.println("Nhap so luong khach hang: ");
-        n = sc.nextInt();
-        dskh = new KhachHang[n];
-        for (int i = 0; i < n; i++) {
-            dskh[i] = new KhachHang();
-            dskh[i].Nhap(sc);
         }
     }
 

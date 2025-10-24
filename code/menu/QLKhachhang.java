@@ -33,7 +33,7 @@ public class QLKhachhang {
             sc.nextLine();
             switch (chon) {
                 case 1:
-                    System.out.println("Them nhan vien vao danh sach");
+                    System.out.println("Them khach hang vao danh sach");
                     dskh.Them();
                     dskh.Xuat();
                     dskh.GhiVaoFile("data/danhsachKH.txt");

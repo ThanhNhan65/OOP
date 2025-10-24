@@ -4,7 +4,7 @@ import java.util.Scanner;
 import code.danhsach.*;
 import code.doituong.*;
 
-public class QLCHitiethoadon {
+public class QLChitiethoadon {
     public void menu() {
         Scanner sc = new Scanner(System.in);
 

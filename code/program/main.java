@@ -11,7 +11,7 @@ public class main{
         QLSanpham ql3 = new QLSanpham();
         QLLoai ql4= new QLLoai();
         QLHoadon ql5 = new QLHoadon();
-        QLCHitiethoadon ql6 = new QLCHitiethoadon();
+        QLChitiethoadon ql6 = new QLChitiethoadon();
 
         int choice;
             do {System.out.println("\n===== QUAN LY BAN NHAC CU =====");

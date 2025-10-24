@@ -1,0 +1,61 @@
+@startuml
+title Sơ đồ lớp - Hệ thống Hóa Đơn
+
+class SanPham {
+  - String MaSP
+  - String TenSP
+  - double DonGia
+  + getMaSP(): String
+  + getTenSP(): String
+  + getDonGia(): double
+}
+
+class DanhSachSanPham {
+  - SanPham[] dsp
+  + Timkiem_MaSP(String): SanPham
+  + ReadFile()
+  + WriteFile()
+}
+
+class ChiTietHoaDon {
+  - String MaHD
+  - SanPham sp
+  - int SoLuong
+  + Nhap()
+  + Tinhtien(): double
+  + Xuat()
+}
+
+class DanhSachChitietHoaDon {
+  - ChiTietHoaDon[] dsct
+  + Them(Scanner, DanhSachHoaDon, DanhSachSanPham)
+  + ReadFile()
+  + WriteFile()
+  + Timkiem_MaHD(String): DanhSachChitietHoaDon
+}
+
+class HoaDon {
+  - String MaHD
+  - String Ngay
+  - DanhSachChitietHoaDon dsct
+  + Thanhtien(): double
+  + Xuat()
+}
+
+class DanhSachHoaDon {
+  - HoaDon[] dshd
+  + Timkiem_MaHD(String): HoaDon
+  + ReadFile()
+  + WriteFile()
+}
+
+"DSSP quản lý nhiều Sản phẩm" as note
+
+DanhSachSanPham "1" -- "0..*" SanPham : manages >
+DanhSachHoaDon "1" -- "0..*" HoaDon : manages >
+HoaDon "1" o-- "1" DanhSachChitietHoaDon : contains >
+DanhSachChitietHoaDon "0..*" -- "1" SanPham : references >
+ChiTietHoaDon "1" --> "1" SanPham
+ChiTietHoaDon "1" --> "1" HoaDon : MaHD links to
+
+@enduml
