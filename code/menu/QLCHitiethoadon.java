@@ -21,18 +21,6 @@ public class QLCHitiethoadon {
         dssp.docFile(dsl);
         dshd.ReadFile(dskh, dsnv);     
         dsct.ReadFile(dshd, dssp);  
-        
-        for(int i = 0; i < dshd.getN(); i++) {
-            HoaDon hd = dshd.getHoaDon(i);
-            if(hd != null && hd.getdsct() != null) {
-                for(int j = 0; j < dsct.getN(); j++) {
-                    ChiTietHoaDon ct = dsct.getDSCT(j);
-                    if(ct != null && ct.getHDB() != null && ct.getHDB().getMaHDB().equals(hd.getMaHDB())) {
-                        hd.getdsct().ThemChiTiet(ct);
-                    }
-                }
-            }
-        }
        
         int choice;
         do {
