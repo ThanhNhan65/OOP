@@ -36,18 +36,15 @@ public class QLKhachhang {
                     System.out.println("Them nhan vien vao danh sach");
                     dskh.Them();
                     dskh.Xuat();
-                    dskh.GhiVaoFile("data/danhsachKH.txt");
                     break;
                 case 2:
                     System.out.print("Chon ma nhan vien muon xoa: ");
                     dskh.Xoa(sc.nextLine());
                     dskh.Xuat();
-                    dskh.GhiVaoFile("data/danhsachKH.txt");
                     break;
                 case 3:
                     System.out.println("Chon ma nhan vien ban muon sua");
-                    dskh.SuaKH(sc.nextLine());
-                    dskh.GhiVaoFile("data/danhsachKH.txt");
+                    dskh.SuaKH();
                     break;
                 case 4:
                     dskh.TimkiemKH();

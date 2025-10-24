@@ -51,9 +51,9 @@ public class NhanVien extends ConNguoi {
     }
 
     public long getLuong() {
-        if (Chucvu.equals("Quan ly")) {
+        if (Chucvu.equalsIgnoreCase("Quan ly")) {
             return ChamCong * 500000;
-        } else if (Chucvu.equals("Nhan vien")) {
+        } else if (Chucvu.equalsIgnoreCase("Nhan vien")) {
             return ChamCong * 300000;
         } else {
             return 0;

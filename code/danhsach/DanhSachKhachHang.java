@@ -99,20 +99,11 @@ public class DanhSachKhachHang {
     }
 
     public void Them() {
-        System.out.println("Nhap vi tri can them: ");
-        int k = sc.nextInt();
-        if (k < 0 || k > n) {
-            System.out.println("Vi tri khong hop le");
-            return;
-        }
-
         dskh = Arrays.copyOf(dskh, n + 1);
-        for (int i = n; i > k; i--) {
-            dskh[i] = dskh[i - 1];
-        }
-        dskh[k] = new KhachHang();
-        dskh[k].Nhap(sc);
+        dskh[n] = new KhachHang();
+        dskh[n].Nhap(sc);
         n++;
+        GhiVaoFile("data/danhsachKH.txt");
     }
 
     public void Xoa(String MaKH) {
@@ -131,47 +122,63 @@ public class DanhSachKhachHang {
         }
         if (!found)
             System.out.println("Khong tim thay khach hang ");
+        GhiVaoFile("data/danhsachKH.txt");
     }
 
-    public void SuaKH(String MaKH) {
+    public void SuaKH() {
         KhachHang kh = null;
         System.out.println("-----SUA THONG TIN KHACH HANG-----");
-        System.out.println("1.Sua ten khach hang.");
-        System.out.println("2.Sua dia chi khach hang.");
-        System.out.println("3.Sua so dien thoai khach hang.");
+        System.out.println("1. Sua ten khach hang.");
+        System.out.println("2. Sua dia chi khach hang.");
+        System.out.println("3. Sua so dien thoai khach hang.");
         System.out.println("-----------------------------------");
         System.out.print("Hay chon 1 so: ");
         int c = sc.nextInt();
         sc.nextLine();
-        for (int i = 0; i < n; i++) {
-            if (dskh[i].getMaKH().equals(MaKH)) {
-                switch (c) {
-                    case 1:
-                        System.out.print("Sua ten khach hang: ");
-                        String ten_moi = sc.nextLine();
-                        kh = SuaTheoHoTen(MaKH, ten_moi);
-                        break;
-                    case 2:
-                        System.out.print("Sua dia chi khach hang: ");
-                        String diachi_moi = sc.nextLine();
-                        kh = SuaTheoDiaChi(MaKH, diachi_moi);
-                        break;
-                    case 3:
-                        System.out.print("Sua so dien thoai khach hang: ");
-                        long sdt_moi = sc.nextLong();
-                        sc.nextLine();
-                        kh = SuaTheoSDT(MaKH, sdt_moi);
-                        break;
-                    default:
-                        System.out.println("Thoat chuong trinh.");
-                        break;
+
+        String MaKH;
+        boolean found = false;
+        do {
+            System.out.print("Nhap ma khach hang: ");
+            MaKH = sc.nextLine();
+            for (int i = 0; i < n; i++) {
+                if (dskh[i].getMaKH().equals(MaKH)) {
+                    found = true;
+                    switch (c) {
+                        case 1:
+                            System.out.print("Sua ten khach hang: ");
+                            String ten_moi = sc.nextLine();
+                            kh = SuaTheoHoTen(MaKH, ten_moi);
+                            break;
+                        case 2:
+                            System.out.print("Sua dia chi khach hang: ");
+                            String diachi_moi = sc.nextLine();
+                            kh = SuaTheoDiaChi(MaKH, diachi_moi);
+                            break;
+                        case 3:
+                            System.out.print("Sua so dien thoai khach hang: ");
+                            long sdt_moi = sc.nextLong();
+                            sc.nextLine();
+                            kh = SuaTheoSDT(MaKH, sdt_moi);
+                            break;
+                        default:
+                            System.out.println("Thoat chuong trinh.");
+                            break;
+                    }
+                    break;
                 }
             }
-        }
+            if (!found) {
+                System.out.println("Khong tim thay ma khach hang, vui long nhap lai.");
+            }
+        } while (!found);
+
         if (kh != null) {
             System.out.println("Da sua thong tin khach hang.");
             kh.Xuat();
         }
+        GhiVaoFile("data/danhsachKH.txt");
+
     }
 
     public void TimkiemKH() {

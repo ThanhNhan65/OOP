@@ -51,7 +51,8 @@ public abstract class ConNguoi implements INhapXuat {
         System.out.print("Nhap dia chi: ");
         Diachi = sc.nextLine();
         System.out.print("Nhap so dien thoai: ");
-        Sdt = sc.nextInt();
+        Sdt = sc.nextLong();
+        sc.nextLine();
     }
 
     @Override

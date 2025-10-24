@@ -37,7 +37,7 @@ public class QLNhanvien {
                     break;
                 case 3:
                     System.out.println("Chon ma nhan vien ban muon sua: ");
-                    dsnv.Sua_Chi_Tiet(sc.nextLine());
+                    dsnv.Sua_Chi_Tiet();
                     dsnv.Xuat();
                     dsnv.GhiVaoFile("data/danhsachNV.txt");
                     break;
