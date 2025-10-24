@@ -25,7 +25,9 @@ public class HoaDon extends GiaoDich {
         this.dskh = dskh;
         this.dsnv = dsnv;
         this.MaHDB = "HD" + String.format("%03d", MaHDNext++);
+        this.dsct = new DanhSachChitietHoaDon();
     }
+
 
     public String getMaHD(){ 
         return MaHDB; 
@@ -102,7 +104,6 @@ public class HoaDon extends GiaoDich {
         System.out.printf("| %-15s: %-60s |%n", "Ten Khach Hang", getKh().getHoten());
         System.out.printf("| %-15s: %-60.2f |%n", "Tong Tien", Thanhtien());
         System.out.println("+--------------------------------------------------------------------------------+");
-        
         if (dsct.getN() > 0) {
             System.out.println("| CHI TIET:                                                                      |");
             System.out.println("+--------------------------------+------------+-----------------+-----------------+");

@@ -1,0 +1,150 @@
+@startuml
+title Class diagram — OOP/DOAN project (generated)
+
+package "code.kethua" {
+  abstract class ConNguoi {
+    +Hoten : String
+    +Diachi : String
+    +Sdt : long
+    +Nhap(sc: Scanner)
+    +Xuat()
+  }
+
+  abstract class GiaoDich {
+    -ngayGD : Date
+    -nv : NhanVien
+    -kh : KhachHang
+    +getNgayGD() : Date
+    +setNgayGD(Date)
+    +getNv() : NhanVien
+    +setNv(NhanVien)
+    +getKh() : KhachHang
+    +setKh(KhachHang)
+    +Nhap(sc: Scanner)
+    +Xuat()
+    +Thanhtien() : double
+  }
+}
+
+package "code.doituong" {
+  interface INhapXuat
+
+  class HoaDon {
+    -MaHDB : String
+    -dsct : code.danhsach.DanhSachChitietHoaDon
+    -dskh : code.danhsach.DanhSachKhachHang
+    -dsnv : code.danhsach.DanhSachNhanVien
+    -MaHDNext : int {static}
+    +getMaHD() : String
+    +setMaHD(String)
+    +getdsct() : code.danhsach.DanhSachChitietHoaDon
+    +Thanhtien() : double
+    +Nhap(sc: Scanner)
+    +Xuat()
+  }
+
+  class ChiTietHoaDon {
+    -hd : HoaDon
+    -sp : SanPham
+    -soluong : int
+    -dshd : code.danhsach.DanhSachHoaDon
+    -dssp : code.danhsach.DanhSachSanPham
+    +Tinhtien() : double
+    +Nhap(sc: Scanner)
+    +Xuat()
+  }
+
+  class SanPham {
+    -ma : String
+    -ten : String
+    -hang : String
+    -loai : Loai
+    -gia : double
+    +getMa() : String
+    +getTen() : String
+    +getGia() : double
+    +Nhap(sc: Scanner)
+    +Xuat()
+    +tofile() : String
+  }
+
+  class Loai {
+    -maLoai : String
+    -tenLoai : String
+    +getMaloai() : String
+    +getTenloai() : String
+  }
+
+  class KhachHang {
+    +MaKH : String
+    +Nhap(sc: Scanner)
+    +Xuat()
+  }
+
+  class NhanVien {
+    +MaNV : String
+    +Chucvu : String
+    +ChamCong : int
+    +Luong : long
+    +Nhap(sc: Scanner)
+    +Xuat()
+  }
+}
+
+package "code.danhsach" {
+  class DanhSachHoaDon {
+    -dshd : code.doituong.HoaDon[]
+    -n : int
+    +ReadFile(dskh, dsnv)
+    +WriteFile()
+    +Them(...)
+  }
+
+  class DanhSachChitietHoaDon {
+    -dsct : code.doituong.ChiTietHoaDon[]
+    -n : int
+    +ReadFile(dshd, dssp)
+    +WriteFile()
+    +Them(sc, dshd, dssp)
+    +ThemChiTiet(ct)
+  }
+
+  class DanhSachSanPham {
+    -ds : code.doituong.SanPham[]
+    -n : int
+    +docFile(dsl)
+    +ghiFile()
+    +TimTheoMa(ma) : SanPham
+  }
+
+  class DanhSachKhachHang {
+    -dskh : code.doituong.KhachHang[]
+    -n : int
+  }
+
+  class DanhSachNhanVien {
+    -dsnv : code.doituong.NhanVien[]
+    -n : int
+  }
+}
+
+' Relationships
+HoaDon --|> GiaoDich
+KhachHang --|> ConNguoi
+NhanVien --|> ConNguoi
+
+' Associations / aggregations
+HoaDon "1" o-- "0..*" ChiTietHoaDon : contains
+code.danhsach.DanhSachChitietHoaDon "1" *-- "0..*" ChiTietHoaDon
+code.danhsach.DanhSachHoaDon "1" *-- "0..*" HoaDon
+ChiTietHoaDon --> SanPham
+GiaoDich --> KhachHang
+GiaoDich --> NhanVien
+
+' Interfaces
+INhapXuat <|.. ConNguoi
+INhapXuat <|.. SanPham
+INhapXuat <|.. ChiTietHoaDon
+INhapXuat <|.. Loai
+
+@enduml

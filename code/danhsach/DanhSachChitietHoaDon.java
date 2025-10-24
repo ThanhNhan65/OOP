@@ -32,20 +32,22 @@ public class DanhSachChitietHoaDon {
             String maSP = arr[1].trim();
             int soluong = Integer.parseInt(arr[2].trim());
 
-            ChiTietHoaDon ct = new ChiTietHoaDon(dshd,dssp); // tao chi tiet (mahd, masp, sl) voi 2 dsrong
-            HoaDon hd = dshd.Timkiem_MaHD(maHD); // kiểm tra có hóa đơn hay không
-            SanPham sp = dssp.TimTheoMa(maSP); // kiểm tra có sản phẩm hay không
+            ChiTietHoaDon ct = new ChiTietHoaDon(dshd,dssp); 
+            HoaDon hd = dshd.Timkiem_MaHD(maHD); 
+            SanPham sp = dssp.TimTheoMa(maSP);
 
-            ct.setHD(hd); // gán hd
-            ct.setSP(sp); // gán sp
-            ct.setSL(soluong); // gán
+            ct.setHD(hd);
+            ct.setSP(sp);
+            ct.setSL(soluong); 
 
-            dsct = Arrays.copyOf(dsct, n + 1); //magr đang rỗng tạo mãng n+1
-            dsct[n++] = ct; // danh sach dsct[0] có chi tiết r
-            
-            if (hd != null){
-                hd.getdsct().ThemChiTiet(ct); // có hóa đơn thì thêm ct vào hóa đơn đó tại mỗi háo đơn có nhiều ct
-            }
+            if (hd != null && sp != null) {
+                dsct = Arrays.copyOf(dsct, n + 1);
+                dsct[n++] = ct;
+
+                if (hd.getdsct() != null) {
+                    hd.getdsct().ThemChiTiet(ct);
+                }
+            } 
         }
         input.close();
     }catch(Exception ex){
@@ -57,8 +59,10 @@ public class DanhSachChitietHoaDon {
         try{
             BufferedWriter fw = new BufferedWriter(new FileWriter("data/chitiethoadon.txt"));
             for(int i = 0; i < n; i++){
-                fw.write(dsct[i].getHD().getMaHD() + "," + dsct[i].getSP().getMa() + "," + dsct[i].getSL());
-                fw.newLine();
+                if (dsct[i] != null && dsct[i].getHD() != null && dsct[i].getSP() != null) {
+                    fw.write(dsct[i].getHD().getMaHD() + "," + dsct[i].getSP().getMa() + "," + dsct[i].getSL());
+                    fw.newLine();
+                }
             }
             fw.close();
         }catch (Exception e) {
@@ -76,13 +80,15 @@ public class DanhSachChitietHoaDon {
         if(ct.getHD() != null){
             ct.getHD().getdsct().ThemChiTiet(ct);
         }
+
         WriteFile();
     }
 
     public void ThemChiTiet(ChiTietHoaDon ct) {
         if(ct != null) {
             dsct = Arrays.copyOf(dsct, n + 1);
-            dsct[n++] = ct;
+            dsct[n] = ct;
+            n++;
         }
     }
 

@@ -7,7 +7,6 @@ public class QLNhanvien {
     public void menu() {
         DanhSachNhanVien dsnv = new DanhSachNhanVien();
         dsnv.DocTuFile("data/danhsachNV.txt");
-        dsnv.Xuat();
         Scanner sc = new Scanner(System.in);
         String op;
         do {
@@ -25,27 +24,22 @@ public class QLNhanvien {
             switch (chon) {
                 case 1:
                     System.out.println("Them nhan vien vao danh sach");
-                    dsnv.Them();
-                    dsnv.Xuat();
-                    dsnv.GhiVaoFile("data/danhsachNV.txt");
+                    dsnv.Them(sc);
+                    dsnv.HienThiDS();
                     break;
                 case 2:
                     System.out.print("Chon ma nhan vien muon xoa: ");
                     dsnv.Xoa(sc.nextLine());
-                    dsnv.Xuat();
-                    dsnv.GhiVaoFile("data/danhsachNV.txt");
                     break;
                 case 3:
                     System.out.println("Chon ma nhan vien ban muon sua: ");
-                    dsnv.Sua_Chi_Tiet();
-                    dsnv.Xuat();
-                    dsnv.GhiVaoFile("data/danhsachNV.txt");
+                    dsnv.Sua_Chi_Tiet(sc);
                     break;
                 case 4:
-                    dsnv.TimkiemNV();
+                    dsnv.TimkiemNV(sc);
                     break;
                 case 5:
-                    dsnv.Xuat();
+                    dsnv.HienThiDS();
                     break;
                 case 0:
                     System.out.println("Thoat chuong trinh.");

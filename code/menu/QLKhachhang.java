@@ -33,12 +33,12 @@ public class QLKhachhang {
             sc.nextLine();
             switch (chon) {
                 case 1:
-                    System.out.println("Them nhan vien vao danh sach");
+                    System.out.println("Them khach hang vao danh sach");
                     dskh.Them();
                     dskh.Xuat();
                     break;
                 case 2:
-                    System.out.print("Chon ma nhan vien muon xoa: ");
+                    System.out.print("Chon ma khach hang muon xoa: ");
                     dskh.Xoa(sc.nextLine());
                     dskh.Xuat();
                     break;
@@ -50,7 +50,7 @@ public class QLKhachhang {
                     dskh.TimkiemKH();
                     break;
                 case 5:
-                    dskh.Xuat();
+                    dskh.HienThiDS();
                     break;
                 case 0:
                     System.out.println("Thoat chuong trinh.");
