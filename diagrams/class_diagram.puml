@@ -1,61 +1,150 @@
 @startuml
-title Sơ đồ lớp - Hệ thống Hóa Đơn
+title Class diagram — OOP/DOAN project (generated)
 
-class SanPham {
-  - String MaSP
-  - String TenSP
-  - double DonGia
-  + getMaSP(): String
-  + getTenSP(): String
-  + getDonGia(): double
+package "code.kethua" {
+  abstract class ConNguoi {
+    +Hoten : String
+    +Diachi : String
+    +Sdt : long
+    +Nhap(sc: Scanner)
+    +Xuat()
+  }
+
+  abstract class GiaoDich {
+    -ngayGD : Date
+    -nv : NhanVien
+    -kh : KhachHang
+    +getNgayGD() : Date
+    +setNgayGD(Date)
+    +getNv() : NhanVien
+    +setNv(NhanVien)
+    +getKh() : KhachHang
+    +setKh(KhachHang)
+    +Nhap(sc: Scanner)
+    +Xuat()
+    +Thanhtien() : double
+  }
 }
 
-class DanhSachSanPham {
-  - SanPham[] dsp
-  + Timkiem_MaSP(String): SanPham
-  + ReadFile()
-  + WriteFile()
+package "code.doituong" {
+  interface INhapXuat
+
+  class HoaDon {
+    -MaHDB : String
+    -dsct : code.danhsach.DanhSachChitietHoaDon
+    -dskh : code.danhsach.DanhSachKhachHang
+    -dsnv : code.danhsach.DanhSachNhanVien
+    -MaHDNext : int {static}
+    +getMaHD() : String
+    +setMaHD(String)
+    +getdsct() : code.danhsach.DanhSachChitietHoaDon
+    +Thanhtien() : double
+    +Nhap(sc: Scanner)
+    +Xuat()
+  }
+
+  class ChiTietHoaDon {
+    -hd : HoaDon
+    -sp : SanPham
+    -soluong : int
+    -dshd : code.danhsach.DanhSachHoaDon
+    -dssp : code.danhsach.DanhSachSanPham
+    +Tinhtien() : double
+    +Nhap(sc: Scanner)
+    +Xuat()
+  }
+
+  class SanPham {
+    -ma : String
+    -ten : String
+    -hang : String
+    -loai : Loai
+    -gia : double
+    +getMa() : String
+    +getTen() : String
+    +getGia() : double
+    +Nhap(sc: Scanner)
+    +Xuat()
+    +tofile() : String
+  }
+
+  class Loai {
+    -maLoai : String
+    -tenLoai : String
+    +getMaloai() : String
+    +getTenloai() : String
+  }
+
+  class KhachHang {
+    +MaKH : String
+    +Nhap(sc: Scanner)
+    +Xuat()
+  }
+
+  class NhanVien {
+    +MaNV : String
+    +Chucvu : String
+    +ChamCong : int
+    +Luong : long
+    +Nhap(sc: Scanner)
+    +Xuat()
+  }
 }
 
-class ChiTietHoaDon {
-  - String MaHD
-  - SanPham sp
-  - int SoLuong
-  + Nhap()
-  + Tinhtien(): double
-  + Xuat()
+package "code.danhsach" {
+  class DanhSachHoaDon {
+    -dshd : code.doituong.HoaDon[]
+    -n : int
+    +ReadFile(dskh, dsnv)
+    +WriteFile()
+    +Them(...)
+  }
+
+  class DanhSachChitietHoaDon {
+    -dsct : code.doituong.ChiTietHoaDon[]
+    -n : int
+    +ReadFile(dshd, dssp)
+    +WriteFile()
+    +Them(sc, dshd, dssp)
+    +ThemChiTiet(ct)
+  }
+
+  class DanhSachSanPham {
+    -ds : code.doituong.SanPham[]
+    -n : int
+    +docFile(dsl)
+    +ghiFile()
+    +TimTheoMa(ma) : SanPham
+  }
+
+  class DanhSachKhachHang {
+    -dskh : code.doituong.KhachHang[]
+    -n : int
+  }
+
+  class DanhSachNhanVien {
+    -dsnv : code.doituong.NhanVien[]
+    -n : int
+  }
 }
 
-class DanhSachChitietHoaDon {
-  - ChiTietHoaDon[] dsct
-  + Them(Scanner, DanhSachHoaDon, DanhSachSanPham)
-  + ReadFile()
-  + WriteFile()
-  + Timkiem_MaHD(String): DanhSachChitietHoaDon
-}
+' Relationships
+HoaDon --|> GiaoDich
+KhachHang --|> ConNguoi
+NhanVien --|> ConNguoi
 
-class HoaDon {
-  - String MaHD
-  - String Ngay
-  - DanhSachChitietHoaDon dsct
-  + Thanhtien(): double
-  + Xuat()
-}
+' Associations / aggregations
+HoaDon "1" o-- "0..*" ChiTietHoaDon : contains
+code.danhsach.DanhSachChitietHoaDon "1" *-- "0..*" ChiTietHoaDon
+code.danhsach.DanhSachHoaDon "1" *-- "0..*" HoaDon
+ChiTietHoaDon --> SanPham
+GiaoDich --> KhachHang
+GiaoDich --> NhanVien
 
-class DanhSachHoaDon {
-  - HoaDon[] dshd
-  + Timkiem_MaHD(String): HoaDon
-  + ReadFile()
-  + WriteFile()
-}
-
-"DSSP quản lý nhiều Sản phẩm" as note
-
-DanhSachSanPham "1" -- "0..*" SanPham : manages >
-DanhSachHoaDon "1" -- "0..*" HoaDon : manages >
-HoaDon "1" o-- "1" DanhSachChitietHoaDon : contains >
-DanhSachChitietHoaDon "0..*" -- "1" SanPham : references >
-ChiTietHoaDon "1" --> "1" SanPham
-ChiTietHoaDon "1" --> "1" HoaDon : MaHD links to
+' Interfaces
+INhapXuat <|.. ConNguoi
+INhapXuat <|.. SanPham
+INhapXuat <|.. ChiTietHoaDon
+INhapXuat <|.. Loai
 
 @enduml

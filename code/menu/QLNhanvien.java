@@ -8,7 +8,6 @@ public class QLNhanvien {
         DanhSachNhanVien dsnv = new DanhSachNhanVien();
         dsnv.DocTuFile("data/danhsachNV.txt");
         dsnv.Xuat();
-        dsnv.GhiVaoFile("data/danhsachNV.txt");
         Scanner sc = new Scanner(System.in);
         String op;
         do {
@@ -37,8 +36,9 @@ public class QLNhanvien {
                     dsnv.GhiVaoFile("data/danhsachNV.txt");
                     break;
                 case 3:
-                    System.out.println("Chon ma nhan vien ban muon sua");
-                    dsnv.Sua_Chi_Tiet(sc.nextLine());
+                    System.out.println("Chon ma nhan vien ban muon sua: ");
+                    dsnv.Sua_Chi_Tiet();
+                    dsnv.Xuat();
                     dsnv.GhiVaoFile("data/danhsachNV.txt");
                     break;
                 case 4:
@@ -55,6 +55,6 @@ public class QLNhanvien {
             }
             System.out.println("Co muon tiep tuc khong ?(y/n)");
             op = sc.nextLine();
-        } while (op.equals("y"));
+        } while (op.equalsIgnoreCase("y"));
     }
 }

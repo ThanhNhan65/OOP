@@ -40,12 +40,14 @@ public class DanhSachChitietHoaDon {
             ct.setSP(sp);
             ct.setSL(soluong); 
 
-            dsct = Arrays.copyOf(dsct, n + 1); 
-            dsct[n++] = ct; 
-            
-            if (hd != null){
-                hd.getdsct().ThemChiTiet(ct);
-            }
+            if (hd != null && sp != null) {
+                dsct = Arrays.copyOf(dsct, n + 1);
+                dsct[n++] = ct;
+
+                if (hd.getdsct() != null) {
+                    hd.getdsct().ThemChiTiet(ct);
+                }
+            } 
         }
         input.close();
     }catch(Exception ex){
@@ -57,8 +59,10 @@ public class DanhSachChitietHoaDon {
         try{
             BufferedWriter fw = new BufferedWriter(new FileWriter("data/chitiethoadon.txt"));
             for(int i = 0; i < n; i++){
-                fw.write(dsct[i].getHD().getMaHD() + "," + dsct[i].getSP().getMa() + "," + dsct[i].getSL());
-                fw.newLine();
+                if (dsct[i] != null && dsct[i].getHD() != null && dsct[i].getSP() != null) {
+                    fw.write(dsct[i].getHD().getMaHD() + "," + dsct[i].getSP().getMa() + "," + dsct[i].getSL());
+                    fw.newLine();
+                }
             }
             fw.close();
         }catch (Exception e) {
@@ -76,13 +80,15 @@ public class DanhSachChitietHoaDon {
         if(ct.getHD() != null){
             ct.getHD().getdsct().ThemChiTiet(ct);
         }
+
         WriteFile();
     }
 
     public void ThemChiTiet(ChiTietHoaDon ct) {
         if(ct != null) {
             dsct = Arrays.copyOf(dsct, n + 1);
-            dsct[n++] = ct;
+            dsct[n] = ct;
+            n++;
         }
     }
 

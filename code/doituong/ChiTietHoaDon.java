@@ -11,14 +11,6 @@ public class ChiTietHoaDon implements INhapXuat {
     
     private DanhSachHoaDon dshd;
     private DanhSachSanPham dssp;
-
-    public ChiTietHoaDon() {
-        hd = new HoaDon();
-        sp = new SanPham();
-        soluong = 0;
-        dshd= null;
-        dssp = null;
-    }
     
     public ChiTietHoaDon(DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         this.dshd = dshd;

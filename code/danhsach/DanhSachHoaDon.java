@@ -37,8 +37,6 @@ public class DanhSachHoaDon{
                     String[] arr = line.split(",");
                     String maHD = arr[0].trim();
                     int id = Integer.parseInt(maHD.replaceAll("[^0-9]", ""));
-                    if(id>Maxid)
-                        Maxid=id;
                     String maKH = arr[1].trim();
                     String maNV = arr[2].trim();
                     Date ngayGD = df.parse(arr[3].trim());
@@ -49,12 +47,17 @@ public class DanhSachHoaDon{
                     KhachHang kh = dskh.Timkiem_MaKH(maKH); 
                     NhanVien nv = dsnv.TimKiemNhanVienTheoMa(maNV);
                     
-                    hd.setKh(kh);
-                    hd.setNv(nv);
-                    hd.setNgayGD(ngayGD);
-                    dshd = Arrays.copyOf(dshd, n+ 1);
-                    dshd[n]= hd;
-                    n++;
+                    if (kh != null && nv != null) {
+                        hd.setKh(kh);
+                        hd.setNv(nv);
+                        hd.setNgayGD(ngayGD);
+                        dshd = Arrays.copyOf(dshd, n+ 1);
+                        dshd[n]= hd;
+                        n++;
+
+                        if(id > Maxid)
+                            Maxid = id;
+                    }
 
                     line = input.readLine();
             }
@@ -70,8 +73,10 @@ public class DanhSachHoaDon{
             try{
                 BufferedWriter fw = new BufferedWriter(new FileWriter("data/hoadonban.txt"));
                 for(int i=0; i<n ;i++){
-                    fw.write(dshd[i].getMaHD() + ","+dshd[i].getKh().getMaKH() + ","+dshd[i].getNv().getMaNV()+ ","+ df.format(dshd[i].getNgayGD()));
-                    fw.newLine();   
+                    if (dshd[i] != null && dshd[i].getKh() != null && dshd[i].getNv() != null) {
+                        fw.write(dshd[i].getMaHD() + ","+dshd[i].getKh().getMaKH() + ","+dshd[i].getNv().getMaNV()+ ","+ df.format(dshd[i].getNgayGD()));
+                        fw.newLine();
+                    }
                 }
                 fw.close();
             }catch (Exception e) {
@@ -79,13 +84,38 @@ public class DanhSachHoaDon{
                 }
     }
 
-        public void Them(Scanner sc, DanhSachKhachHang dskh, DanhSachNhanVien dsnv){
-            dshd = Arrays.copyOf(dshd, n +1);
-            dshd[n]= new HoaDon(dskh, dsnv);
+        public void Them(Scanner sc, DanhSachKhachHang dskh, DanhSachNhanVien dsnv, DanhSachSanPham dssp, DanhSachChitietHoaDon dsct){
+            dshd = Arrays.copyOf(dshd, n + 1);
+            dshd[n] = new HoaDon(dskh, dsnv);
             dshd[n].Nhap(sc);
-            dshd[n].getdsct();
             n++;
             WriteFile();
+            dshd[n-1].Xuat();
+            System.out.println("Vui long nhap chi tiet hoa don (them it nhat 1 san pham)");
+            int tieptuc = 1;
+            boolean them = false;
+            do {
+                ChiTietHoaDon ct = new ChiTietHoaDon(this, dssp);
+                ct.Nhap(sc);
+
+                dshd[n-1].getdsct().ThemChiTiet(ct);
+
+                if (dsct != null) {
+                    dsct.ThemChiTiet(ct);
+                    dsct.WriteFile();
+                }
+
+                them = true;
+
+                System.out.println("Co muon them nua khong, nhap 1 de tiep tuc hoac 0 de ket thuc");
+                tieptuc = sc.nextInt();
+                sc.nextLine();
+            } while (tieptuc != 0);
+
+            if (!them) {
+                System.out.println("Ban chua them chi tiet nao. Hoa don se bi huy.");
+                dshd = Arrays.copyOf(dshd, Math.max(0, dshd.length - 1));
+            }
         }
 
     public void Timkiem(Scanner sc, DanhSachKhachHang dskh, DanhSachNhanVien dsnv){
