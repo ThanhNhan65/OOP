@@ -32,24 +32,25 @@ public class DanhSachNhanVien {
         }
 
         System.out.println(
-                "+--------+----------------------+----------------------+-----------------+----------------+--------------+--------------+");
-        System.out.printf("| %-6s | %-20s | %-20s | %-15s | %-14s | %-12s | %-12s |\n", "Ma", "Ho va ten", "Dia chi",
-                "So dien thoai", "Luong");
+                "+--------+----------------------+----------------------+--------------+--------------+--------------+");
+        System.out.printf("| %-6s | %-20s | %-20s | %-12s |%-12s | %-12s |\n", "Ma", "Ho va ten", "Dia chi", "Sdt",
+                "Loai", "Luong");
         System.out.println(
-                "+--------+----------------------+----------------------+-----------------+----------------+--------------+--------------+");
+                "+--------+----------------------+----------------------+--------------+--------------+--------------+");
 
         for (int i = 0; i < n; i++) {
             dsnv[i].Xuat();
         }
 
         System.out.println(
-                "+--------+----------------------+----------------------+-----------------+----------------+--------------+--------------+");
+                "+--------+----------------------+----------------------+--------------+--------------+--------------+");
     }
 
     public void Them(Scanner sc) {
         dsnv = Arrays.copyOf(dsnv, n + 1);
         System.out.println("Chon loai nhan vien ban muon them(1.FullTime or 2.PartTime)");
         int choice = sc.nextInt();
+        sc.nextLine();
         switch (choice) {
             case 1:
                 dsnv[n] = new NhanVienFullTime();
@@ -68,11 +69,16 @@ public class DanhSachNhanVien {
             BufferedWriter writer = new BufferedWriter(new FileWriter(File, false));
             for (int i = 0; i < n; i++) {
                 NhanVien nv = dsnv[i];
-                writer.write(
-                        nv.getHoten() + "," + nv.getDiachi() + "," + nv.getSdt() + "," + nv.getMaNV() + ","
-                                + nv.getLoai());
+                if (nv instanceof NhanVienFullTime) {
+                    NhanVienFullTime ft = (NhanVienFullTime) nv;
+                    writer.write(ft.getHoten() + "," + ft.getDiachi() + "," + ft.getSdt() + "," + ft.getMaNV()
+                            + ",FullTime," + ft.getNgay());
+                } else if (nv instanceof NhanVienPartTime) {
+                    NhanVienPartTime pt = (NhanVienPartTime) nv;
+                    writer.write(pt.getHoten() + "," + pt.getDiachi() + "," + pt.getSdt() + "," + pt.getMaNV()
+                            + ",PartTime," + pt.getGio());
+                }
                 writer.newLine();
-
             }
             writer.close();
             System.out.println("Da cap nhat danh sach vao file thanh cong");
@@ -84,28 +90,36 @@ public class DanhSachNhanVien {
     public void DocTuFile(String File) {
         try {
             BufferedReader input = new BufferedReader(new FileReader(File));
-            String line = input.readLine();
-            while (line != null) {
+            String line;
+            while ((line = input.readLine()) != null) {
                 String[] chuoi = line.split(",");
+                if (chuoi.length < 6)
+                    continue;
 
                 String HoTen = chuoi[0];
                 String Diachi = chuoi[1];
                 long Sdt = Long.parseLong(chuoi[2]);
                 String MaNV = chuoi[3];
-                line = input.readLine();
-                NhanVien nv = new NhanVien();
-                if (nv.getLoai().equals("FullTime")) {
-                    nv = new NhanVienFullTime(HoTen, Diachi, Sdt, MaNV);
-                } else {
-                    nv = new NhanVienPartTime(HoTen, Diachi, Sdt, MaNV);
-                }
+                String Loai = chuoi[4];
+                int ngay = 0, gio = 0;
+
+                if (Loai.equals("FullTime"))
+                    ngay = Integer.parseInt(chuoi[5]);
+                else
+                    gio = Integer.parseInt(chuoi[5]);
+
+                NhanVien nv;
+                if (Loai.equals("FullTime"))
+                    nv = new NhanVienFullTime(HoTen, Diachi, Sdt, MaNV, ngay, Loai);
+                else
+                    nv = new NhanVienPartTime(HoTen, Diachi, Sdt, MaNV, gio, Loai);
+
                 int so = Integer.parseInt(MaNV.substring(2));
-                if (so > nv.dem) {
-                    nv.dem = so;
-                }
+                if (so > NhanVien.dem)
+                    NhanVien.dem = so + 1;
+
                 dsnv = Arrays.copyOf(dsnv, n + 1);
-                dsnv[n] = nv;
-                n++;
+                dsnv[n++] = nv;
             }
             input.close();
         } catch (Exception ex) {
@@ -203,6 +217,8 @@ public class DanhSachNhanVien {
                 return dsnv[i];
             }
         }
+        if (!found)
+            System.out.println("Khong tim thay nhan vien");
         return null;
     }
 
@@ -210,6 +226,7 @@ public class DanhSachNhanVien {
         boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dsnv[i].getHoten().equals(HoTen)) {
+                found = true;
                 return dsnv[i];
             }
         }

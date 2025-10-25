@@ -28,7 +28,7 @@ public class DanhSachKhachHang {
             BufferedWriter writer = new BufferedWriter(new FileWriter(File, false));
             for (int i = 0; i < n; i++) {
                 KhachHang kh = dskh[i];
-                writer.write(kh.Hoten + "," + kh.Diachi + "," + kh.Sdt + "," + kh.MaKH);
+                writer.write(kh.getHoten() + "," + kh.getDiachi() + "," + kh.getSdt() + "," + kh.getMaKH());
                 writer.newLine();
             }
             writer.close();
@@ -78,7 +78,7 @@ public class DanhSachKhachHang {
         }
     }
 
-    public void Xuat() {
+    public void HienThiDS() {
         if (n == 0) {
             System.out.println("Danh sach rong!");
             return;
@@ -223,10 +223,10 @@ public class DanhSachKhachHang {
         return null;
     }
 
-    public KhachHang Timkiem_HoTen(String hoten) {
+    public KhachHang Timkiem_HoTen(String HoTen) {
         boolean found = false;
         for (int i = 0; i < n; i++) {
-            if (dskh[i].getHoten().equals(hoten)) {
+            if (dskh[i].getHoten().equals(HoTen)) {
                 found = true;
                 return dskh[i];
             }

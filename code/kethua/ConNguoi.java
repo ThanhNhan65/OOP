@@ -48,12 +48,12 @@ public abstract class ConNguoi implements INhapXuat {
     public void Nhap(Scanner sc) {
         System.out.print("Nhap ho va ten: ");
         Hoten = sc.nextLine();
-        sc.nextLine();
+
         System.out.print("Nhap dia chi: ");
         Diachi = sc.nextLine();
+
         System.out.print("Nhap so dien thoai: ");
         Sdt = sc.nextLong();
-        sc.nextLine();
     }
 
     @Override

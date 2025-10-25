@@ -1,9 +1,5 @@
-Ma Gia Vy,Binh Phu,909457300,NV001,PartTime
-Duong Chi Tai,Hau Giang,19012912,NV002,PartTime
-Nguyen Khanh Hung,Tran Phu,10470127,NV003,PartTime
-Nguyen Thanh Nhan,Binh Chanh,10840172,NV004,PartTime
-Tran Ngoc Kim Ngan,hong iet,912460,NV005,PartTime
-Thu Trang,ai biet,12461486,NV006,PartTime
-Huong Giang,hong biet,19247091,NV007,PartTime
-Thu Trang,ai biet,1460146,NV008,PartTime
-,Bp,147091,,FullTime
+Ma Gia Vy,BP,909457300,NV001,FullTime,26
+Duong Chi Tai,Hau Giang,12740147903,NV002,PartTime,800
+Nguyen Khanh Hung,Tran Phu,174017147,NV003,PartTime,2400
+Nguyen Thanh Nhan,Binh Chanh,912409147,NV004,FullTime,24
+Tran Ngoc Kim Ngan,Binh Phu,10297402947,NV005,FullTime,26

@@ -15,8 +15,7 @@ public class QLKhachhang {
     public void menu() {
         DanhSachKhachHang dskh = new DanhSachKhachHang();
         dskh.DocTuFile("data/danhsachKH.txt");
-        dskh.Xuat();
-        dskh.GhiVaoFile("data/danhsachKH.txt");
+        dskh.HienThiDS();
         Scanner sc = new Scanner(System.in);
         String op;
         do {
@@ -35,12 +34,10 @@ public class QLKhachhang {
                 case 1:
                     System.out.println("Them khach hang vao danh sach");
                     dskh.Them();
-                    dskh.Xuat();
                     break;
                 case 2:
                     System.out.print("Chon ma khach hang muon xoa: ");
                     dskh.Xoa(sc.nextLine());
-                    dskh.Xuat();
                     break;
                 case 3:
                     System.out.println("Chon ma nhan vien ban muon sua");
@@ -60,6 +57,6 @@ public class QLKhachhang {
             }
             System.out.println("Co muon tiep tuc khong ?(y/n)");
             op = sc.nextLine();
-        } while (op.equals("y"));
+        } while (op.equalsIgnoreCase("y"));
     }
 }

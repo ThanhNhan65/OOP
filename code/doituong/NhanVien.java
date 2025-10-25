@@ -6,18 +6,14 @@ import code.kethua.*;
 public class NhanVien extends ConNguoi {
     private String MaNV;
     public static int dem = 1;
-    private String loai;
 
     public NhanVien() {
         super();
-        MaNV = "";
-        loai = "";
     }
 
     public NhanVien(String Hoten, String Diachi, long Sdt, String MaNV) {
         super(Hoten, Diachi, Sdt);
-        this.MaNV = String.format("NV%03d", dem++);
-        this.loai = loai;
+        this.MaNV = MaNV;
     }
 
     public String getLoai() {
@@ -30,12 +26,12 @@ public class NhanVien extends ConNguoi {
 
     @Override
     public void Nhap(Scanner sc) {
+        this.MaNV = String.format("NV%03d", dem++);
         super.Nhap(sc);
     }
 
     @Override
     public void Xuat() {
-        System.out.printf("| %-6s | %-20s | %-20s | %-15d | %-14s | %-12d | %-12.0f |\n", MaNV, getHoten(), getDiachi(),
-                getSdt());
+        System.out.printf("| %-6s | %-20s | %-20s | %-12d |\n", MaNV, getHoten(), getDiachi(), getSdt());
     }
 }

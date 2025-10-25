@@ -1,7 +1,8 @@
 Tran Ngoc Kim Ngan,Hong biet,9184689461,KH001
 Thu Trang,Binh Phu,10724710,KH002
-Huong Giang,Hong biet,1834843849,KH003
+Huong Giang ,Hong biet,1834843849,KH003
 Nguyen Duong Khanh Vy,Binh phu,1027409,KH004
 Nay thi hong biet,hong biet,172474,KH005
 dien,BP,21701274,KH006
 Thaddeus,HG,1927190912,KH007
+Bin,Binh Tan,19074019,KH007

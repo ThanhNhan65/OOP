@@ -29,7 +29,7 @@ public class KhachHang extends ConNguoi {
 
     @Override
     public void Xuat() {
-        System.out.printf("| %-6s | %-21s | %-20s | %-15s |\n", MaKH, Hoten, Diachi, Sdt);
+        System.out.printf("| %-6s | %-21s | %-20s | %-15s |\n", MaKH, getHoten(), getDiachi(), getSdt());
     }
 
 }
