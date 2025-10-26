@@ -28,8 +28,8 @@ public class KhachHang extends ConNguoi {
 
     @Override
     public void Xuat() {
-        System.out.printf("| %-8s | %-25s | %-25s | %-15s |%n", 
-            MaKH, getHoten(), getDiachi(), getSdt());
+        System.out.printf("| %-8s | %-25s | %-25s | %-15s |%n",
+                MaKH, getHoten(), getDiachi(), getSdt());
     }
 
 }

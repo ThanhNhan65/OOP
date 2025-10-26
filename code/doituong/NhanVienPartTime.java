@@ -20,7 +20,8 @@ public class NhanVienPartTime extends NhanVien {
     public String getLoai() {
         return "PartTime";
     }
-    public int getgio(){
+
+    public int getgio() {
         return gio;
     }
 
@@ -37,6 +38,6 @@ public class NhanVienPartTime extends NhanVien {
     @Override
     public void Xuat() {
         System.out.printf("| %-8s | %-25s | %-25s | %-15s | %-10s | %8d gio  | %12.0f |%n",
-            getMaNV(), getHoten(), getDiachi(), getSdt(), getLoai(), gio, (double)getLuong());
+                getMaNV(), getHoten(), getDiachi(), getSdt(), getLoai(), gio, (double) getLuong());
     }
 }

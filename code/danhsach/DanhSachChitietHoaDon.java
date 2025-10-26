@@ -9,7 +9,6 @@ public class DanhSachChitietHoaDon {
     private ChiTietHoaDon[] dsct;
     private int n;
 
-
     public DanhSachChitietHoaDon() {
         n = 0;
         dsct = new ChiTietHoaDon[0];
@@ -24,49 +23,49 @@ public class DanhSachChitietHoaDon {
     }
 
     public void ReadFile(DanhSachHoaDon dshd, DanhSachSanPham dssp) {
-    try {
-        BufferedReader input = new BufferedReader(new FileReader("data/chitiethoadon.txt"));
-        String line;
-        while ((line = input.readLine()) != null) {
-            String[] arr = line.split(",");
-            String maHD = arr[0].trim();
-            String maSP = arr[1].trim();
-            int soluong = Integer.parseInt(arr[2].trim());
+        try {
+            BufferedReader input = new BufferedReader(new FileReader("data/chitiethoadon.txt"));
+            String line;
+            while ((line = input.readLine()) != null) {
+                String[] arr = line.split(",");
+                String maHD = arr[0].trim();
+                String maSP = arr[1].trim();
+                int soluong = Integer.parseInt(arr[2].trim());
 
-            ChiTietHoaDon ct = new ChiTietHoaDon(dshd,dssp); 
-            HoaDon hd = dshd.Timkiem_MaHD(maHD); 
-            SanPham sp = dssp.TimTheoMa(maSP);
+                ChiTietHoaDon ct = new ChiTietHoaDon(dshd, dssp);
+                HoaDon hd = dshd.Timkiem_MaHD(maHD);
+                SanPham sp = dssp.TimTheoMa(maSP);
 
-            ct.setHD(hd);
-            ct.setSP(sp);
-            ct.setSL(soluong); 
+                ct.setHD(hd);
+                ct.setSP(sp);
+                ct.setSL(soluong);
 
-            if (hd != null && sp != null) {
-                dsct = Arrays.copyOf(dsct, n + 1);
-                dsct[n++] = ct;
+                if (hd != null && sp != null) {
+                    dsct = Arrays.copyOf(dsct, n + 1);
+                    dsct[n++] = ct;
 
-                if (hd.getdsct() != null) {
-                    hd.getdsct().ThemChiTiet(ct);
+                    if (hd.getdsct() != null) {
+                        hd.getdsct().ThemChiTiet(ct);
+                    }
                 }
-            } 
+            }
+            input.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        input.close();
-    }catch(Exception ex){
-        ex.printStackTrace();
     }
-}
 
     public void WriteFile() {
-        try{
+        try {
             BufferedWriter fw = new BufferedWriter(new FileWriter("data/chitiethoadon.txt"));
-            for(int i = 0; i < n; i++){
+            for (int i = 0; i < n; i++) {
                 if (dsct[i] != null && dsct[i].getHD() != null && dsct[i].getSP() != null) {
                     fw.write(dsct[i].getHD().getMaHD() + "," + dsct[i].getSP().getMa() + "," + dsct[i].getSL());
                     fw.newLine();
                 }
             }
             fw.close();
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
@@ -74,11 +73,11 @@ public class DanhSachChitietHoaDon {
     public void Them(Scanner sc, DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         ChiTietHoaDon ct = new ChiTietHoaDon(dshd, dssp);
         ct.Nhap(sc);
-        dsct = Arrays.copyOf(dsct, n + 1); 
+        dsct = Arrays.copyOf(dsct, n + 1);
         dsct[n] = ct;
         n++;
-        
-        if(ct.getHD() != null){
+
+        if (ct.getHD() != null) {
             ct.getHD().getdsct().ThemChiTiet(ct);
         }
 
@@ -86,30 +85,30 @@ public class DanhSachChitietHoaDon {
     }
 
     public void ThemChiTiet(ChiTietHoaDon ct) {
-        if(ct != null) {
+        if (ct != null) {
             dsct = Arrays.copyOf(dsct, n + 1);
             dsct[n] = ct;
             n++;
         }
     }
 
-    public void Sua(Scanner sc,DanhSachHoaDon dshd, DanhSachSanPham dssp){
+    public void Sua(Scanner sc, DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         System.out.println("Nhap ma hoa don can sua (nhan Enter de thoat):");
         String MaHD = sc.nextLine().trim();
-        if (InputUtils.ThoatNeuEnter(MaHD)) 
+        if (InputUtils.ThoatNeuEnter(MaHD))
             return;
         HoaDon hd = dshd.Timkiem_MaHD(MaHD);
-        while (hd == null){
+        while (hd == null) {
             System.out.println("Khong tim thay hoa don: " + MaHD);
             System.out.println("Vui long nhap lai (Enter de thoat)! ");
             MaHD = sc.nextLine().trim();
-            if (InputUtils.ThoatNeuEnter(MaHD)) 
+            if (InputUtils.ThoatNeuEnter(MaHD))
                 return;
             hd = dshd.Timkiem_MaHD(MaHD);
         }
         hd.Xuat();
         int choice;
-        do{
+        do {
             System.out.println("1. Sua ma san pham va so luong");
             System.out.println("2. Sua so luong san pham");
             System.out.println("0. Thoat");
@@ -133,14 +132,14 @@ public class DanhSachChitietHoaDon {
     private void Suaspsl(Scanner sc, DanhSachChitietHoaDon dsct, DanhSachSanPham dssp) {
         System.out.println("Nhap ma san pham can sua (Enter de thoat):");
         String MaSP = sc.nextLine().trim();
-        if (InputUtils.ThoatNeuEnter(MaSP)) 
+        if (InputUtils.ThoatNeuEnter(MaSP))
             return;
         SanPham sp = dssp.TimTheoMa(MaSP);
         while (sp == null) {
             System.out.println("Khong tim thay san pham: " + MaSP);
             System.out.println("Vui long nhap lai (Enter de thoat)! ");
             MaSP = sc.nextLine().trim();
-            if (InputUtils.ThoatNeuEnter(MaSP)) 
+            if (InputUtils.ThoatNeuEnter(MaSP))
                 return;
             sp = dssp.TimTheoMa(MaSP);
         }
@@ -150,13 +149,13 @@ public class DanhSachChitietHoaDon {
             if (MaSP.equals(ct.getSP().getMa())) {
                 System.out.println("Nhap ma san pham moi (Enter de thoat):");
                 String newSP = sc.nextLine().trim();
-                if (InputUtils.ThoatNeuEnter(newSP)) 
+                if (InputUtils.ThoatNeuEnter(newSP))
                     return;
                 SanPham newsp = dssp.TimTheoMa(newSP);
                 while (newsp == null) {
                     System.out.println("Nhap lai ma san pham moi (Enter de thoat):");
                     newSP = sc.nextLine().trim();
-                    if (InputUtils.ThoatNeuEnter(newSP)) 
+                    if (InputUtils.ThoatNeuEnter(newSP))
                         return;
                     newsp = dssp.TimTheoMa(newSP);
                 }
@@ -174,8 +173,8 @@ public class DanhSachChitietHoaDon {
                 break;
             }
         }
-         WriteFile();
-         
+        WriteFile();
+
     }
 
     private void Suasl(Scanner sc, DanhSachChitietHoaDon dsct, DanhSachSanPham dssp) {
@@ -188,7 +187,7 @@ public class DanhSachChitietHoaDon {
             System.out.println("Khong tim thay san pham: " + MaSP);
             System.out.println("Vui long nhap lai (Enter de thoat)! ");
             MaSP = sc.nextLine().trim();
-            if (InputUtils.ThoatNeuEnter(MaSP)) 
+            if (InputUtils.ThoatNeuEnter(MaSP))
                 return;
             sp = dssp.TimTheoMa(MaSP);
         }
@@ -203,21 +202,21 @@ public class DanhSachChitietHoaDon {
                 break;
             }
         }
-            WriteFile();
-          
+        WriteFile();
+
     }
 
-    public void Xoa(Scanner sc,DanhSachHoaDon dshd, DanhSachSanPham dssp) {
+    public void Xoa(Scanner sc, DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         System.out.println("Nhap ma hoa don can xoa (Enter de thoat):");
         String MaHD = sc.nextLine();
-        if (InputUtils.ThoatNeuEnter(MaHD)) 
+        if (InputUtils.ThoatNeuEnter(MaHD))
             return;
         HoaDon hd = dshd.Timkiem_MaHD(MaHD);
         while (hd == null) {
             System.out.println("Khong tim thay chi tiet hoa don: " + MaHD);
             System.out.println("Vui long nhap lai (Enter de thoat)! ");
             MaHD = sc.nextLine();
-            if (InputUtils.ThoatNeuEnter(MaHD)) 
+            if (InputUtils.ThoatNeuEnter(MaHD))
                 return;
             hd = dshd.Timkiem_MaHD(MaHD);
         }
@@ -255,48 +254,50 @@ public class DanhSachChitietHoaDon {
                 dsct = Arrays.copyOf(dsct, n - 1);
                 n--;
                 bool = true;
-            } else i++;
+            } else
+                i++;
         }
         System.out.println(bool ? "Xoa thanh cong!" : "That bai!");
         WriteFile();
     }
 
-    public void Xoasphd(Scanner sc,String MaHD,DanhSachHoaDon dshd, DanhSachSanPham dssp) {
+    public void Xoasphd(Scanner sc, String MaHD, DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         boolean bool = false;
         System.out.println("Nhap ma san pham can xoa (Enter de thoat):");
         String MaSP = sc.nextLine();
-        if (InputUtils.ThoatNeuEnter(MaSP)) 
+        if (InputUtils.ThoatNeuEnter(MaSP))
             return;
         SanPham sp = dssp.TimTheoMa(MaSP);
         while (sp == null) {
             System.out.println("Khong tim thay san pham: " + MaSP);
             System.out.println("Vui long nhap lai (Enter de thoat)! ");
             MaSP = sc.nextLine();
-            if (InputUtils.ThoatNeuEnter(MaSP)) 
+            if (InputUtils.ThoatNeuEnter(MaSP))
                 return;
             sp = dssp.TimTheoMa(MaSP);
         }
 
         for (int i = 0; i < n;) {
             if (dsct[i].getHD().getMaHD().equals(MaHD) &&
-                dsct[i].getSP().getMa().equals(MaSP)) {
+                    dsct[i].getSP().getMa().equals(MaSP)) {
                 for (int j = i; j < n - 1; j++) {
                     dsct[j] = dsct[j + 1];
                 }
                 dsct = Arrays.copyOf(dsct, n - 1);
                 n--;
                 bool = true;
-            } else i++;
+            } else
+                i++;
         }
 
         System.out.println(bool ? "Xoa thanh cong!" : "That bai!");
         WriteFile();
     }
 
-    public void TimKiem(Scanner sc,DanhSachHoaDon dshd, DanhSachSanPham dssp) {
+    public void TimKiem(Scanner sc, DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         System.out.println("Nhap ma hoa don (Enter de thoat):");
         String MaHD = sc.nextLine();
-        if (InputUtils.ThoatNeuEnter(MaHD)) 
+        if (InputUtils.ThoatNeuEnter(MaHD))
             return;
         HoaDon hd = dshd.Timkiem_MaHD(MaHD);
         if (hd == null) {
@@ -309,8 +310,9 @@ public class DanhSachChitietHoaDon {
             }
         }
     }
-    public void Hienthidanhsach(){
-        for(int i=0 ; i < n ;i++){
+
+    public void Hienthidanhsach() {
+        for (int i = 0; i < n; i++) {
             dsct[i].Xuat();
         }
     }

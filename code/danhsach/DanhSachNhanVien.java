@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
 import code.doituong.*;
+import code.kiemtra.InputUtils;
 
 public class DanhSachNhanVien {
     public NhanVien[] dsnv;
@@ -24,7 +25,7 @@ public class DanhSachNhanVien {
         this.n = n;
         this.dsnv = dsnv;
     }
-    
+
     public void HienThiDS() {
         if (n == 0) {
             System.out.println("Danh sach rong!");
@@ -34,7 +35,6 @@ public class DanhSachNhanVien {
             dsnv[i].Xuat();
         }
     }
-
 
     public void Them(Scanner sc) {
         dsnv = Arrays.copyOf(dsnv, n + 1);
@@ -89,7 +89,7 @@ public class DanhSachNhanVien {
                 String MaNV = chuoi[3].trim();
                 int work = Integer.parseInt(chuoi[4].trim());
                 String loai = chuoi[5];
-                
+
                 NhanVien nv;
                 if ("FullTime".equals(loai)) {
                     nv = new NhanVienFullTime(HoTen, Diachi, Sdt, MaNV, work);
@@ -113,9 +113,11 @@ public class DanhSachNhanVien {
     }
 
     public void Xoa(String MaNV) {
+        if (InputUtils.ThoatNeuEnter(MaNV))
+            return;
         boolean found = false;
         for (int i = 0; i < n; i++) {
-                if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV)) {
+            if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV)) {
                 for (int j = i; j < n - 1; j++) {
                     dsnv[j] = dsnv[j + 1];
                 }
@@ -150,13 +152,15 @@ public class DanhSachNhanVien {
         }
 
         String MaNV;
-            boolean found;
+        boolean found;
         do {
-                found = false;
+            found = false;
             System.out.print("Nhap ma nhan vien: ");
             MaNV = sc.nextLine();
+            if (InputUtils.ThoatNeuEnter(MaNV))
+                return;
             for (int i = 0; i < n; i++) {
-                    if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV)) {
+                if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV)) {
                     found = true;
                     switch (chon) {
                         case 1:
@@ -198,7 +202,7 @@ public class DanhSachNhanVien {
     public NhanVien TimKiemNhanVienTheoMa(String MaNV) {
         boolean found = false;
         for (int i = 0; i < n; i++) {
-                if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV)) {
+            if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV)) {
                 found = true;
                 return dsnv[i];
             }
@@ -209,7 +213,7 @@ public class DanhSachNhanVien {
     public NhanVien TimKiemNhanVienTheoHoTen(String HoTen) {
         boolean found = false;
         for (int i = 0; i < n; i++) {
-                if (dsnv[i] != null && dsnv[i].getHoten() != null && dsnv[i].getHoten().equals(HoTen)) {
+            if (dsnv[i] != null && dsnv[i].getHoten() != null && dsnv[i].getHoten().equals(HoTen)) {
                 return dsnv[i];
             }
         }
@@ -221,7 +225,7 @@ public class DanhSachNhanVien {
     public NhanVien SuaTheoHoTen(String HoTen_moi, String MaNV_moi) {
         boolean found = false;
         for (int i = 0; i < n; i++) {
-                if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV_moi)) {
+            if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV_moi)) {
                 found = true;
                 dsnv[i].setHoten(HoTen_moi);
                 return dsnv[i];
@@ -235,7 +239,7 @@ public class DanhSachNhanVien {
     public NhanVien SuaTheoDiaChi(String DiaChi_moi, String MaNV_moi) {
         boolean found = false;
         for (int i = 0; i < n; i++) {
-                if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV_moi)) {
+            if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV_moi)) {
                 found = true;
                 dsnv[i].setDiachi(DiaChi_moi);
                 return dsnv[i];
@@ -249,7 +253,7 @@ public class DanhSachNhanVien {
     public NhanVien SuaTheoSDT(String Sdt_moi, String MaNV_moi) {
         boolean found = false;
         for (int i = 0; i < n; i++) {
-                if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV_moi)) {
+            if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV_moi)) {
                 found = true;
                 dsnv[i].setSdt(Sdt_moi);
                 return dsnv[i];
@@ -269,6 +273,7 @@ public class DanhSachNhanVien {
         System.out.print("Vui long chon: ");
         int c = sc.nextInt();
         sc.nextLine();
+
         switch (c) {
             case 1:
                 System.out.print("Nhap ma nhan vien muon tim kiem: ");

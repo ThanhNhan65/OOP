@@ -47,6 +47,6 @@ public class QLNhanvien {
                 default:
                     System.out.println("Khong co chuc nang nay, cho cap nhat.");
             }
-        } while(chon != 0);
+        } while (chon != 0);
     }
 }

@@ -29,12 +29,13 @@ public class NhanVien extends ConNguoi {
 
     @Override
     public void Nhap(Scanner sc) {
+        this.MaNV = String.format("NV%03d", dem++);
         super.Nhap(sc);
     }
 
     @Override
     public void Xuat() {
-        System.out.printf("| %-8s | %-25s | %-25s | %-15s |%n", 
-            MaNV, getHoten(), getDiachi(), getSdt());
+        System.out.printf("| %-8s | %-25s | %-25s | %-15s |%n",
+                MaNV, getHoten(), getDiachi(), getSdt());
     }
 }

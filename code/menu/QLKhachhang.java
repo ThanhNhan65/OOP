@@ -34,22 +34,20 @@ public class QLKhachhang {
                 case 1:
                     System.out.println("Them khach hang vao danh sach");
                     dskh.Them();
-                    dskh.Xuat();
                     break;
                 case 2:
                     System.out.print("Chon ma khach hang muon xoa: ");
                     dskh.Xoa(sc.nextLine());
-                    dskh.Xuat();
                     break;
                 case 3:
-                    System.out.println("Chon ma khach hang ban muon sua");
+                    System.out.println("Chon ma nhan vien ban muon sua");
                     dskh.SuaKH();
                     break;
                 case 4:
                     dskh.TimkiemKH();
                     break;
                 case 5:
-                    dskh.Xuat();
+                    dskh.HienThiDS();
                     break;
                 case 0:
                     System.out.println("Thoat chuong trinh.");

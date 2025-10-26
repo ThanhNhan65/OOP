@@ -8,10 +8,10 @@ public class ChiTietHoaDon implements INhapXuat {
     private HoaDon hd;
     private SanPham sp;
     private int soluong;
-    
+
     private DanhSachHoaDon dshd;
     private DanhSachSanPham dssp;
-    
+
     public ChiTietHoaDon(DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         this.dshd = dshd;
         this.dssp = dssp;
@@ -19,7 +19,7 @@ public class ChiTietHoaDon implements INhapXuat {
         this.sp = new SanPham();
         this.soluong = 0;
     }
-    
+
     public void setHD(HoaDon hd) {
         this.hd = hd;
     }
@@ -30,13 +30,12 @@ public class ChiTietHoaDon implements INhapXuat {
 
     public void setSP(SanPham sp) {
         this.sp = sp;
-        
+
     }
 
     public SanPham getSP() {
         return sp;
     }
-
 
     public void setSL(int soluong) {
         this.soluong = soluong;
@@ -82,9 +81,6 @@ public class ChiTietHoaDon implements INhapXuat {
 
     public void Xuat() {
         System.out.printf("| %-12s | %-12s | %-30s | %10d | %15.2f |%n",
-            hd.getMaHD(), sp.getMa(), sp.getTen(), soluong, Tinhtien());
+                hd.getMaHD(), sp.getMa(), sp.getTen(), soluong, Tinhtien());
     }
 }
-
-
-

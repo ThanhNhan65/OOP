@@ -10,7 +10,8 @@ public class NhanVienFullTime extends NhanVien {
         super();
         ngay = 0;
     }
-    public int getngay(){
+
+    public int getngay() {
         return ngay;
     }
 
@@ -37,6 +38,6 @@ public class NhanVienFullTime extends NhanVien {
     @Override
     public void Xuat() {
         System.out.printf("| %-8s | %-25s | %-25s | %-15s | %-10s | %8d ngay | %12.0f |%n",
-            getMaNV(), getHoten(), getDiachi(), getSdt(), getLoai(), ngay, (double)getLuong());
+                getMaNV(), getHoten(), getDiachi(), getSdt(), getLoai(), ngay, (double) getLuong());
     }
 }

@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Arrays;
 import code.doituong.*;
+import code.kiemtra.InputUtils;
 
 public class DanhSachKhachHang {
     public KhachHang[] dskh;
@@ -65,7 +66,7 @@ public class DanhSachKhachHang {
         }
     }
 
-    public void Xuat() {
+    public void HienThiDS() {
         if (n == 0) {
             System.out.println("Danh sach rong!");
             return;
@@ -84,6 +85,8 @@ public class DanhSachKhachHang {
     }
 
     public void Xoa(String MaKH) {
+        if (InputUtils.ThoatNeuEnter(MaKH))
+            return;
         boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dskh[i].getMaKH().equals(MaKH)) {
@@ -118,6 +121,8 @@ public class DanhSachKhachHang {
         do {
             System.out.print("Nhap ma khach hang: ");
             MaKH = sc.nextLine();
+            if (InputUtils.ThoatNeuEnter(MaKH))
+                return;
             for (int i = 0; i < n; i++) {
                 if (dskh[i].getMaKH().equals(MaKH)) {
                     found = true;
@@ -188,7 +193,6 @@ public class DanhSachKhachHang {
 
     public KhachHang Timkiem_MaKH(String MaKH) {
         boolean found = false;
-
         for (int i = 0; i < n; i++) {
             if (dskh[i].getMaKH().equals(MaKH)) {
                 found = true;
