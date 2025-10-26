@@ -1,150 +1,252 @@
 @startuml
-title Class diagram — OOP/DOAN project (generated)
+skinparam linetype ortho
+skinparam shadowing false
+skinparam class {
+  BackgroundColor #FAFAFA
+  BorderColor #333333
+  ArrowColor #1E90FF
+}
+skinparam defaultFontName Consolas
+left to right direction
 
-package "code.kethua" {
-  abstract class ConNguoi {
-    +Hoten : String
-    +Diachi : String
-    +Sdt : long
+title Hệ thống quản lý bán nhạc cụ — Class Diagram (đầy đủ)
+
+package "code.giaodien" {
+  interface INhapXuat {
     +Nhap(sc: Scanner)
     +Xuat()
   }
+}
 
-  abstract class GiaoDich {
-    -ngayGD : Date
-    -nv : NhanVien
-    -kh : KhachHang
-    +getNgayGD() : Date
-    +setNgayGD(Date)
-    +getNv() : NhanVien
-    +setNv(NhanVien)
-    +getKh() : KhachHang
-    +setKh(KhachHang)
-    +Nhap(sc: Scanner)
-    +Xuat()
-    +Thanhtien() : double
+package "code.kethua" {
+  abstract class ConNguoi implements INhapXuat {
+    -Hoten: String
+    -Diachi: String
+    -Sdt: long
+  }
+
+  abstract class GiaoDich implements INhapXuat {
+    -ngayGD: Date
+    -nv: NhanVien
+    -kh: KhachHang
   }
 }
 
 package "code.doituong" {
-  interface INhapXuat
-
-  class HoaDon {
-    -MaHDB : String
-    -dsct : code.danhsach.DanhSachChitietHoaDon
-    -dskh : code.danhsach.DanhSachKhachHang
-    -dsnv : code.danhsach.DanhSachNhanVien
-    -MaHDNext : int {static}
-    +getMaHD() : String
-    +setMaHD(String)
-    +getdsct() : code.danhsach.DanhSachChitietHoaDon
-    +Thanhtien() : double
-    +Nhap(sc: Scanner)
-    +Xuat()
+  class NhanVien extends code.kethua.ConNguoi {
+    -MaNV: String
+  }
+  class NhanVienFullTime extends NhanVien {
+    -ngay: int
+  }
+  class NhanVienPartTime extends NhanVien {
+    -gio: int
   }
 
-  class ChiTietHoaDon {
-    -hd : HoaDon
-    -sp : SanPham
-    -soluong : int
-    -dshd : code.danhsach.DanhSachHoaDon
-    -dssp : code.danhsach.DanhSachSanPham
-    +Tinhtien() : double
-    +Nhap(sc: Scanner)
-    +Xuat()
+  class KhachHang extends code.kethua.ConNguoi {
+    -MaKH: String
   }
 
-  class SanPham {
-    -ma : String
-    -ten : String
-    -hang : String
-    -loai : Loai
-    -gia : double
-    +getMa() : String
-    +getTen() : String
-    +getGia() : double
-    +Nhap(sc: Scanner)
-    +Xuat()
-    +tofile() : String
+  class Loai implements code.giaodien.INhapXuat {
+    -maLoai: String
+    -tenLoai: String
   }
 
-  class Loai {
-    -maLoai : String
-    -tenLoai : String
-    +getMaloai() : String
-    +getTenloai() : String
+  class SanPham implements code.giaodien.INhapXuat {
+    -ma: String
+    -ten: String
+    -hang: String
+    -gia: double
   }
 
-  class KhachHang {
-    +MaKH : String
-    +Nhap(sc: Scanner)
-    +Xuat()
+  class Kho {
+    -sp: SanPham
+    -Dauvao: int
+    -Daura: int
+    -Ton: int
   }
 
-  class NhanVien {
-    +MaNV : String
-    +Chucvu : String
-    +ChamCong : int
-    +Luong : long
-    +Nhap(sc: Scanner)
-    +Xuat()
+  class HoaDon extends code.kethua.GiaoDich {
+    -MaHDB: String
+    -dsct: code.danhsach.DanhSachChitietHoaDon
+  }
+
+  class ChiTietHoaDon implements code.giaodien.INhapXuat {
+    -hd: HoaDon
+    -sp: SanPham
+    -soluong: int
   }
 }
 
 package "code.danhsach" {
-  class DanhSachHoaDon {
-    -dshd : code.doituong.HoaDon[]
-    -n : int
-    +ReadFile(dskh, dsnv)
-    +WriteFile()
-    +Them(...)
-  }
-
-  class DanhSachChitietHoaDon {
-    -dsct : code.doituong.ChiTietHoaDon[]
-    -n : int
-    +ReadFile(dshd, dssp)
-    +WriteFile()
-    +Them(sc, dshd, dssp)
-    +ThemChiTiet(ct)
-  }
-
-  class DanhSachSanPham {
-    -ds : code.doituong.SanPham[]
-    -n : int
-    +docFile(dsl)
-    +ghiFile()
-    +TimTheoMa(ma) : SanPham
-  }
-
-  class DanhSachKhachHang {
-    -dskh : code.doituong.KhachHang[]
-    -n : int
-  }
-
   class DanhSachNhanVien {
-    -dsnv : code.doituong.NhanVien[]
-    -n : int
+    dsnv: code.doituong.NhanVien[]
+    n: int
+    +HienThiDS(): void
+    +Them(sc: Scanner): void
+    +GhiVaoFile(file: String): void
+    +DocTuFile(file: String): void
+    +Xoa(MaNV: String): void
+    +Sua_Chi_Tiet(sc: Scanner): void
+    +TimKiemNhanVienTheoMa(MaNV: String): code.doituong.NhanVien
+    +TimKiemNhanVienTheoHoTen(hoten: String): code.doituong.NhanVien
+    +TimkiemNV(sc: Scanner): void
+  }
+  class DanhSachKhachHang {
+    dskh: code.doituong.KhachHang[]
+    n: int
+    +GhiVaoFile(file: String): void
+    +DocTuFile(file: String): void
+    +Nhap(sc: Scanner): void
+    +Xuat(): void
+    +Them(): void
+    +Xoa(MaKH: String): void
+    +SuaKH(): void
+    +TimkiemKH(): void
+    +Timkiem_MaKH(MaKH: String): code.doituong.KhachHang
+    +Timkiem_HoTen(hoten: String): code.doituong.KhachHang
+  }
+  class DanhSachSanPham {
+    dssp: code.doituong.SanPham[]
+    n: int
+    +docFile(dsl: DanhSachLoai): void
+    +ghiFile(): void
+    +Them(sc: Scanner, dsl: DanhSachLoai): void
+    +Xoa(sc: Scanner): void
+    +TimKiem(sc: Scanner): void
+    +TimTheoMa(ma: String): code.doituong.SanPham
+    +Sua(sc: Scanner, dsl: DanhSachLoai): void
+    +Hienthidanhsach(): void
+    +locTheoHang(sc: Scanner): void
+    +locTheoLoai(sc: Scanner): void
+    +locTheoGia(sc: Scanner): void
+  }
+  class DanhSachLoai {
+    ds: code.doituong.Loai[]
+    n: int
+    +docFile(): void
+    +ghiFile(): void
+    +Them(sc: Scanner): void
+    +Xem(): void
+    +Xoa(sc: Scanner): void
+    +Sua(sc: Scanner): void
+    +TimKiem(sc: Scanner): void
+    +TimTheoMa(ma: String): code.doituong.Loai
+    +TimTheoTen(ten: String): int
+    +getN(): int
+  }
+  class DanhSachHoaDon {
+    dshd: code.doituong.HoaDon[]
+    n: int
+    +ReadFile(dskh: DanhSachKhachHang, dsnv: DanhSachNhanVien): void
+    +WriteFile(): void
+    +Them(sc: Scanner, dskh: DanhSachKhachHang, dsnv: DanhSachNhanVien, dssp: DanhSachSanPham, dsct: DanhSachChitietHoaDon): void
+    +Timkiem(sc: Scanner, dskh: DanhSachKhachHang, dsnv: DanhSachNhanVien): void
+    +Timkiem_MaHD(ma: String): code.doituong.HoaDon
+    +Timkiem_MaKH(maKH: String): void
+    +Timkiem_MaNV(maNV: String): void
+    +Xoa(sc: Scanner, dshd: DanhSachHoaDon, dskh: DanhSachKhachHang): void
+    +Xoa_MaHD(ma: String): void
+    +Xoa_MaKH(maKH: String): void
+    +Sua_NgayGD(sc: Scanner, ngay: Date): void
+    +Sua(sc: Scanner, dsnv: DanhSachNhanVien, dskh: DanhSachKhachHang): void
+    +Sua_MaKH(sc: Scanner, maKH: String, dskh: DanhSachKhachHang): void
+    +Sua_MaNV(sc: Scanner, maNV: String, dsnv: DanhSachNhanVien): void
+    +Showlist(): void
+  }
+  class DanhSachChitietHoaDon {
+    dsct: code.doituong.ChiTietHoaDon[]
+    n: int
+    +ReadFile(dshd: DanhSachHoaDon, dssp: DanhSachSanPham): void
+    +WriteFile(): void
+    +Them(sc: Scanner, dshd: DanhSachHoaDon, dssp: DanhSachSanPham): void
+    +ThemChiTiet(ct: code.doituong.ChiTietHoaDon): void
+    +Sua(sc: Scanner, dshd: DanhSachHoaDon, dssp: DanhSachSanPham): void
+    +Xoa(sc: Scanner, dshd: DanhSachHoaDon, dssp: DanhSachSanPham): void
+    +XoaTB(maHD: String): void
+    +Xoasphd(sc: Scanner, maHD: String, dshd: DanhSachHoaDon, dssp: DanhSachSanPham): void
+    +TimKiem(sc: Scanner, dshd: DanhSachHoaDon, dssp: DanhSachSanPham): void
+    +Hienthidanhsach(): void
+  }
+  class DanhSachKho {
+    dskho: code.doituong.Kho[]
+    n: int
+    +docFile(dssp: DanhSachSanPham, dsct: DanhSachChitietHoaDon): void
+    +ghiFile(): void
+    +Them(sc: Scanner, dssp: DanhSachSanPham, dsct: DanhSachChitietHoaDon): void
+    +HienThi(): void
+    +Sua(sc: Scanner, dssp: DanhSachSanPham): void
+    +TimKiem(sc: Scanner, dssp: DanhSachSanPham): void
+    +Xoa(sc: Scanner, dssp: DanhSachSanPham): void
   }
 }
 
-' Relationships
-HoaDon --|> GiaoDich
-KhachHang --|> ConNguoi
-NhanVien --|> ConNguoi
+package "code.menu" {
+  class QLKhachhang
+  class QLNhanvien
+  class QLSanpham
+  class QLLoai
+  class QLHoadon
+  class QLChitiethoadon
+  class QLKho
+}
 
-' Associations / aggregations
-HoaDon "1" o-- "0..*" ChiTietHoaDon : contains
-code.danhsach.DanhSachChitietHoaDon "1" *-- "0..*" ChiTietHoaDon
-code.danhsach.DanhSachHoaDon "1" *-- "0..*" HoaDon
-ChiTietHoaDon --> SanPham
-GiaoDich --> KhachHang
-GiaoDich --> NhanVien
+' =============================
+' Kế thừa
+code.kethua.ConNguoi <|-- code.doituong.NhanVien
+code.kethua.ConNguoi <|-- code.doituong.KhachHang
+code.doituong.NhanVien <|-- code.doituong.NhanVienFullTime
+code.doituong.NhanVien <|-- code.doituong.NhanVienPartTime
+code.kethua.GiaoDich <|-- code.doituong.HoaDon
 
-' Interfaces
-INhapXuat <|.. ConNguoi
-INhapXuat <|.. SanPham
-INhapXuat <|.. ChiTietHoaDon
-INhapXuat <|.. Loai
+' =============================
+' Implementations
+code.giaodien.INhapXuat <|.. code.kethua.ConNguoi
+code.giaodien.INhapXuat <|.. code.doituong.Loai
+code.giaodien.INhapXuat <|.. code.doituong.SanPham
+code.giaodien.INhapXuat <|.. code.doituong.ChiTietHoaDon
+code.giaodien.INhapXuat <|.. code.kethua.GiaoDich
+
+' =============================
+' Associations domain
+code.doituong.SanPham --> code.doituong.Loai : thuộc loại
+code.doituong.Kho --> code.doituong.SanPham : quản lý
+code.doituong.ChiTietHoaDon --> code.doituong.HoaDon : thuộc
+code.doituong.ChiTietHoaDon --> code.doituong.SanPham : gồm
+code.doituong.HoaDon --> code.danhsach.DanhSachChitietHoaDon : chứa
+code.kethua.GiaoDich --> code.doituong.NhanVien : nv
+code.kethua.GiaoDich --> code.doituong.KhachHang : kh
+
+' =============================
+' Aggregations (Danh sách)
+code.danhsach.DanhSachNhanVien *-- code.doituong.NhanVien
+code.danhsach.DanhSachKhachHang *-- code.doituong.KhachHang
+code.danhsach.DanhSachSanPham *-- code.doituong.SanPham
+code.danhsach.DanhSachLoai *-- code.doituong.Loai
+code.danhsach.DanhSachHoaDon *-- code.doituong.HoaDon
+code.danhsach.DanhSachChitietHoaDon *-- code.doituong.ChiTietHoaDon
+code.danhsach.DanhSachKho *-- code.doituong.Kho
+
+' =============================
+' Dependencies từ menu đến danh sách (dashed)
+code.menu.QLKhachhang ..> code.danhsach.DanhSachKhachHang : dùng
+code.menu.QLNhanvien ..> code.danhsach.DanhSachNhanVien : dùng
+code.menu.QLSanpham ..> code.danhsach.DanhSachSanPham : dùng
+code.menu.QLSanpham ..> code.danhsach.DanhSachLoai : dùng
+code.menu.QLLoai ..> code.danhsach.DanhSachLoai : dùng
+code.menu.QLHoadon ..> code.danhsach.DanhSachHoaDon : dùng
+code.menu.QLHoadon ..> code.danhsach.DanhSachKhachHang : dùng
+code.menu.QLHoadon ..> code.danhsach.DanhSachNhanVien : dùng
+code.menu.QLChitiethoadon ..> code.danhsach.DanhSachChitietHoaDon : dùng
+code.menu.QLChitiethoadon ..> code.danhsach.DanhSachHoaDon : dùng
+code.menu.QLChitiethoadon ..> code.danhsach.DanhSachSanPham : dùng
+code.menu.QLKho ..> code.danhsach.DanhSachKho : dùng
+code.menu.QLKho ..> code.danhsach.DanhSachSanPham : dùng
+
+note top of code.kethua.ConNguoi : Lớp trừu tượng cho Nhân viên & Khách hàng
+note right of code.kethua.GiaoDich : Gồm ngày GD, NV, KH
+note right of code.doituong.HoaDon : Có danh sách chi tiết
+note right of code.doituong.ChiTietHoaDon : Gồm SP + số lượng
+note right of code.doituong.Kho : Theo dõi tồn kho
 
 @enduml

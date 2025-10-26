@@ -9,34 +9,42 @@ import java.util.Scanner;
 import code.doituong.*;
 
 public class DanhSachLoai {
-    private Loai[] ds = new Loai[0];
-    private int n = 0;
+    private Loai[] ds;
+    private int n ;
 
-    public void docFile(){
+    public DanhSachLoai(){
         ds = new Loai[0];
         n = 0;
+    }
+
+    public void docFile(){
+        int maxid=0;
         try{
             BufferedReader br = new BufferedReader(new FileReader("data/loai.txt"));
             String line = br.readLine();
+            
             while(line != null){
                 line = line.trim();
                 if(!line.isEmpty()){
                     String[] a = line.split(",", -1);
                     if(a.length >= 2){
                         String ma  = a[0].trim();
+                        int id =Integer.parseInt(ma.substring(1));
                         String ten = a[1].trim();
                         if(!ma.isEmpty() && !TonTaiMa(ma)){
-                            Loai l = new Loai();
-                            l.setMaloai(ma);
-                            l.setTenloai(ten);
+                            Loai l = new Loai(ma, ten);
                             ds = Arrays.copyOf(ds, n + 1);
                             ds[n++] = l;
+
+                            if(id>maxid)
+                               maxid=id;
                         }
-                    }
+                    }  
                 }
                 line = br.readLine();
             }
             br.close();
+            Loai.setmanext(maxid + 1);
         }catch(Exception ex){
             ex.printStackTrace();
         }

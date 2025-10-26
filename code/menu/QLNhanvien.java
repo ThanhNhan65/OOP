@@ -7,9 +7,12 @@ public class QLNhanvien {
     public void menu() {
         DanhSachNhanVien dsnv = new DanhSachNhanVien();
         dsnv.DocTuFile("data/danhsachNV.txt");
+<<<<<<< HEAD
         dsnv.HienThiDS();
+=======
+>>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
         Scanner sc = new Scanner(System.in);
-        String op;
+        int chon;
         do {
             System.out.println("-----DANH SACH CAC CHUC NANG-----");
             System.out.println("1.Them nhan vien.");
@@ -20,18 +23,26 @@ public class QLNhanvien {
             System.out.println("0.Thoat chuong trinh.");
             System.out.println("----------------------------------");
             System.out.print("Moi chon chuc nang: ");
-            int chon = sc.nextInt();
+            chon = sc.nextInt();
             sc.nextLine();
             switch (chon) {
                 case 1:
                     System.out.println("Them nhan vien vao danh sach");
                     dsnv.Them(sc);
+<<<<<<< HEAD
+=======
+                    dsnv.HienThiDS();
+>>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
                     break;
                 case 2:
                     System.out.print("Chon ma nhan vien muon xoa: ");
                     dsnv.Xoa(sc.nextLine());
                     break;
                 case 3:
+<<<<<<< HEAD
+=======
+                    System.out.println("Chon ma nhan vien ban muon sua: ");
+>>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
                     dsnv.Sua_Chi_Tiet(sc);
                     break;
                 case 4:
@@ -46,8 +57,6 @@ public class QLNhanvien {
                 default:
                     System.out.println("Khong co chuc nang nay, cho cap nhat.");
             }
-            System.out.println("Co muon tiep tuc khong ?(y/n)");
-            op = sc.nextLine();
-        } while (op.equalsIgnoreCase("y"));
+        } while(chon != 0);
     }
 }

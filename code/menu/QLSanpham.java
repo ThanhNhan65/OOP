@@ -16,10 +16,11 @@ public class QLSanpham{
         while (true) {
             System.out.println("\n---- MENU SAN PHAM ----");
             System.out.println("1. Them san pham");
-            System.out.println("2. Tim kiem san pham");
-            System.out.println("3. Sua san pham");
+            System.out.println("2. Sua san pham ");
+            System.out.println("3. Tim kiem san pham");
             System.out.println("4. Xoa san pham");
             System.out.println("5. Loc san pham (Hang/Loai/Gia)");
+            System.out.println("6. Hien thi danh sach");
             System.out.println("0. Quay lai");
             System.out.print("Chon: ");
             int c2 = sc.nextInt(); 
@@ -32,17 +33,17 @@ public class QLSanpham{
                     dssp.Them(sc, dsl);
                     break;
                 case 2:
-                    dssp.TimKiem(sc);
+                    dssp.Sua(sc, dsl);
                     break;
                 case 3:
-                    dssp.Sua(sc, dsl);
+                    dssp.TimKiem(sc);
                     break;
                 case 4:
                     dssp.Xoa(sc);
                     break;
                 case 5: {
                     while (true) {
-                        System.out.println("\n---- LOC SAN PHAM ----");
+                        System.out.println("\n==== LOC SAN PHAM ====");
                         System.out.println("1. Loc theo hang");
                         System.out.println("2. Loc theo loai");
                         System.out.println("3. Loc theo gia [min, max]");
@@ -61,6 +62,9 @@ public class QLSanpham{
                     }
                     break;
                 }
+                case 6:
+                    dssp.Hienthidanhsach();;
+                    break;
                 default:
                     System.out.println("Khong hop le");
             }

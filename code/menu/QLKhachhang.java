@@ -15,9 +15,13 @@ public class QLKhachhang {
     public void menu() {
         DanhSachKhachHang dskh = new DanhSachKhachHang();
         dskh.DocTuFile("data/danhsachKH.txt");
+<<<<<<< HEAD
         dskh.HienThiDS();
+=======
+        dskh.GhiVaoFile("data/danhsachKH.txt");
+>>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
         Scanner sc = new Scanner(System.in);
-        String op;
+        int chon;
         do {
             System.out.println("-----DANH SACH CAC CHUC NANG-----");
             System.out.println("1.Them khach hang.");
@@ -28,7 +32,7 @@ public class QLKhachhang {
             System.out.println("0.Thoat chuong trinh.");
             System.out.println("----------------------------------");
             System.out.print("Moi chon chuc nang: ");
-            int chon = sc.nextInt();
+            chon = sc.nextInt();
             sc.nextLine();
             switch (chon) {
                 case 1:
@@ -55,8 +59,12 @@ public class QLKhachhang {
                 default:
                     System.out.println("Khong co chuc nang nay, cho cap nhat.");
             }
+<<<<<<< HEAD
             System.out.println("Co muon tiep tuc khong ?(y/n)");
             op = sc.nextLine();
         } while (op.equalsIgnoreCase("y"));
+=======
+        } while (chon != 0);
+>>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
     }
 }

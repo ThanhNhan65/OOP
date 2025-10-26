@@ -3,6 +3,7 @@ package code.danhsach;
 import java.util.*;
 import java.io.*;
 import code.doituong.*;
+import code.kiemtra.*;;
 
 public class DanhSachChitietHoaDon {
     private ChiTietHoaDon[] dsct;
@@ -93,21 +94,25 @@ public class DanhSachChitietHoaDon {
     }
 
     public void Sua(Scanner sc,DanhSachHoaDon dshd, DanhSachSanPham dssp){
-        System.out.println("Nhap ma hoa don can sua:");
+        System.out.println("Nhap ma hoa don can sua (nhan Enter de thoat):");
         String MaHD = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(MaHD)) 
+            return;
         HoaDon hd = dshd.Timkiem_MaHD(MaHD);
         while (hd == null){
             System.out.println("Khong tim thay hoa don: " + MaHD);
-            System.out.println("Vui long nhap lai! ");
+            System.out.println("Vui long nhap lai (Enter de thoat)! ");
             MaHD = sc.nextLine().trim();
+            if (InputUtils.ThoatNeuEnter(MaHD)) 
+                return;
             hd = dshd.Timkiem_MaHD(MaHD);
         }
-
+        hd.Xuat();
         int choice;
         do{
             System.out.println("1. Sua ma san pham va so luong");
             System.out.println("2. Sua so luong san pham");
-            System.out.println("3. Thoat");
+            System.out.println("0. Thoat");
             System.out.print("Chon: ");
             choice = sc.nextInt();
             sc.nextLine();
@@ -118,33 +123,41 @@ public class DanhSachChitietHoaDon {
                 case 2:
                     Suasl(sc, hd.getdsct(), dssp);
                     break;
-                case 3:
+                case 0:
                     System.out.println("Thoat menu sua.");
                     break;
             }
-        } while (choice != 3);
+        } while (choice != 0);
     }
 
     private void Suaspsl(Scanner sc, DanhSachChitietHoaDon dsct, DanhSachSanPham dssp) {
-        System.out.println("Nhap ma san pham can sua:");
+        System.out.println("Nhap ma san pham can sua (Enter de thoat):");
         String MaSP = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(MaSP)) 
+            return;
         SanPham sp = dssp.TimTheoMa(MaSP);
         while (sp == null) {
             System.out.println("Khong tim thay san pham: " + MaSP);
-            System.out.println("Vui long nhap lai! ");
+            System.out.println("Vui long nhap lai (Enter de thoat)! ");
             MaSP = sc.nextLine().trim();
+            if (InputUtils.ThoatNeuEnter(MaSP)) 
+                return;
             sp = dssp.TimTheoMa(MaSP);
         }
 
         for (int i = 0; i < dsct.getN(); i++) {
             ChiTietHoaDon ct = dsct.getct(i);
             if (MaSP.equals(ct.getSP().getMa())) {
-                System.out.println("Nhap ma san pham moi:");
+                System.out.println("Nhap ma san pham moi (Enter de thoat):");
                 String newSP = sc.nextLine().trim();
+                if (InputUtils.ThoatNeuEnter(newSP)) 
+                    return;
                 SanPham newsp = dssp.TimTheoMa(newSP);
                 while (newsp == null) {
-                    System.out.println("Nhap lai ma san pham moi:");
+                    System.out.println("Nhap lai ma san pham moi (Enter de thoat):");
                     newSP = sc.nextLine().trim();
+                    if (InputUtils.ThoatNeuEnter(newSP)) 
+                        return;
                     newsp = dssp.TimTheoMa(newSP);
                 }
 
@@ -166,13 +179,17 @@ public class DanhSachChitietHoaDon {
     }
 
     private void Suasl(Scanner sc, DanhSachChitietHoaDon dsct, DanhSachSanPham dssp) {
-        System.out.println("Nhap ma san pham can sua:");
+        System.out.println("Nhap ma san pham can sua (Enter de thoat):");
         String MaSP = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(MaSP))
+            return;
         SanPham sp = dssp.TimTheoMa(MaSP);
         while (sp == null) {
             System.out.println("Khong tim thay san pham: " + MaSP);
-            System.out.println("Vui long nhap lai! ");
+            System.out.println("Vui long nhap lai (Enter de thoat)! ");
             MaSP = sc.nextLine().trim();
+            if (InputUtils.ThoatNeuEnter(MaSP)) 
+                return;
             sp = dssp.TimTheoMa(MaSP);
         }
 
@@ -191,21 +208,26 @@ public class DanhSachChitietHoaDon {
     }
 
     public void Xoa(Scanner sc,DanhSachHoaDon dshd, DanhSachSanPham dssp) {
-        System.out.println("Nhap ma hoa don can xoa:");
+        System.out.println("Nhap ma hoa don can xoa (Enter de thoat):");
         String MaHD = sc.nextLine();
+        if (InputUtils.ThoatNeuEnter(MaHD)) 
+            return;
         HoaDon hd = dshd.Timkiem_MaHD(MaHD);
         while (hd == null) {
             System.out.println("Khong tim thay chi tiet hoa don: " + MaHD);
-            System.out.println("Vui long nhap lai! ");
+            System.out.println("Vui long nhap lai (Enter de thoat)! ");
             MaHD = sc.nextLine();
+            if (InputUtils.ThoatNeuEnter(MaHD)) 
+                return;
             hd = dshd.Timkiem_MaHD(MaHD);
         }
+        hd.Xuat();
 
         int choice;
         do {
             System.out.println("1. Xoa toan bo chi tiet cua hoa don");
             System.out.println("2. Xoa 1 san pham trong hoa don");
-            System.out.println("3. Thoat");
+            System.out.println("0. Thoat");
             System.out.print("Chon: ");
             choice = sc.nextInt();
             sc.nextLine();
@@ -216,11 +238,11 @@ public class DanhSachChitietHoaDon {
                 case 2:
                     Xoasphd(sc, MaHD, dshd, dssp);
                     break;
-                case 3:
+                case 0:
                     System.out.println("Thoat menu xoa.");
                     break;
             }
-        } while (choice != 3);
+        } while (choice != 0);
     }
 
     public void XoaTB(String MaHD) {
@@ -241,13 +263,17 @@ public class DanhSachChitietHoaDon {
 
     public void Xoasphd(Scanner sc,String MaHD,DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         boolean bool = false;
-        System.out.println("Nhap ma san pham can xoa:");
+        System.out.println("Nhap ma san pham can xoa (Enter de thoat):");
         String MaSP = sc.nextLine();
+        if (InputUtils.ThoatNeuEnter(MaSP)) 
+            return;
         SanPham sp = dssp.TimTheoMa(MaSP);
         while (sp == null) {
             System.out.println("Khong tim thay san pham: " + MaSP);
-            System.out.println("Vui long nhap lai! ");
+            System.out.println("Vui long nhap lai (Enter de thoat)! ");
             MaSP = sc.nextLine();
+            if (InputUtils.ThoatNeuEnter(MaSP)) 
+                return;
             sp = dssp.TimTheoMa(MaSP);
         }
 
@@ -268,8 +294,10 @@ public class DanhSachChitietHoaDon {
     }
 
     public void TimKiem(Scanner sc,DanhSachHoaDon dshd, DanhSachSanPham dssp) {
-        System.out.println("Nhap ma hoa don:");
+        System.out.println("Nhap ma hoa don (Enter de thoat):");
         String MaHD = sc.nextLine();
+        if (InputUtils.ThoatNeuEnter(MaHD)) 
+            return;
         HoaDon hd = dshd.Timkiem_MaHD(MaHD);
         if (hd == null) {
             System.out.println("Khong tim thay hoa don!");

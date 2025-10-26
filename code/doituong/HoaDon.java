@@ -16,7 +16,7 @@ public class HoaDon extends GiaoDich {
 
     public HoaDon() {
         super();
-        this.MaHDB = "";
+        this.MaHDB =String.format("HD%03d", MaHDNext++);
         this.dsct = new DanhSachChitietHoaDon();
     }
 
@@ -24,7 +24,7 @@ public class HoaDon extends GiaoDich {
         super();
         this.dskh = dskh;
         this.dsnv = dsnv;
-        this.MaHDB = "HD" + String.format("%03d", MaHDNext++);
+        this.MaHDB =String.format("HD%03d", MaHDNext++);
         this.dsct = new DanhSachChitietHoaDon();
     }
 
@@ -61,19 +61,8 @@ public class HoaDon extends GiaoDich {
         return thanhtien;
     }
 
-    public void Nhap(Scanner sc) {
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-
-        System.out.print("Nhap ngay giao dich (dd/MM/yyyy): ");
-        String str = sc.nextLine();
-        try {
-            this.setNgayGD(df.parse(str));
-        } catch (Exception ex) {
-            System.out.println("Loi dinh dang ngay, dat mac dinh la ngay hien tai.");
-            this.setNgayGD(new Date());
-        }
-
-
+    public void Nhap(Scanner sc){
+        this.setNgayGD(new Date());
         System.out.print("Nhap ma khach hang: ");
         String MaKH = sc.nextLine();
         KhachHang kh = (dskh != null) ? dskh.Timkiem_MaKH(MaKH) : null;
@@ -107,14 +96,15 @@ public class HoaDon extends GiaoDich {
         if (dsct.getN() > 0) {
             System.out.println("| CHI TIET:                                                                      |");
             System.out.println("+--------------------------------+------------+-----------------+-----------------+");
-            System.out.printf("| %-30s | %-10s | %-15s | %-15s |%n", 
-                "San Pham", "So Luong", "Don Gia", "Thanh Tien");
+            System.out.printf("| %-30s | %-30s | %-10s | %-15s | %-15s |%n", 
+                "Ma San Pham","San Pham", "So Luong", "Don Gia", "Thanh Tien");
             System.out.println("+--------------------------------+------------+-----------------+-----------------+");
             
             for(int i=0; i<dsct.getN(); i++){
                 ChiTietHoaDon ct = dsct.getct(i);
                 if(ct.getHD().getMaHD().equals(this.MaHDB)){
-                    System.out.printf("| %-30s | %10d | %15.2f | %15.2f |%n",
+                    System.out.printf("| %-30s | %-30s | %10d | %15.2f | %15.2f |%n",
+                        ct.getSP().getMa(),
                         ct.getSP().getTen(),
                         ct.getSL(),
                         ct.getSP().getGia(),
