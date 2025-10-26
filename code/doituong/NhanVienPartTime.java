@@ -36,7 +36,7 @@ public class NhanVienPartTime extends NhanVien {
 
     @Override
     public void Xuat() {
-        System.out.printf("| %-6s | %-20s | %-20s | %-15d | %-14s | %-12d |\n",
-                getMaNV(), getHoten(), getDiachi(), getSdt(), getLoai(), getLuong());
+        System.out.printf("| %-8s | %-25s | %-25s | %-15s | %-10s | %8d gio  | %12.0f |%n",
+            getMaNV(), getHoten(), getDiachi(), getSdt(), getLoai(), gio, (double)getLuong());
     }
 }

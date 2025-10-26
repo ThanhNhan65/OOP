@@ -6,3 +6,4 @@ Thu Trang,ai biet,12461486,NV005,15,PartTime
 Huong Giang,hong biet,19247091,NV006,15,PartTime
 gsdggdssdg,dsgfdfgs,456456,NV007,44,FullTime
 hh,fff,645656,NV008,4,FullTime
+��,dsad,3443,NV009,34,PartTime

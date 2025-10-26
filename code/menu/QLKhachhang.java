@@ -17,7 +17,7 @@ public class QLKhachhang {
         dskh.DocTuFile("data/danhsachKH.txt");
         dskh.GhiVaoFile("data/danhsachKH.txt");
         Scanner sc = new Scanner(System.in);
-        String op;
+        int chon;
         do {
             System.out.println("-----DANH SACH CAC CHUC NANG-----");
             System.out.println("1.Them khach hang.");
@@ -28,7 +28,7 @@ public class QLKhachhang {
             System.out.println("0.Thoat chuong trinh.");
             System.out.println("----------------------------------");
             System.out.print("Moi chon chuc nang: ");
-            int chon = sc.nextInt();
+            chon = sc.nextInt();
             sc.nextLine();
             switch (chon) {
                 case 1:
@@ -57,8 +57,6 @@ public class QLKhachhang {
                 default:
                     System.out.println("Khong co chuc nang nay, cho cap nhat.");
             }
-            System.out.println("Co muon tiep tuc khong ?(y/n)");
-            op = sc.nextLine();
-        } while (op.equals("y"));
+        } while (chon != 0);
     }
 }

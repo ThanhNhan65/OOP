@@ -16,7 +16,7 @@ public class HoaDon extends GiaoDich {
 
     public HoaDon() {
         super();
-        this.MaHDB = "";
+        this.MaHDB =String.format("HD%03d", MaHDNext++);
         this.dsct = new DanhSachChitietHoaDon();
     }
 
@@ -24,7 +24,7 @@ public class HoaDon extends GiaoDich {
         super();
         this.dskh = dskh;
         this.dsnv = dsnv;
-        this.MaHDB = "HD" + String.format("%03d", MaHDNext++);
+        this.MaHDB =String.format("HD%03d", MaHDNext++);
         this.dsct = new DanhSachChitietHoaDon();
     }
 

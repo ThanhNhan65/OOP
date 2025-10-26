@@ -81,12 +81,8 @@ public class ChiTietHoaDon implements INhapXuat {
     }
 
     public void Xuat() {
-        System.out.printf("%-15s | %-14s | %-31s | %10d | %15.2f |%n",
-            hd.getMaHD(),
-            sp.getMa(),
-            sp.getTen(),
-            soluong,
-            Tinhtien());
+        System.out.printf("| %-12s | %-12s | %-30s | %10d | %15.2f |%n",
+            hd.getMaHD(), sp.getMa(), sp.getTen(), soluong, Tinhtien());
     }
 }
 

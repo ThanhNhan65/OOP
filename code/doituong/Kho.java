@@ -62,6 +62,7 @@ public class Kho {
     }
 
     public void Xuat() {
-        System.out.printf("%-15s %-15s %-15d %-15d %-15d%n", sp.getMa(), sp.getTen(), Dauvao, tinhDaura(), tinhTon() );
+        System.out.printf("| %-10s | %-25s | %10d | %10d | %10d |%n", 
+            sp.getMa(), sp.getTen(), Dauvao, tinhDaura(), tinhTon());
     }
 }

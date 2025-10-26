@@ -10,10 +10,13 @@ public class SanPham implements INhapXuat {
     private Loai loai;
     private double gia;
     private DanhSachLoai dsl;
+    private static int manext = 1;
     
-    public SanPham(){}
+    public SanPham(){
+        this.ma = String.format("SP%03d", manext++);
+    }
     public SanPham(String ma, String ten, String hang, Loai loai, double gia){
-        this.ma= ma;
+        this.ma = String.format("SP%03d", manext++);
         this.ten= ten;
         this.hang= hang;
         this.loai= loai;
@@ -22,6 +25,9 @@ public class SanPham implements INhapXuat {
     
     public void setDanhSachLoai(DanhSachLoai dsl){
         this.dsl = dsl;
+    }
+    public static void setmanext(int manext){
+        SanPham.manext = manext;
     }
     public String getMa(){
         return ma;
@@ -55,8 +61,6 @@ public class SanPham implements INhapXuat {
     }
 
     public void Nhap(Scanner sc){
-        System.out.print("Nhap ma sp: ");
-        ma= sc.nextLine();
         System.out.print("Nhap ten sp: ");
         ten= sc.nextLine();
         System.out.print("Nhap ten hang: ");
@@ -79,8 +83,8 @@ public class SanPham implements INhapXuat {
         }
     }
     public void Xuat(){
-        System.out.printf("%-10s | %-20s | %-12s | %-12s | %10.2f%n",
-                                   ma, ten, hang, loai.getMaloai(), gia);
+        System.out.printf("| %-10s | %-25s | %-20s | %-12s | %12.2f |%n",
+            ma, ten, hang, loai.getMaloai(), gia);
     }
     public String tofile(){
         return ma+","+ten+","+hang+","+loai.getMaloai()+","+gia;

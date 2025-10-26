@@ -36,7 +36,7 @@ public class DanhSachHoaDon{
                 while(line != null){
                     String[] arr = line.split(",");
                     String maHD = arr[0].trim();
-                    int id = Integer.parseInt(maHD.replaceAll("[^0-9]", ""));
+                    int id = Integer.parseInt(maHD.substring(2));
                     String maKH = arr[1].trim();
                     String maNV = arr[2].trim();
                     Date ngayGD = df.parse(arr[3].trim());

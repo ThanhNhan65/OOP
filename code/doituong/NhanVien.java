@@ -10,7 +10,7 @@ public class NhanVien extends ConNguoi {
 
     public NhanVien() {
         super();
-        MaNV = "";
+        this.MaNV = String.format("NV%03d", dem++);
         loai = "";
     }
 
@@ -30,12 +30,11 @@ public class NhanVien extends ConNguoi {
     @Override
     public void Nhap(Scanner sc) {
         super.Nhap(sc);
-        MaNV = this.MaNV = String.format("NV%03d", dem);
     }
 
     @Override
     public void Xuat() {
-        System.out.printf("| %-6s | %-20s | %-20s | %-15d | %-14s | %-12d | %-12.0f |\n", MaNV, getHoten(), getDiachi(),
-                getSdt());
+        System.out.printf("| %-8s | %-25s | %-25s | %-15s |%n", 
+            MaNV, getHoten(), getDiachi(), getSdt());
     }
 }

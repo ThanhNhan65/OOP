@@ -80,19 +80,9 @@ public class DanhSachKhachHang {
             System.out.println("Danh sach rong!");
             return;
         }
-
-        System.out
-                .println("+--------+-----------------------+----------------------+-----------------+");
-        System.out.printf("| %-6s | %-21s | %-20s | %-15s |\n", "Ma", "Ho va ten", "Dia chi", "So dien thoai");
-        System.out
-                .println("+--------+-----------------------+----------------------+-----------------+");
-
         for (int i = 0; i < n; i++) {
             dskh[i].Xuat();
         }
-
-        System.out
-                .println("+--------+-----------------------+----------------------+-----------------+");
     }
 
     public void Them() {
