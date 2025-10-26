@@ -61,9 +61,14 @@ public abstract class ConNguoi implements INhapXuat {
 
         System.out.print("Nhap so dien thoai: ");
         Sdt = sc.nextLine();
+        if (InputUtils.ThoatNeuEnter(Sdt))
+            return;
+
         while (Sdt.length() != 10) {
             System.out.print("Nhap lai so dien thoai: ");
             Sdt = sc.nextLine();
+            if (InputUtils.ThoatNeuEnter(Sdt))
+            return;
         }
     }
 

@@ -89,9 +89,16 @@ public class DanhSachHoaDon {
 
     public void Them(Scanner sc, DanhSachKhachHang dskh, DanhSachNhanVien dsnv, DanhSachSanPham dssp,
             DanhSachChitietHoaDon dsct) {
+        HoaDon hd = new HoaDon(dskh, dsnv);
+        hd.Nhap(sc);
+        if (hd.getMaHD() == null || hd.getMaHD().trim().isEmpty()
+            || hd.getKh().getMaKH() == null || hd.getKh().getMaKH().trim().isEmpty()
+            || hd.getNv().getMaNV() == null || hd.getNv().getMaNV().trim().isEmpty()) {
+           
+            return;
+        }
         dshd = Arrays.copyOf(dshd, n + 1);
-        dshd[n] = new HoaDon(dskh, dsnv);
-        dshd[n].Nhap(sc);
+        dshd[n] = hd;
         n++;
         WriteFile();
         dshd[n - 1].Xuat();
@@ -101,21 +108,21 @@ public class DanhSachHoaDon {
         do {
             ChiTietHoaDon ct = new ChiTietHoaDon(this, dssp);
             ct.Nhap(sc);
-
+            if (ct.getSP().getMa() == null || ct.getSP().getMa().trim().isEmpty()
+                || ct.getSL() <= 0) {
+               
+                break;
+            }
             dshd[n - 1].getdsct().ThemChiTiet(ct);
-
             if (dsct != null) {
                 dsct.ThemChiTiet(ct);
                 dsct.WriteFile();
             }
-
             them = true;
-
             System.out.println("Co muon them nua khong, nhap 1 de tiep tuc hoac 0 de ket thuc");
             tieptuc = sc.nextInt();
             sc.nextLine();
         } while (tieptuc != 0);
-
         if (!them) {
             System.out.println("Ban chua them chi tiet nao. Hoa don se bi huy.");
             dshd = Arrays.copyOf(dshd, Math.max(0, dshd.length - 1));

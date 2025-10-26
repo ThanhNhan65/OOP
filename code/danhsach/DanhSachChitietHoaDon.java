@@ -73,14 +73,17 @@ public class DanhSachChitietHoaDon {
     public void Them(Scanner sc, DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         ChiTietHoaDon ct = new ChiTietHoaDon(dshd, dssp);
         ct.Nhap(sc);
+
+        if (ct.getSP().getMa() == null || ct.getSP().getMa().trim().isEmpty()
+            || ct.getSL() <= 0|| ct.getHD() == null || ct.getHD().getMaHD() == null || ct.getHD().getMaHD().trim().isEmpty()) 
+                return;
+        
         dsct = Arrays.copyOf(dsct, n + 1);
         dsct[n] = ct;
         n++;
-
         if (ct.getHD() != null) {
             ct.getHD().getdsct().ThemChiTiet(ct);
         }
-
         WriteFile();
     }
 
