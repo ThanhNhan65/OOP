@@ -112,14 +112,14 @@ public class DanhSachKhachHang {
         System.out.println("2. Sua dia chi khach hang.");
         System.out.println("3. Sua so dien thoai khach hang.");
         System.out.println("-----------------------------------");
-        System.out.print("Hay chon 1 so: ");
+        System.out.print("Chon: ");
         int c = sc.nextInt();
         sc.nextLine();
 
         String MaKH;
         boolean found = false;
         do {
-            System.out.print("Nhap ma khach hang: ");
+            System.out.print("Nhap ma khach hang (Enter de thoat): ");
             MaKH = sc.nextLine();
             if (InputUtils.ThoatNeuEnter(MaKH))
                 return;
@@ -144,9 +144,10 @@ public class DanhSachKhachHang {
                         case 3:
                             System.out.print("Sua so dien thoai khach hang: ");
                             String sdt_moi = sc.nextLine();
-                            if (InputUtils.ThoatNeuEnter(sdt_moi))
-                                return;
-                            sc.nextLine();
+                            while (sdt_moi.length() != 10) {
+                                System.out.print("Nhap lai so dien thoai: ");
+                                sdt_moi = sc.nextLine();
+                            }
                             kh = SuaTheoSDT(MaKH, sdt_moi);
                             break;
                         default:
@@ -175,7 +176,7 @@ public class DanhSachKhachHang {
         System.out.println("1.Tim kiem theo ten.");
         System.out.println("2.Tim kiem theo Ma khach hang.");
         System.out.println("-----------------------------");
-        System.out.println("Chon 1 so: ");
+        System.out.println("Chon: ");
         int c = sc.nextInt();
         sc.nextLine();
         switch (c) {
@@ -202,70 +203,50 @@ public class DanhSachKhachHang {
     }
 
     public KhachHang Timkiem_MaKH(String MaKH) {
-        boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dskh[i].getMaKH().equals(MaKH)) {
-                found = true;
                 return dskh[i];
             }
         }
-        if (!found)
-            System.out.println("Khong tim thay khach hang");
         return null;
     }
 
     public KhachHang Timkiem_HoTen(String hoten) {
-        boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dskh[i].getHoten().equals(hoten)) {
-                found = true;
                 return dskh[i];
             }
         }
-        if (!found)
-            System.out.println("Khong tim thay khach hang");
         return null;
     }
 
     public KhachHang SuaTheoHoTen(String MaKH, String hoten_moi) {
-        boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dskh[i].getMaKH().equals(MaKH)) {
-                found = true;
                 dskh[i].setHoten(hoten_moi);
                 return dskh[i];
             }
         }
-        if (!found)
-            System.out.println("Khong tim thay khach hang");
         return null;
     }
 
     public KhachHang SuaTheoDiaChi(String MaKH, String diachi_moi) {
-        boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dskh[i].getMaKH().equals(MaKH)) {
-                found = true;
                 dskh[i].setDiachi(diachi_moi);
                 return dskh[i];
             }
         }
-        if (!found)
-            System.out.println("Khong tim thay khach hang");
         return null;
     }
 
     public KhachHang SuaTheoSDT(String MaKH, String sdt_moi) {
-        boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dskh[i].getMaKH().equals(MaKH)) {
-                found = true;
                 dskh[i].setSdt(sdt_moi);
                 return dskh[i];
             }
         }
-        if (!found)
-            System.out.println("Khong tim thay khach hang");
         return null;
     }
 }

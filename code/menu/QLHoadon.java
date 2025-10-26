@@ -54,7 +54,7 @@ public class QLHoadon{
                         dshd.Showlist();
                         break;
                     case 0:
-                        System.out.println("Thoat chuong trinh.");
+                        System.out.println("Thoat quan ly hoa don.");
                         break;
                     default:
                         System.out.println("Lua chon khong hop le! Vui long chon lai.");

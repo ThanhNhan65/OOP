@@ -341,6 +341,7 @@ public class DanhSachSanPham {
         String loaiHienTai = (sp.getLoai() != null ? sp.getLoai().getMaloai() : "null");
         System.out.println("Ma loai hien tai: " + loaiHienTai);
         System.out.print("Ma loai moi: ");
+        String input = sc.nextLine();
         Loai l = dsl.TimTheoMa(sc.nextLine().trim());
         if (l == null) {
             System.out.println("Khong hop le");

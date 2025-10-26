@@ -1,17 +1,4 @@
-<<<<<<< HEAD
-Ma Gia Vy,BP,909457300,NV001,FullTime,26
-Duong Chi Tai,Hau Giang,12740147903,NV002,PartTime,800
-Nguyen Khanh Hung,Tran Phu,174017147,NV003,PartTime,2400
-Nguyen Thanh Nhan,Binh Chanh,912409147,NV004,FullTime,24
-Tran Ngoc Kim Ngan,Binh Phu,10297402947,NV005,FullTime,26
-=======
-Tai khung,Hau Giang,19012912,NV001,15,PartTime
-Nguyen Khanh Hung,Tran Phu,10470127,NV002,15,PartTime
-Nguyen Thanh Nhan,Binh Chanh,10840172,NV003,15,PartTime
-Tran Ngoc Kim Ngan,hong iet,912460,NV004,15,PartTime
-Thu Trang,ai biet,12461486,NV005,15,PartTime
-Huong Giang,hong biet,19247091,NV006,15,PartTime
-gsdggdssdg,dsgfdfgs,456456,NV007,44,FullTime
-hh,fff,645656,NV008,4,FullTime
-��,dsad,3443,NV009,34,PartTime
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
+Nguyen Thanh Sang,Binh Chanh,0907123123,NV001,40,FullTime
+Tran Minh Khoa,Thu Duc TPHCM,0976543210,NV002,40,FullTime
+Le Thi Lan,Quan 10 TPHCM,0965432109,NV003,20,PartTime
+Pham Van Minh,Binh Tan TPHCM,0954321098,NV004,20,PartTime

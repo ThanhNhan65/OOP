@@ -32,15 +32,12 @@ public class QLKhachhang {
             sc.nextLine();
             switch (chon) {
                 case 1:
-                    System.out.println("Them khach hang vao danh sach");
                     dskh.Them();
                     break;
                 case 2:
-                    System.out.print("Chon ma khach hang muon xoa: ");
                     dskh.Xoa(sc.nextLine());
                     break;
                 case 3:
-                    System.out.println("Chon ma nhan vien ban muon sua");
                     dskh.SuaKH();
                     break;
                 case 4:
@@ -50,7 +47,7 @@ public class QLKhachhang {
                     dskh.HienThiDS();
                     break;
                 case 0:
-                    System.out.println("Thoat chuong trinh.");
+                    System.out.println("Thoat quan ly khach hang.");
                     return;
                 default:
                     System.out.println("Khong co chuc nang nay, cho cap nhat.");

@@ -30,8 +30,8 @@ public class QLKho {
             System.out.println("3. Xoa ");
             System.out.println("4. Tim kiem");
             System.out.println("5. Hien thi danh sach");
-            System.out.println("0. Thoát");
-            System.out.print("Chọn: ");
+            System.out.println("0. Thoat");
+            System.out.print("Chon: ");
             chon = sc.nextInt(); 
             sc.nextLine();
 
@@ -52,10 +52,10 @@ public class QLKho {
                     dskho.HienThi();
                     break;
                 case 0:
-                    System.out.println("Thoát quản lý kho");
+                    System.out.println("Thoat quan ly kho");
                     break;
                 default:
-                    System.out.println("Lựa chọn không hợp lệ!");
+                    System.out.println("Lua chon khong hop le!");
             }
         } while (chon != 0);
     }
