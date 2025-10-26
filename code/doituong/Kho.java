@@ -3,6 +3,7 @@ package code.doituong;
 import java.util.Scanner;
 
 import code.danhsach.*;
+
 public class Kho {
     private SanPham sp;
     private int Dauvao;
@@ -19,28 +20,32 @@ public class Kho {
         this.dsct = dsct;
     }
 
-    public void setsp(SanPham sp){
-        this.sp= sp;
+    public void setsp(SanPham sp) {
+        this.sp = sp;
     }
-    public void setdauvao(int dauvao){
+
+    public void setdauvao(int dauvao) {
         this.Dauvao = dauvao;
     }
-    public SanPham getsp(){
+
+    public SanPham getsp() {
         return sp;
     }
-    public int getDauvao(){
+
+    public int getDauvao() {
         return Dauvao;
     }
-    public int tinhDaura(){
-        int tong=0;
-        for(int i=0; i< dsct.getN();i++)
-        if(sp.getMa().equals(dsct.getct(i).getSP().getMa()))
-            tong += dsct.getct(i).getSL();
+
+    public int tinhDaura() {
+        int tong = 0;
+        for (int i = 0; i < dsct.getN(); i++)
+            if (sp.getMa().equals(dsct.getct(i).getSP().getMa()))
+                tong += dsct.getct(i).getSL();
 
         return tong;
     }
 
-    public int tinhTon(){
+    public int tinhTon() {
         return Dauvao - tinhDaura();
     }
 
@@ -48,21 +53,21 @@ public class Kho {
         System.out.println("Nhap ma san pham:");
         String masp = sc.nextLine();
         this.sp = dssp.TimTheoMa(masp);
-        while(sp==null){
+        while (sp == null) {
             System.out.println("Nhap lai ma san pham:");
             masp = sc.nextLine();
             this.sp = dssp.TimTheoMa(masp);
         }
         System.out.println("Nhap dau vao");
-        this.Dauvao= sc.nextInt();
-        while(Dauvao <0){
+        this.Dauvao = sc.nextInt();
+        while (Dauvao < 0) {
             System.out.println("Nhap lai dau vao");
-            this.Dauvao= sc.nextInt();
+            this.Dauvao = sc.nextInt();
         }
     }
 
     public void Xuat() {
-        System.out.printf("| %-10s | %-25s | %10d | %10d | %10d |%n", 
-            sp.getMa(), sp.getTen(), Dauvao, tinhDaura(), tinhTon());
+        System.out.printf("| %-10s | %-25s | %10d | %10d | %10d |%n",
+                sp.getMa(), sp.getTen(), Dauvao, tinhDaura(), tinhTon());
     }
 }

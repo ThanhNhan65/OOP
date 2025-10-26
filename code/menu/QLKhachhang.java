@@ -15,11 +15,7 @@ public class QLKhachhang {
     public void menu() {
         DanhSachKhachHang dskh = new DanhSachKhachHang();
         dskh.DocTuFile("data/danhsachKH.txt");
-<<<<<<< HEAD
-        dskh.HienThiDS();
-=======
         dskh.GhiVaoFile("data/danhsachKH.txt");
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
         Scanner sc = new Scanner(System.in);
         int chon;
         do {
@@ -59,12 +55,6 @@ public class QLKhachhang {
                 default:
                     System.out.println("Khong co chuc nang nay, cho cap nhat.");
             }
-<<<<<<< HEAD
-            System.out.println("Co muon tiep tuc khong ?(y/n)");
-            op = sc.nextLine();
-        } while (op.equalsIgnoreCase("y"));
-=======
         } while (chon != 0);
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
     }
 }

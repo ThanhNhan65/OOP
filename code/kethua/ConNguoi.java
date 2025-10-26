@@ -54,10 +54,7 @@ public abstract class ConNguoi implements INhapXuat {
 
         System.out.print("Nhap so dien thoai: ");
         Sdt = sc.nextLong();
-<<<<<<< HEAD
-=======
         sc.nextLine();
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
     }
 
     @Override

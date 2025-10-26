@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
 import code.doituong.*;
+import code.kiemtra.InputUtils;
 
 public class DanhSachNhanVien {
     public NhanVien[] dsnv;
@@ -112,6 +113,8 @@ public class DanhSachNhanVien {
     }
 
     public void Xoa(String MaNV) {
+        if (InputUtils.ThoatNeuEnter(MaNV))
+            return;
         boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV)) {
@@ -154,6 +157,8 @@ public class DanhSachNhanVien {
             found = false;
             System.out.print("Nhap ma nhan vien: ");
             MaNV = sc.nextLine();
+            if (InputUtils.ThoatNeuEnter(MaNV))
+                return;
             for (int i = 0; i < n; i++) {
                 if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV)) {
                     found = true;
@@ -268,6 +273,7 @@ public class DanhSachNhanVien {
         System.out.print("Vui long chon: ");
         int c = sc.nextInt();
         sc.nextLine();
+
         switch (c) {
             case 1:
                 System.out.print("Nhap ma nhan vien muon tim kiem: ");

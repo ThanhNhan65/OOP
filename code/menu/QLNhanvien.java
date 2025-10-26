@@ -7,10 +7,6 @@ public class QLNhanvien {
     public void menu() {
         DanhSachNhanVien dsnv = new DanhSachNhanVien();
         dsnv.DocTuFile("data/danhsachNV.txt");
-<<<<<<< HEAD
-        dsnv.HienThiDS();
-=======
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
         Scanner sc = new Scanner(System.in);
         int chon;
         do {
@@ -29,20 +25,14 @@ public class QLNhanvien {
                 case 1:
                     System.out.println("Them nhan vien vao danh sach");
                     dsnv.Them(sc);
-<<<<<<< HEAD
-=======
                     dsnv.HienThiDS();
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
                     break;
                 case 2:
                     System.out.print("Chon ma nhan vien muon xoa: ");
                     dsnv.Xoa(sc.nextLine());
                     break;
                 case 3:
-<<<<<<< HEAD
-=======
                     System.out.println("Chon ma nhan vien ban muon sua: ");
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
                     dsnv.Sua_Chi_Tiet(sc);
                     break;
                 case 4:
@@ -57,6 +47,6 @@ public class QLNhanvien {
                 default:
                     System.out.println("Khong co chuc nang nay, cho cap nhat.");
             }
-        } while(chon != 0);
+        } while (chon != 0);
     }
 }

@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Arrays;
 import code.doituong.*;
+import code.kiemtra.InputUtils;
 
 public class DanhSachKhachHang {
     public KhachHang[] dskh;
@@ -28,7 +29,7 @@ public class DanhSachKhachHang {
             BufferedWriter writer = new BufferedWriter(new FileWriter(File, false));
             for (int i = 0; i < n; i++) {
                 KhachHang kh = dskh[i];
-                writer.write(kh.getHoten() + "," + kh.getDiachi() + "," + kh.getSdt() + "," + kh.getMaKH());
+                writer.write(kh.getHoten() + "," + kh.getDiachi() + "," + kh.getSdt() + "," + kh.MaKH);
                 writer.newLine();
             }
             writer.close();
@@ -94,6 +95,8 @@ public class DanhSachKhachHang {
     }
 
     public void Xoa(String MaKH) {
+        if (InputUtils.ThoatNeuEnter(MaKH))
+            return;
         boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dskh[i].getMaKH().equals(MaKH)) {
@@ -128,6 +131,8 @@ public class DanhSachKhachHang {
         do {
             System.out.print("Nhap ma khach hang: ");
             MaKH = sc.nextLine();
+            if (InputUtils.ThoatNeuEnter(MaKH))
+                return;
             for (int i = 0; i < n; i++) {
                 if (dskh[i].getMaKH().equals(MaKH)) {
                     found = true;
@@ -198,7 +203,6 @@ public class DanhSachKhachHang {
 
     public KhachHang Timkiem_MaKH(String MaKH) {
         boolean found = false;
-
         for (int i = 0; i < n; i++) {
             if (dskh[i].getMaKH().equals(MaKH)) {
                 found = true;
@@ -210,10 +214,10 @@ public class DanhSachKhachHang {
         return null;
     }
 
-    public KhachHang Timkiem_HoTen(String HoTen) {
+    public KhachHang Timkiem_HoTen(String hoten) {
         boolean found = false;
         for (int i = 0; i < n; i++) {
-            if (dskh[i].getHoten().equals(HoTen)) {
+            if (dskh[i].getHoten().equals(hoten)) {
                 found = true;
                 return dskh[i];
             }
