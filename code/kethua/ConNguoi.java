@@ -6,15 +6,15 @@ import code.giaodien.*;
 public abstract class ConNguoi implements INhapXuat {
     private String Hoten;
     private String Diachi;
-    private long Sdt;
+    private String Sdt;
 
     public ConNguoi() {
         Hoten = "";
         Diachi = "";
-        Sdt = 0;
+        Sdt = "";
     }
 
-    public ConNguoi(String Hoten, String Diachi, long Sdt) {
+    public ConNguoi(String Hoten, String Diachi, String Sdt) {
         this.Hoten = Hoten;
         this.Diachi = Diachi;
         this.Sdt = Sdt;
@@ -28,7 +28,7 @@ public abstract class ConNguoi implements INhapXuat {
         this.Diachi = Diachi;
     }
 
-    public void setSdt(long Sdt) {
+    public void setSdt(String Sdt) {
         this.Sdt = Sdt;
     }
 
@@ -40,7 +40,7 @@ public abstract class ConNguoi implements INhapXuat {
         return Diachi;
     }
 
-    public long getSdt() {
+    public String getSdt() {
         return Sdt;
     }
 
@@ -51,7 +51,11 @@ public abstract class ConNguoi implements INhapXuat {
         System.out.print("Nhap dia chi: ");
         Diachi = sc.nextLine();
         System.out.print("Nhap so dien thoai: ");
-        Sdt = sc.nextLong();
+        Sdt = sc.nextLine();
+        while(Sdt.length()!=10){
+            System.out.print("Nhap lai so dien thoai: ");
+            Sdt = sc.nextLine();
+        }
         sc.nextLine();
     }
 

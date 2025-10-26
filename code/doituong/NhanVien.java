@@ -14,7 +14,7 @@ public class NhanVien extends ConNguoi {
         loai = "";
     }
 
-    public NhanVien(String Hoten, String Diachi, long Sdt, String MaNV) {
+    public NhanVien(String Hoten, String Diachi, String Sdt, String MaNV) {
         super(Hoten, Diachi, Sdt);
         this.MaNV = String.format("NV%03d", dem++);
     }

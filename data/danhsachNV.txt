@@ -1,9 +1,7 @@
-Tai khung,Hau Giang,19012912,NV001,15,PartTime
-Nguyen Khanh Hung,Tran Phu,10470127,NV002,15,PartTime
-Nguyen Thanh Nhan,Binh Chanh,10840172,NV003,15,PartTime
-Tran Ngoc Kim Ngan,hong iet,912460,NV004,15,PartTime
-Thu Trang,ai biet,12461486,NV005,15,PartTime
-Huong Giang,hong biet,19247091,NV006,15,PartTime
-gsdggdssdg,dsgfdfgs,456456,NV007,44,FullTime
-hh,fff,645656,NV008,4,FullTime
-��,dsad,3443,NV009,34,PartTime
+Tai khung,Hau Giang,9011122233,NV001,15,PartTime
+Nguyen Khanh Hung,Tran Phu,9022233344,NV002,15,PartTime
+Nguyen Thanh Nhan,Binh Chanh,9033344455,NV003,15,PartTime
+Tran Ngoc Kim Ngan,hong iet,9044455566,NV004,15,PartTime
+Thu Trang,ai biet,9055566677,NV005,15,PartTime
+Huong Giang,hong biet,9066677788,NV006,15,PartTime
+gsdggdssdg,dsgfdfgs,9077788899,NV007,44,FullTime

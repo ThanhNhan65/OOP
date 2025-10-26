@@ -378,7 +378,7 @@ public class DanhSachHoaDon{
                 String newma = sc.nextLine();
                 NhanVien nv= dsnv.TimKiemNhanVienTheoMa(newma);
                 while(nv==null){
-                    System.out.println("Khong tim thay khach hang: " + newma);
+                    System.out.println("Khong tim thay nhan vien: " + newma);
                     System.out.println("Vui long nhap lai! ");
                     newma = sc.nextLine();
                     nv= dsnv.TimKiemNhanVienTheoMa(newma);

@@ -11,7 +11,7 @@ public class NhanVienPartTime extends NhanVien {
         gio = 0;
     }
 
-    public NhanVienPartTime(String Hoten, String Diachi, long Sdt, String MaNV, int gio) {
+    public NhanVienPartTime(String Hoten, String Diachi, String Sdt, String MaNV, int gio) {
         super(Hoten, Diachi, Sdt, MaNV);
         this.gio = gio;
     }

@@ -19,7 +19,7 @@ public class NhanVienFullTime extends NhanVien {
         return "FullTime";
     }
 
-    public NhanVienFullTime(String Hoten, String Diachi, long Sdt, String MaNV, int ngay) {
+    public NhanVienFullTime(String Hoten, String Diachi, String Sdt, String MaNV, int ngay) {
         super(Hoten, Diachi, Sdt, MaNV);
         this.ngay = ngay;
     }
