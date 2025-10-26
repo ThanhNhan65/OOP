@@ -100,24 +100,19 @@ public class HoaDon extends GiaoDich {
     public void Xuat() {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
-        System.out.println("\n+--------------------------------------------------------------------------------+");
-        System.out.printf("| %-15s: %-60s |%n", "Hoa Don", MaHDB);
-        System.out.printf("| %-15s: %-60s |%n", "Ngay", df.format(getNgayGD()));
-        System.out.printf("| %-15s: %-60s |%n", "Ma Khach Hang", getKh().getMaKH());
-        System.out.printf("| %-15s: %-60s |%n", "Ten Khach Hang", getKh().getHoten());
-        System.out.printf("| %-15s: %-60.2f |%n", "Tong Tien", Thanhtien());
-        System.out.println("+--------------------------------------------------------------------------------+");
+        System.out.println("\n");
+        System.out.printf("| %-15s: %-90s %n", "Hoa Don", MaHDB);
+        System.out.printf("| %-15s: %-90s %n", "Ngay", df.format(getNgayGD()));
+        System.out.printf("| %-15s: %-90s %n", "Ma Khach Hang", getKh().getMaKH());
+        System.out.printf("| %-15s: %-90s %n", "Ten Khach Hang", getKh().getHoten());
+        System.out.printf("| %-15s: %-90.2f %n", "Tong Tien", Thanhtien());
         if (dsct.getN() > 0) {
-            System.out.println("| CHI TIET:                                                                      |");
-            System.out.println("+--------------------------------+------------+-----------------+-----------------+");
-            System.out.printf("| %-30s | %-30s | %-10s | %-15s | %-15s |%n",
-                    "Ma San Pham", "San Pham", "So Luong", "Don Gia", "Thanh Tien");
-            System.out.println("+--------------------------------+------------+-----------------+-----------------+");
+            System.out.println("CHI TIET:");
 
             for (int i = 0; i < dsct.getN(); i++) {
                 ChiTietHoaDon ct = dsct.getct(i);
                 if (ct.getHD().getMaHD().equals(this.MaHDB)) {
-                    System.out.printf("| %-30s | %-30s | %10d | %15.2f | %15.2f |%n",
+                    System.out.printf("| %-10s | %-28s | %8d | %13.2f | %17.2f |%n",
                             ct.getSP().getMa(),
                             ct.getSP().getTen(),
                             ct.getSL(),
@@ -125,7 +120,6 @@ public class HoaDon extends GiaoDich {
                             ct.Tinhtien());
                 }
             }
-            System.out.println("+--------------------------------+------------+-----------------+-----------------+");
         }
     }
 }
