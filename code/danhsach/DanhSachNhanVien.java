@@ -155,7 +155,7 @@ public class DanhSachNhanVien {
         boolean found;
         do {
             found = false;
-            System.out.print("Nhap ma nhan vien: ");
+            System.out.print("Nhap ma nhan vien (Enter de thoat): ");
             MaNV = sc.nextLine();
             if (InputUtils.ThoatNeuEnter(MaNV))
                 return;
@@ -180,6 +180,10 @@ public class DanhSachNhanVien {
                         case 3:
                             System.out.println("Nhap so dien thoai moi cua nhan vien: ");
                             String Sdt_moi = sc.nextLine();
+                            while(Sdt_moi.length()!=10){
+                                System.out.print("Nhap lai so dien thoai: ");
+                                Sdt_moi = sc.nextLine();
+                            }
                             nv = SuaTheoSDT(Sdt_moi, MaNV);
                             if (nv != null)
                                 nv.Xuat();
@@ -200,67 +204,51 @@ public class DanhSachNhanVien {
     }
 
     public NhanVien TimKiemNhanVienTheoMa(String MaNV) {
-        boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV)) {
-                found = true;
-                return dsnv[i];
+                return dsnv[i];       
+
             }
         }
         return null;
     }
 
     public NhanVien TimKiemNhanVienTheoHoTen(String HoTen) {
-        boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dsnv[i] != null && dsnv[i].getHoten() != null && dsnv[i].getHoten().equals(HoTen)) {
                 return dsnv[i];
             }
         }
-        if (!found)
-            System.out.println("Khong tim thay nhan vien");
         return null;
     }
 
     public NhanVien SuaTheoHoTen(String HoTen_moi, String MaNV_moi) {
-        boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV_moi)) {
-                found = true;
                 dsnv[i].setHoten(HoTen_moi);
                 return dsnv[i];
             }
         }
-        if (!found)
-            System.out.println("Khong tim thay nhan vien.");
         return null;
     }
 
     public NhanVien SuaTheoDiaChi(String DiaChi_moi, String MaNV_moi) {
-        boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV_moi)) {
-                found = true;
                 dsnv[i].setDiachi(DiaChi_moi);
                 return dsnv[i];
             }
         }
-        if (!found)
-            System.out.println("Khong tim thay nhan vien.");
         return null;
     }
 
     public NhanVien SuaTheoSDT(String Sdt_moi, String MaNV_moi) {
-        boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV_moi)) {
-                found = true;
                 dsnv[i].setSdt(Sdt_moi);
                 return dsnv[i];
             }
         }
-        if (!found)
-            System.out.println("Khong tim thay nhan vien.");
         return null;
     }
 
@@ -278,10 +266,18 @@ public class DanhSachNhanVien {
             case 1:
                 System.out.print("Nhap ma nhan vien muon tim kiem: ");
                 nv = TimKiemNhanVienTheoMa(sc.nextLine());
+                if(nv==null)
+                    System.out.println("Khong tim thay nhan vien");
+                else
+                    System.out.println("Tim thay nhan vien");
                 break;
             case 2:
                 System.out.print("Nhap ho va ten nhan vien muon tim kiem: ");
                 nv = TimKiemNhanVienTheoHoTen(sc.nextLine());
+                if(nv==null)
+                    System.out.println("Khong tim thay nhan vien");
+                else
+                    System.out.println("Tim thay nhan vien");
                 break;
             default:
                 System.out.println("Khong tim kiem nhan vien.");

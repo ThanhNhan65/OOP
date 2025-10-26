@@ -1,6 +1,5 @@
-Tran Ngoc Kim Ngan,Hong biet,9012345678,KH001
-Thu Trang,Hong biet,9123456780,KH002
-Huong Giang,Hong biet,9234567890,KH003
-Nguyen Duong Khanh Vy,Binh Hu,9345678901,KH004
-Nay thi hong biet,hong biet,9456789012,KH005
-meo meo,sfsf,9567890123,KH006
+Nguyen Van An,Quan 1 TPHCM,0901234567,KH001
+Tran Thi Binh,Quan 3 TPHCM,0912345678,KH002
+Le Van Cuong,Binh Thanh TPHCM,0923456789,KH003
+Pham Thi Dung,Tan Binh TPHCM,0934567890,KH004
+Hoang Van Em,Go Vap TPHCM,0945678901,KH005

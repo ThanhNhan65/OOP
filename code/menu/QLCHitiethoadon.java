@@ -52,7 +52,7 @@ public class QLChitiethoadon {
                     dsct.Hienthidanhsach();
                     break;
                 case 0:
-                    System.out.println("Thoat chuong trinh.");
+                    System.out.println("Thoat quan ly chi tiet.");
                     break;
                 default:
                     System.out.println("Lua chon khong hop le! Vui long chon lai.");

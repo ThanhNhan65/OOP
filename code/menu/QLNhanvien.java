@@ -23,16 +23,13 @@ public class QLNhanvien {
             sc.nextLine();
             switch (chon) {
                 case 1:
-                    System.out.println("Them nhan vien vao danh sach");
                     dsnv.Them(sc);
                     dsnv.HienThiDS();
                     break;
                 case 2:
-                    System.out.print("Chon ma nhan vien muon xoa: ");
                     dsnv.Xoa(sc.nextLine());
                     break;
                 case 3:
-                    System.out.println("Chon ma nhan vien ban muon sua: ");
                     dsnv.Sua_Chi_Tiet(sc);
                     break;
                 case 4:
