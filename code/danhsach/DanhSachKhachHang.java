@@ -46,10 +46,10 @@ public class DanhSachKhachHang {
             while (line != null) {
                 String[] chuoi = line.split(",");
 
-                String HoTen = chuoi[0];
-                String Diachi = chuoi[1];
-                long Sdt = Long.parseLong(chuoi[2]);
-                String MaKH = chuoi[3];
+                String HoTen = chuoi[0].trim();
+                String Diachi = chuoi[1].trim();
+                String Sdt = chuoi[2].trim();
+                String MaKH = chuoi[3].trim();
                 line = input.readLine();
                 KhachHang kh = new KhachHang(HoTen, Diachi, Sdt, MaKH);
                 int so = Integer.parseInt(MaKH.substring(2));
@@ -63,16 +63,6 @@ public class DanhSachKhachHang {
             input.close();
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
-    }
-
-    public void Nhap(Scanner sc) {
-        System.out.println("Nhap so luong khach hang: ");
-        n = sc.nextInt();
-        dskh = new KhachHang[n];
-        for (int i = 0; i < n; i++) {
-            dskh[i] = new KhachHang();
-            dskh[i].Nhap(sc);
         }
     }
 
@@ -140,16 +130,22 @@ public class DanhSachKhachHang {
                         case 1:
                             System.out.print("Sua ten khach hang: ");
                             String ten_moi = sc.nextLine();
+                            if (InputUtils.ThoatNeuEnter(ten_moi))
+                                return;
                             kh = SuaTheoHoTen(MaKH, ten_moi);
                             break;
                         case 2:
                             System.out.print("Sua dia chi khach hang: ");
                             String diachi_moi = sc.nextLine();
+                            if (InputUtils.ThoatNeuEnter(diachi_moi))
+                                return;
                             kh = SuaTheoDiaChi(MaKH, diachi_moi);
                             break;
                         case 3:
                             System.out.print("Sua so dien thoai khach hang: ");
-                            long sdt_moi = sc.nextLong();
+                            String sdt_moi = sc.nextLine();
+                            if (InputUtils.ThoatNeuEnter(sdt_moi))
+                                return;
                             sc.nextLine();
                             kh = SuaTheoSDT(MaKH, sdt_moi);
                             break;
@@ -186,10 +182,14 @@ public class DanhSachKhachHang {
             case 1:
                 System.out.println("Nhap ho ten khach hang ban muon tim kiem: ");
                 kh = Timkiem_HoTen(sc.nextLine());
+                if (InputUtils.ThoatNeuEnter(sc.nextLine()))
+                    return;
                 break;
             case 2:
                 System.out.println("Nhap ma khach hang ban muon tim kiem: ");
                 kh = Timkiem_MaKH(sc.nextLine());
+                if (InputUtils.ThoatNeuEnter(sc.nextLine()))
+                    return;
                 break;
             default:
                 System.out.println("Thoat chuong trinh");
@@ -255,7 +255,7 @@ public class DanhSachKhachHang {
         return null;
     }
 
-    public KhachHang SuaTheoSDT(String MaKH, long sdt_moi) {
+    public KhachHang SuaTheoSDT(String MaKH, String sdt_moi) {
         boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dskh[i].getMaKH().equals(MaKH)) {

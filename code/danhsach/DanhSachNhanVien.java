@@ -83,11 +83,11 @@ public class DanhSachNhanVien {
             while (line != null) {
                 String[] chuoi = line.split(",");
 
-                String HoTen = chuoi[0];
-                String Diachi = chuoi[1];
-                long Sdt = Long.parseLong(chuoi[2]);
-                String MaNV = chuoi[3];
-                int work = Integer.parseInt(chuoi[4]);
+                String HoTen = chuoi[0].trim();
+                String Diachi = chuoi[1].trim();
+                String Sdt = chuoi[2].trim();
+                String MaNV = chuoi[3].trim();
+                int work = Integer.parseInt(chuoi[4].trim());
                 String loai = chuoi[5];
 
                 NhanVien nv;
@@ -179,7 +179,7 @@ public class DanhSachNhanVien {
                             break;
                         case 3:
                             System.out.println("Nhap so dien thoai moi cua nhan vien: ");
-                            long Sdt_moi = sc.nextLong();
+                            String Sdt_moi = sc.nextLine();
                             nv = SuaTheoSDT(Sdt_moi, MaNV);
                             if (nv != null)
                                 nv.Xuat();
@@ -250,7 +250,7 @@ public class DanhSachNhanVien {
         return null;
     }
 
-    public NhanVien SuaTheoSDT(long Sdt_moi, String MaNV_moi) {
+    public NhanVien SuaTheoSDT(String Sdt_moi, String MaNV_moi) {
         boolean found = false;
         for (int i = 0; i < n; i++) {
             if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV_moi)) {
@@ -278,10 +278,14 @@ public class DanhSachNhanVien {
             case 1:
                 System.out.print("Nhap ma nhan vien muon tim kiem: ");
                 nv = TimKiemNhanVienTheoMa(sc.nextLine());
+                if (InputUtils.ThoatNeuEnter(sc.nextLine()))
+                    return;
                 break;
             case 2:
                 System.out.print("Nhap ho va ten nhan vien muon tim kiem: ");
                 nv = TimKiemNhanVienTheoHoTen(sc.nextLine());
+                if (InputUtils.ThoatNeuEnter(sc.nextLine()))
+                    return;
                 break;
             default:
                 System.out.println("Khong tim kiem nhan vien.");

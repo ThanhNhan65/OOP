@@ -2,6 +2,7 @@ package code.doituong;
 
 import java.util.Scanner;
 import code.giaodien.*;
+import code.kiemtra.InputUtils;
 
 public class Loai implements INhapXuat {
     private String maLoai, tenLoai;
@@ -39,6 +40,8 @@ public class Loai implements INhapXuat {
     public void Nhap(Scanner sc) {
         System.out.print("Nhap ten loai: ");
         tenLoai = sc.nextLine();
+        if (InputUtils.ThoatNeuEnter(tenLoai))
+            return;
     }
 
     public void Xuat() {

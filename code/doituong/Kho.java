@@ -3,6 +3,7 @@ package code.doituong;
 import java.util.Scanner;
 
 import code.danhsach.*;
+import code.kiemtra.InputUtils;
 
 public class Kho {
     private SanPham sp;
@@ -52,14 +53,17 @@ public class Kho {
     public void Nhap(Scanner sc) {
         System.out.println("Nhap ma san pham:");
         String masp = sc.nextLine();
+        if (InputUtils.ThoatNeuEnter(masp))
+            return;
         this.sp = dssp.TimTheoMa(masp);
         while (sp == null) {
             System.out.println("Nhap lai ma san pham:");
             masp = sc.nextLine();
+            if (InputUtils.ThoatNeuEnter(masp))
+                return;
             this.sp = dssp.TimTheoMa(masp);
         }
         System.out.println("Nhap dau vao");
-        this.Dauvao = sc.nextInt();
         while (Dauvao < 0) {
             System.out.println("Nhap lai dau vao");
             this.Dauvao = sc.nextInt();

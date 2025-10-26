@@ -188,6 +188,8 @@ public class DanhSachSanPham {
                 case 1: {
                     System.out.print("Nhap ma: ");
                     String ma = sc.nextLine().trim();
+                    if (InputUtils.ThoatNeuEnter(ma))
+                        return;
                     SanPham sp = TimTheoMa(ma);
                     if (sp != null)
                         sp.Xuat();
@@ -198,6 +200,8 @@ public class DanhSachSanPham {
                 case 2: {
                     System.out.print("Nhap ten: ");
                     String ten = sc.nextLine().trim();
+                    if (InputUtils.ThoatNeuEnter(ten))
+                        return;
                     int dem = TimTheoTen(ten);
                     if (dem == 0)
                         System.out.println("Khong tim thay");
@@ -288,6 +292,8 @@ public class DanhSachSanPham {
         System.out.println("Ma hien tai: " + sp.getMa());
         System.out.print("Ma moi: ");
         String maMoi = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(maMoi))
+            return;
         if (maMoi.isEmpty()) {
             System.out.println("Khong hop le");
             return;
@@ -307,6 +313,8 @@ public class DanhSachSanPham {
         System.out.println("Ten hien tai: " + sp.getTen());
         System.out.print("Ten moi: ");
         String ten = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(ten))
+            return;
         if (ten.isEmpty()) {
             System.out.println("Khong hop le");
             return;
@@ -319,6 +327,8 @@ public class DanhSachSanPham {
         System.out.println("Hang hien tai: " + sp.getHang());
         System.out.print("Hang moi: ");
         String hang = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(hang))
+            return;
         if (hang.isEmpty()) {
             System.out.println("Khong hop le");
             return;
@@ -361,6 +371,8 @@ public class DanhSachSanPham {
         System.out.println("Ma hien tai: " + sp.getMa());
         System.out.print("Ma moi: ");
         s = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(s))
+            return;
         if (!s.isEmpty()) {
             boolean trung = false;
             for (int i = 0; i < n; i++) {
@@ -377,12 +389,16 @@ public class DanhSachSanPham {
         System.out.println("Ten hien tai: " + sp.getTen());
         System.out.print("Ten moi: ");
         s = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(s))
+            return;
         if (!s.isEmpty())
             sp.setTen(s);
 
         System.out.println("Hang hien tai: " + sp.getHang());
         System.out.print("Hang moi: ");
         s = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(s))
+            return;
         if (!s.isEmpty())
             sp.setHang(s);
 
@@ -390,6 +406,8 @@ public class DanhSachSanPham {
         System.out.println("Ma loai hien tai: " + loaiHienTai);
         System.out.print("Ma loai moi: ");
         s = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(s))
+            return;
         if (!s.isEmpty()) {
             Loai l = dsl.TimTheoMa(s);
             if (l != null)
@@ -399,6 +417,8 @@ public class DanhSachSanPham {
         System.out.println("Gia hien tai: " + sp.getGia());
         System.out.print("Gia moi: ");
         s = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(s))
+            return;
         if (!s.isEmpty()) {
             try {
                 double gia = Double.parseDouble(s);
@@ -413,6 +433,8 @@ public class DanhSachSanPham {
     public void locTheoHang(Scanner sc) {
         System.out.print("Nhap ten hang: ");
         String h = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(h))
+            return;
         boolean found = false;
         for (int i = 0; i < n; i++) {
             SanPham sp = dssp[i];
@@ -428,6 +450,8 @@ public class DanhSachSanPham {
     public void locTheoLoai(Scanner sc) {
         System.out.print("Nhap ma loai: ");
         String ma = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(ma))
+            return;
         for (int i = 0; i < n; i++) {
             SanPham sp = dssp[i];
             if (sp == null)
@@ -442,8 +466,12 @@ public class DanhSachSanPham {
     public void locTheoGia(Scanner sc) {
         System.out.print("Nhap gia thap nhat: ");
         String s1 = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(s1))
+            return;
         System.out.print("Nhap gia cao nhat: ");
         String s2 = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(s2))
+            return;
         try {
             double min = Double.parseDouble(s1);
             double max = Double.parseDouble(s2);

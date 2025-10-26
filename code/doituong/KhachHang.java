@@ -16,7 +16,7 @@ public class KhachHang extends ConNguoi {
         return MaKH;
     }
 
-    public KhachHang(String Hoten, String Diachi, long Sdt, String MaKH) {
+    public KhachHang(String Hoten, String Diachi, String Sdt, String MaKH) {
         super(Hoten, Diachi, Sdt);
         this.MaKH = String.format("KH%03d", dem++);
     }

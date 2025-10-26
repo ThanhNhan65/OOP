@@ -97,6 +97,8 @@ public class DanhSachKho {
         while (sp == null) {
             System.out.println("Nhap lai ma san pham:");
             masp = sc.nextLine();
+            if (InputUtils.ThoatNeuEnter(masp))
+                return;
             sp = dssp.TimTheoMa(masp);
         }
         for (int i = 0; i < n; i++) {
@@ -112,10 +114,14 @@ public class DanhSachKho {
     public void TimKiem(Scanner sc, DanhSachSanPham dssp) {
         System.out.println("Nhap san pham muon tim");
         String masp = sc.nextLine();
+        if (InputUtils.ThoatNeuEnter(masp))
+            return;
         SanPham sp = dssp.TimTheoMa(masp);
         while (sp == null) {
             System.out.println("Nhap lai ma san pham:");
             masp = sc.nextLine();
+            if (InputUtils.ThoatNeuEnter(masp))
+                return;
             sp = dssp.TimTheoMa(masp);
         }
         for (int i = 0; i < n; i++) {
@@ -130,10 +136,14 @@ public class DanhSachKho {
     public void Xoa(Scanner sc, DanhSachSanPham dssp) {
         System.out.println("Nhap san pham muon xoa");
         String masp = sc.nextLine();
+        if (InputUtils.ThoatNeuEnter(masp))
+            return;
         SanPham sp = dssp.TimTheoMa(masp);
         while (sp == null) {
             System.out.println("Nhap lai ma san pham:");
             masp = sc.nextLine();
+            if (InputUtils.ThoatNeuEnter(masp))
+                return;
             sp = dssp.TimTheoMa(masp);
         }
         for (int i = 0; i < n;) {

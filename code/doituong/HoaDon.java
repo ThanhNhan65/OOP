@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 import code.kethua.*;
+import code.kiemtra.InputUtils;
 import code.danhsach.*;
 
 public class HoaDon extends GiaoDich {
@@ -69,20 +70,28 @@ public class HoaDon extends GiaoDich {
         this.setNgayGD(new Date());
         System.out.print("Nhap ma khach hang: ");
         String MaKH = sc.nextLine();
+        if (InputUtils.ThoatNeuEnter(MaKH))
+            return;
         KhachHang kh = (dskh != null) ? dskh.Timkiem_MaKH(MaKH) : null;
         while (kh == null) {
             System.out.println("Khong tim thay khach hang, nhap lai: ");
             MaKH = sc.nextLine();
+            if (InputUtils.ThoatNeuEnter(MaKH))
+                return;
             kh = (dskh != null) ? dskh.Timkiem_MaKH(MaKH) : null;
         }
         this.setKh(kh);
 
         System.out.print("Nhap ma nhan vien: ");
         String MaNV = sc.nextLine();
+        if (InputUtils.ThoatNeuEnter(MaNV))
+            return;
         NhanVien nv = (dsnv != null) ? dsnv.TimKiemNhanVienTheoMa(MaNV) : null;
         while (nv == null) {
             System.out.println("Khong tim thay nhan vien, nhap lai: ");
             MaNV = sc.nextLine();
+            if (InputUtils.ThoatNeuEnter(MaNV))
+                return;
             nv = (dsnv != null) ? dsnv.TimKiemNhanVienTheoMa(MaNV) : null;
         }
         this.setNv(nv);

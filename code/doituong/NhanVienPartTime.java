@@ -2,6 +2,8 @@ package code.doituong;
 
 import java.util.Scanner;
 
+import code.kiemtra.InputUtils;
+
 public class NhanVienPartTime extends NhanVien {
     private int gio;
     private static long luong = 25000;
@@ -11,7 +13,7 @@ public class NhanVienPartTime extends NhanVien {
         gio = 0;
     }
 
-    public NhanVienPartTime(String Hoten, String Diachi, long Sdt, String MaNV, int gio) {
+    public NhanVienPartTime(String Hoten, String Diachi, String Sdt, String MaNV, int gio) {
         super(Hoten, Diachi, Sdt, MaNV);
         this.gio = gio;
     }
@@ -32,7 +34,10 @@ public class NhanVienPartTime extends NhanVien {
     public void Nhap(Scanner sc) {
         super.Nhap(sc);
         System.out.println("Nhap so gio lam viec cua nhan vien: ");
-        gio = sc.nextInt();
+        String input = sc.nextLine();
+        if (InputUtils.ThoatNeuEnter(input))
+            return;
+        int gio = Integer.parseInt(input);
     }
 
     @Override

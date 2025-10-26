@@ -3,6 +3,7 @@ package code.doituong;
 import java.util.Scanner;
 import code.danhsach.*;
 import code.giaodien.*;
+import code.kiemtra.InputUtils;
 
 public class ChiTietHoaDon implements INhapXuat {
     private HoaDon hd;
@@ -52,29 +53,44 @@ public class ChiTietHoaDon implements INhapXuat {
     public void Nhap(Scanner sc) {
         System.out.println("Vui long nhap ma hoa don: ");
         String MaHD = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(MaHD))
+            return;
         this.hd = dshd.Timkiem_MaHD(MaHD);
         while (hd == null) {
             System.out.println("Khong tim thay hoa don: " + MaHD);
             System.out.println("Vui long nhap lai: ");
             MaHD = sc.nextLine().trim();
+            if (InputUtils.ThoatNeuEnter(MaHD))
+                return;
             this.hd = dshd.Timkiem_MaHD(MaHD);
         }
 
         System.out.println("Vui long nhap ma san pham: ");
         String MaSP = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(MaSP))
+            return;
         this.sp = dssp.TimTheoMa(MaSP);
         while (sp == null) {
             System.out.println("Khong tim thay san pham: " + MaSP);
             System.out.println("Vui long nhap lai: ");
             MaSP = sc.nextLine().trim();
+            if (InputUtils.ThoatNeuEnter(MaSP))
+                return;
             this.sp = dssp.TimTheoMa(MaSP);
         }
 
         System.out.println("Vui long nhap so luong: ");
-        this.soluong = sc.nextInt();
+        String input = sc.nextLine();
+        if (InputUtils.ThoatNeuEnter(input))
+            return;
+        this.soluong = Integer.parseInt(input);
         while (soluong < 0) {
             System.out.println("So luong khong hop le. Vui long nhap lai: ");
-            this.soluong = sc.nextInt();
+            input = sc.nextLine();
+            if (InputUtils.ThoatNeuEnter(input))
+                return;
+            this.soluong = Integer.parseInt(input);
+
         }
         sc.nextLine();
     }
