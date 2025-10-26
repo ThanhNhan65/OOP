@@ -1,95 +1,188 @@
-@startuml
-title Class diagram — OOP/DOAN project (generated)
+@startuml@startuml
+
+skinparam classAttributeIconSize 0title Class diagram — OOP/DOAN project (generated)
+
+hide empty members
 
 package "code.kethua" {
-  abstract class ConNguoi {
-    +Hoten : String
-    +Diachi : String
-    +Sdt : long
-    +Nhap(sc: Scanner)
-    +Xuat()
-  }
 
-  abstract class GiaoDich {
-    -ngayGD : Date
-    -nv : NhanVien
-    -kh : KhachHang
-    +getNgayGD() : Date
-    +setNgayGD(Date)
-    +getNv() : NhanVien
-    +setNv(NhanVien)
+' Packages  abstract class ConNguoi {
+
+package code.doituong {    +Hoten : String
+
+  class GiaoDich    +Diachi : String
+
+  interface INhapXuat    +Sdt : long
+
+    +Nhap(sc: Scanner)
+
+  class HoaDon extends GiaoDich {    +Xuat()
+
+    - MaHDB : String  }
+
+    - dsct : DanhSachChitietHoaDon
+
+    - dskh : DanhSachKhachHang  abstract class GiaoDich {
+
+    - dsnv : DanhSachNhanVien    -ngayGD : Date
+
+    + getMaHD() : String    -nv : NhanVien
+
+    + getdsct() : DanhSachChitietHoaDon    -kh : KhachHang
+
+    + Nhap(sc: Scanner) : void    +getNgayGD() : Date
+
+    + Xuat() : void    +setNgayGD(Date)
+
+    + Thanhtien() : double    +getNv() : NhanVien
+
+  }    +setNv(NhanVien)
+
     +getKh() : KhachHang
-    +setKh(KhachHang)
-    +Nhap(sc: Scanner)
-    +Xuat()
-    +Thanhtien() : double
-  }
-}
 
-package "code.doituong" {
+  class ChiTietHoaDon implements INhapXuat {    +setKh(KhachHang)
+
+    - hd : HoaDon    +Nhap(sc: Scanner)
+
+    - sp : SanPham    +Xuat()
+
+    - soluong : int    +Thanhtien() : double
+
+    + Tinhtien() : double  }
+
+    + Nhap(sc: Scanner) : void}
+
+    + Xuat() : void
+
+  }package "code.doituong" {
+
   interface INhapXuat
 
-  class HoaDon {
-    -MaHDB : String
-    -dsct : code.danhsach.DanhSachChitietHoaDon
-    -dskh : code.danhsach.DanhSachKhachHang
+  class SanPham implements INhapXuat {
+
+    + getMa() : String  class HoaDon {
+
+    + getTen() : String    -MaHDB : String
+
+    + getGia() : double    -dsct : code.danhsach.DanhSachChitietHoaDon
+
+  }    -dskh : code.danhsach.DanhSachKhachHang
+
     -dsnv : code.danhsach.DanhSachNhanVien
-    -MaHDNext : int {static}
+
+  class Loai implements INhapXuat    -MaHDNext : int {static}
+
     +getMaHD() : String
-    +setMaHD(String)
-    +getdsct() : code.danhsach.DanhSachChitietHoaDon
-    +Thanhtien() : double
-    +Nhap(sc: Scanner)
-    +Xuat()
+
+  class ConNguoi    +setMaHD(String)
+
+  class KhachHang extends ConNguoi    +getdsct() : code.danhsach.DanhSachChitietHoaDon
+
+  class NhanVien extends ConNguoi    +Thanhtien() : double
+
+  class NhanVienFullTime extends NhanVien    +Nhap(sc: Scanner)
+
+  class NhanVienPartTime extends NhanVien    +Xuat()
+
   }
 
-  class ChiTietHoaDon {
-    -hd : HoaDon
-    -sp : SanPham
-    -soluong : int
-    -dshd : code.danhsach.DanhSachHoaDon
-    -dssp : code.danhsach.DanhSachSanPham
+  class Kho {
+
+    - sp : SanPham  class ChiTietHoaDon {
+
+    - Dauvao : int    -hd : HoaDon
+
+    - Daura : int    -sp : SanPham
+
+    - Ton : int    -soluong : int
+
+  }    -dshd : code.danhsach.DanhSachHoaDon
+
+}    -dssp : code.danhsach.DanhSachSanPham
+
     +Tinhtien() : double
-    +Nhap(sc: Scanner)
-    +Xuat()
+
+package code.danhsach {    +Nhap(sc: Scanner)
+
+  class DanhSachHoaDon {    +Xuat()
+
+    - dshd : HoaDon[]  }
+
+    - n : int
+
+    + ReadFile(dskh: DanhSachKhachHang, dsnv: DanhSachNhanVien) : void  class SanPham {
+
+    + WriteFile() : void    -ma : String
+
+    + Them(sc: Scanner, dskh: DanhSachKhachHang, dsnv: DanhSachNhanVien, dssp: DanhSachSanPham, dsct: DanhSachChitietHoaDon) : void    -ten : String
+
+    + Timkiem_MaHD(ma: String) : HoaDon    -hang : String
+
+  }    -loai : Loai
+
+  class DanhSachChitietHoaDon {    -gia : double
+
+    - dsct : ChiTietHoaDon[]    +getMa() : String
+
+    - n : int    +getTen() : String
+
+    + ReadFile(dshd: DanhSachHoaDon, dssp: DanhSachSanPham) : void    +getGia() : double
+
+    + WriteFile() : void    +Nhap(sc: Scanner)
+
+    + Them(sc: Scanner, dshd: DanhSachHoaDon, dssp: DanhSachSanPham) : void    +Xuat()
+
+    + ThemChiTiet(ct: ChiTietHoaDon) : void    +tofile() : String
+
+  }  }
+
+  class DanhSachKhachHang { - dskh : KhachHang[] }
+
+  class DanhSachNhanVien { - dsnv : NhanVien[] }  class Loai {
+
+  class DanhSachSanPham { - dssp : SanPham[] }    -maLoai : String
+
+  class DanhSachLoai { - dsloai : Loai[] }    -tenLoai : String
+
+  class DanhSachKho { - dskho : Kho[] }    +getMaloai() : String
+
+}    +getTenloai() : String
+
   }
 
-  class SanPham {
-    -ma : String
-    -ten : String
-    -hang : String
-    -loai : Loai
-    -gia : double
-    +getMa() : String
-    +getTen() : String
-    +getGia() : double
-    +Nhap(sc: Scanner)
-    +Xuat()
-    +tofile() : String
-  }
+' Relationships
 
-  class Loai {
-    -maLoai : String
-    -tenLoai : String
-    +getMaloai() : String
-    +getTenloai() : String
-  }
+HoaDon "1" o-- "*" ChiTietHoaDon : contains  class KhachHang {
 
-  class KhachHang {
-    +MaKH : String
-    +Nhap(sc: Scanner)
-    +Xuat()
-  }
+ChiTietHoaDon --> HoaDon : hd    +MaKH : String
 
-  class NhanVien {
-    +MaNV : String
-    +Chucvu : String
-    +ChamCong : int
-    +Luong : long
-    +Nhap(sc: Scanner)
-    +Xuat()
-  }
+ChiTietHoaDon --> SanPham : sp    +Nhap(sc: Scanner)
+
+SanPham --> Loai    +Xuat()
+
+DanhSachHoaDon "1" *-- "*" HoaDon  }
+
+DanhSachChitietHoaDon "1" *-- "*" ChiTietHoaDon
+
+DanhSachKhachHang "1" *-- "*" KhachHang  class NhanVien {
+
+DanhSachNhanVien "1" *-- "*" NhanVien    +MaNV : String
+
+DanhSachSanPham "1" *-- "*" SanPham    +Chucvu : String
+
+DanhSachLoai "1" *-- "*" Loai    +ChamCong : int
+
+DanhSachKho "1" *-- "*" Kho    +Luong : long
+
+HoaDon --> KhachHang : kh    +Nhap(sc: Scanner)
+
+HoaDon --> NhanVien : nv    +Xuat()
+
+Kho --> SanPham : sp  }
+
 }
+
+@enduml
 
 package "code.danhsach" {
   class DanhSachHoaDon {

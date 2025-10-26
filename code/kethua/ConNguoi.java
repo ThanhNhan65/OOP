@@ -4,9 +4,9 @@ import java.util.Scanner;
 import code.giaodien.*;
 
 public abstract class ConNguoi implements INhapXuat {
-    public String Hoten;
-    public String Diachi;
-    public long Sdt;
+    private String Hoten;
+    private String Diachi;
+    private long Sdt;
 
     public ConNguoi() {
         Hoten = "";
@@ -51,7 +51,7 @@ public abstract class ConNguoi implements INhapXuat {
         System.out.print("Nhap dia chi: ");
         Diachi = sc.nextLine();
         System.out.print("Nhap so dien thoai: ");
-        Sdt = sc.nextInt();
+        Sdt = sc.nextLong();
         sc.nextLine();
     }
 

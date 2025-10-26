@@ -1,108 +1,149 @@
 package code.danhsach;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.Arrays;
 import java.util.Scanner;
-import code.doituong.Kho;
-
+import code.doituong.*;
 
 public class DanhSachKho {
-    private Kho[] dsKho;     
-    private int soLuong;     
+    private Kho[] dskho ;
+    private int n;
 
-    public DanhSachKho() {
-        dsKho = new Kho[0]; 
-        soLuong = 0;
+    public DanhSachKho(){
+        dskho = new Kho[0];
+        n=0;
+    }
+    public int getN(){
+        return n;
+    }
+    public void docFile(DanhSachSanPham dssp, DanhSachChitietHoaDon dsct){
+        dskho = new Kho[0];
+        n = 0;
+        try{
+            BufferedReader br = new BufferedReader(new FileReader("data/kho.txt"));
+            String line = br.readLine();
+            while(line != null){
+                line = line.trim();
+                    String[] arr = line.split(",");
+                    
+                    String masp = arr[0].trim();
+                    int dauvao = Integer.parseInt(arr[1].trim());
+                    SanPham sp = dssp.TimTheoMa(masp);
+                    Kho k= new Kho(dssp, dsct);        
+                    dskho = Arrays.copyOf(dskho, n + 1);
+
+                    k.setsp(sp);
+                    k.setdauvao(dauvao);
+                    dskho[n]=k;
+                    n++;
+                  
+                line = br.readLine();
+            }
+            br.close();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 
-   
-    public void themKho(Kho k) {
-        if (soLuong >= dsKho.length) {
-            System.out.println(" Không thể thêm — danh sách kho đã đầy!");
+    public void ghiFile(){
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter("data/kho.txt"));
+            for(int i = 0; i < n; i++){
+                Kho k = dskho[i];
+                if(k == null) continue;
+                String mahd = k.getsp().getMa();
+                int soluong = k.getDauvao();
+                bw.write(mahd + "," + soluong);
+                bw.newLine();
+            }
+            bw.close();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void Them(Scanner sc, DanhSachSanPham dssp, DanhSachChitietHoaDon dsct){
+        Kho k = new Kho(dssp,dsct);
+        k.Nhap(sc);
+        dskho = Arrays.copyOf(dskho, n + 1);
+        dskho [n++] = k;
+        System.out.println("Da them vao kho");
+        ghiFile();
+    }
+
+    public void HienThi(){
+        if(n == 0){
+            System.out.println("Danh sach kho rong");
             return;
         }
-        dsKho[soLuong++] = k;
-        System.out.println(" Đã thêm kho mới vào danh sách!");
+        for(int i = 0; i < n; i++){
+            dskho[i].Xuat();
+        }
+    }
+
+    public void Sua(Scanner sc, DanhSachSanPham dssp){
+        System.out.println("Nhap san pham muon sua");
+        String masp = sc.nextLine();
+        SanPham sp = dssp.TimTheoMa(masp);
+        while(sp==null){
+            System.out.println("Nhap lai ma san pham:");
+            masp = sc.nextLine();
+            sp = dssp.TimTheoMa(masp);
+        }
+        for(int i=0; i< n; i++){
+            if(dskho[i].getsp().getMa().equals(masp)){
+                System.out.println("Sua lai dau vao");
+                int newdauvao = sc.nextInt();
+                dskho[i].setdauvao(newdauvao);
+            }
+        }
+        ghiFile();
     }
 
     
-    public void nhapDanhSachKho(Scanner sc) {
-        System.out.print("Nhập số lượng kho cần thêm: ");
-        int n = Integer.parseInt(sc.nextLine());
 
-        for (int i = 0; i < n; i++) {
-            if (soLuong >= dsKho.length) {
-                System.out.println("⚠ Danh sách đã đầy, dừng nhập!");
+    public void TimKiem(Scanner sc, DanhSachSanPham dssp){
+        System.out.println("Nhap san pham muon tim");
+        String masp = sc.nextLine();
+        SanPham sp = dssp.TimTheoMa(masp);
+        while(sp==null){
+            System.out.println("Nhap lai ma san pham:");
+            masp = sc.nextLine();
+            sp = dssp.TimTheoMa(masp);
+        }
+        for(int i=0; i< n; i++){
+            if(dskho[i].getsp().getMa().equals(masp)){
+
+                dskho[i].Xuat();
                 break;
             }
-            System.out.println("\n--- Nhập kho thứ " + (soLuong + 1) + " ---");
-            Kho k = new Kho();
-            k.Nhap(sc);
-            dsKho[soLuong++] = k;
         }
     }
-
-   
-    public void xuatDanhSachKho() {
-        if (soLuong == 0) {
-            System.out.println("⚠ Danh sách kho trống!");
-            return;
-        }
-
-        System.out.println("\n===== DANH SÁCH KHO HÀNG =====");
-        for (int i = 0; i < soLuong; i++) {
-            dsKho[i].Xuat();
-        }
-    }
-
-  
-    public Kho timKhoTheoMa(String maKho) {
-        for (int i = 0; i < soLuong; i++) {
-            if (dsKho[i].getMaKho().equalsIgnoreCase(maKho)) {
-                return dsKho[i];
-            }
-        }
-        return null;
-    }
-
- 
-    public boolean xoaKhoTheoMa(String maKho) {
-        for (int i = 0; i < soLuong; i++) {
-            if (dsKho[i].getMaKho().equalsIgnoreCase(maKho)) {
-             
-                for (int j = i; j < soLuong - 1; j++) {
-                    dsKho[j] = dsKho[j + 1];
-                }
-                dsKho[--soLuong] = null;
-                System.out.println("🗑 Đã xóa kho có mã: " + maKho);
-                return true;
-            }
-        }
-        System.out.println(" Không tìm thấy kho có mã: " + maKho);
-        return false;
-    }
-
     
-    public void hienThiKhoCanNhapHang() {
-        System.out.println("\n=== DANH SÁCH KHO CẦN NHẬP THÊM HÀNG ===");
-        boolean co = false;
-
-        for (int i = 0; i < soLuong; i++) {
-            if (dsKho[i].KiemTraTonKho()) {
-                dsKho[i].Xuat();
-                co = true;
-            }
+    public void Xoa(Scanner sc, DanhSachSanPham dssp){
+        System.out.println("Nhap san pham muon xoa");
+        String masp = sc.nextLine();
+        SanPham sp = dssp.TimTheoMa(masp);
+        while(sp==null){
+            System.out.println("Nhap lai ma san pham:");
+            masp = sc.nextLine();
+            sp = dssp.TimTheoMa(masp);
         }
-
-        if (!co) {
-            System.out.println(" Tất cả kho đều đủ hàng, không cần nhập thêm!");
+        for(int i=0; i< n;){
+            if(dskho[i].getsp().getMa().equals(masp)){
+                for(int j=i ; j<n-1; j++ ){
+                    dskho[j]=dskho[j+1];
+                }
+                    dskho= Arrays.copyOf(dskho, n-1);
+                    n--;
+            }else 
+                i++;
+            
         }
+        ghiFile();
     }
-
-    public int getSoLuong() {
-        return soLuong;
-    }
-
-   
-    public Kho[] getDsKho() {
-        return dsKho;
-    }
+ 
 }

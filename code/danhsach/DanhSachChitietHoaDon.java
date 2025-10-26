@@ -102,12 +102,12 @@ public class DanhSachChitietHoaDon {
             MaHD = sc.nextLine().trim();
             hd = dshd.Timkiem_MaHD(MaHD);
         }
-
+        hd.Xuat();
         int choice;
         do{
             System.out.println("1. Sua ma san pham va so luong");
             System.out.println("2. Sua so luong san pham");
-            System.out.println("3. Thoat");
+            System.out.println("0. Thoat");
             System.out.print("Chon: ");
             choice = sc.nextInt();
             sc.nextLine();
@@ -118,11 +118,11 @@ public class DanhSachChitietHoaDon {
                 case 2:
                     Suasl(sc, hd.getdsct(), dssp);
                     break;
-                case 3:
+                case 0:
                     System.out.println("Thoat menu sua.");
                     break;
             }
-        } while (choice != 3);
+        } while (choice != 0);
     }
 
     private void Suaspsl(Scanner sc, DanhSachChitietHoaDon dsct, DanhSachSanPham dssp) {
@@ -200,12 +200,13 @@ public class DanhSachChitietHoaDon {
             MaHD = sc.nextLine();
             hd = dshd.Timkiem_MaHD(MaHD);
         }
+        hd.Xuat();
 
         int choice;
         do {
             System.out.println("1. Xoa toan bo chi tiet cua hoa don");
             System.out.println("2. Xoa 1 san pham trong hoa don");
-            System.out.println("3. Thoat");
+            System.out.println("0. Thoat");
             System.out.print("Chon: ");
             choice = sc.nextInt();
             sc.nextLine();
@@ -216,11 +217,11 @@ public class DanhSachChitietHoaDon {
                 case 2:
                     Xoasphd(sc, MaHD, dshd, dssp);
                     break;
-                case 3:
+                case 0:
                     System.out.println("Thoat menu xoa.");
                     break;
             }
-        } while (choice != 3);
+        } while (choice != 0);
     }
 
     public void XoaTB(String MaHD) {

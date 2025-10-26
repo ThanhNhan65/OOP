@@ -28,7 +28,7 @@ public class DanhSachKhachHang {
             BufferedWriter writer = new BufferedWriter(new FileWriter(File, false));
             for (int i = 0; i < n; i++) {
                 KhachHang kh = dskh[i];
-                writer.write(kh.Hoten + "," + kh.Diachi + "," + kh.Sdt + "," + kh.MaKH);
+                writer.write(kh.getHoten() + "," + kh.getDiachi() + "," + kh.getSdt() + "," + kh.MaKH);
                 writer.newLine();
             }
             writer.close();
@@ -44,9 +44,6 @@ public class DanhSachKhachHang {
             String line = input.readLine();
             while (line != null) {
                 String[] chuoi = line.split(",");
-                for (int i = 0; i < chuoi.length; i++) {
-                    System.out.println(chuoi[i]);
-                }
 
                 String HoTen = chuoi[0];
                 String Diachi = chuoi[1];

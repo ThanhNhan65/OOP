@@ -290,7 +290,8 @@ public class DanhSachHoaDon{
                         System.out.println("Loi dinh dang ngay. Su dung dd/MM/yyyy\nDat mac dinh la ngay hien tai.");
                         dshd[i].setNgayGD(new Date());
                     }
-                bool = true;        
+                bool = true;      
+                break;  
             }
         }
         System.out.println(bool ? "Xoa thanh cong!" : "That bai!");
@@ -303,6 +304,7 @@ public class DanhSachHoaDon{
         do {
             System.out.println("1. Sua theo ma khach hang");
             System.out.println("2. Sua theo ma nhan vien");
+            System.out.println("3. Sua theo ngay giao dich");
             System.out.println("0. Thoat");
             System.out.print("Chon: ");
             choice = sc.nextInt();
@@ -332,6 +334,18 @@ public class DanhSachHoaDon{
                     }
                     Sua_MaNV(sc, manv, dsnv);            
                     break;
+                case 3:
+                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                    System.out.println("Nhap ngay giao dich can sua (dd/MM/yyyy): ");
+                    String newngay = sc.nextLine();
+                    try {
+                        Date ngay = df.parse(newngay);
+                        Sua_NgayGD(sc, ngay);
+                    } catch (Exception ex) {
+                        System.out.println("Loi dinh dang ngay. Vui long su dung dd/MM/yyyy");
+                    }
+                    break;
+
             }
         } while (choice != 0);
     }
@@ -349,7 +363,8 @@ public class DanhSachHoaDon{
                     kh= dskh.Timkiem_MaKH(newma);
                 }
                 dshd[i].setKh(kh);
-                bool = true;        
+                bool = true;
+                break;        
             }
         }
         System.out.println(bool ? "Xoa thanh cong!" : "That bai!");
@@ -369,7 +384,8 @@ public class DanhSachHoaDon{
                     nv= dsnv.TimKiemNhanVienTheoMa(newma);
                 }
                 dshd[i].setNv(nv);
-                bool = true;        
+                bool = true;   
+                break;     
             }
         }
         System.out.println(bool ? "Xoa thanh cong!" : "That bai!");

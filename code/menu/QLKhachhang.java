@@ -15,7 +15,6 @@ public class QLKhachhang {
     public void menu() {
         DanhSachKhachHang dskh = new DanhSachKhachHang();
         dskh.DocTuFile("data/danhsachKH.txt");
-        dskh.Xuat();
         dskh.GhiVaoFile("data/danhsachKH.txt");
         Scanner sc = new Scanner(System.in);
         String op;

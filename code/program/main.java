@@ -12,6 +12,7 @@ public class main{
         QLLoai ql4= new QLLoai();
         QLHoadon ql5 = new QLHoadon();
         QLChitiethoadon ql6 = new QLChitiethoadon();
+        QLKho ql7 = new QLKho();
 
         int choice;
             do {System.out.println("\n===== QUAN LY BAN NHAC CU =====");
@@ -21,6 +22,7 @@ public class main{
                 System.out.println("4. Quan ly loai");
                 System.out.println("5. Quan ly hoa don");
                 System.out.println("6. Quan ly chi tiet hoa don");
+                System.out.println("7. Quan ly Kho");
                 System.out.println("0. Thoat");
                 System.out.print("Chon: ");
                 choice = sc.nextInt();
@@ -45,6 +47,9 @@ public class main{
                     case 6:
                         ql6.menu();
                         break;
+                    case 7:
+                        ql7.menu();
+                        break;    
                     case 0:
                         System.out.println("Thoat chuong trinh.");
                         break;
