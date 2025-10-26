@@ -72,6 +72,10 @@ public class DanhSachKho {
     public void Them(Scanner sc, DanhSachSanPham dssp, DanhSachChitietHoaDon dsct) {
         Kho k = new Kho(dssp, dsct);
         k.Nhap(sc);
+       
+        if (k.getsp() == null || k.getsp().getMa() == null || k.getsp().getMa().trim().isEmpty()) {
+            return;
+        }
         dskho = Arrays.copyOf(dskho, n + 1);
         dskho[n++] = k;
         System.out.println("Da them vao kho");

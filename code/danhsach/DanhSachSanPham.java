@@ -88,11 +88,13 @@ public class DanhSachSanPham {
         SanPham sp = new SanPham();
         sp.setDanhSachLoai(dsl);
         sp.Nhap(sc);
-        String ma = sp.getMa();
-        if (ma == null || ma.trim().isEmpty()) {
-            System.out.println("Ma khong hop le");
+        if (sp.getMa() == null || sp.getMa().trim().isEmpty()
+            || sp.getTen() == null || sp.getTen().trim().isEmpty()
+            || sp.getLoai() == null || sp.getLoai().getMaloai() == null || sp.getLoai().getMaloai().trim().isEmpty()) {
+            System.out.println("Da huy them san pham (thieu thong tin hoac nhan Enter de thoat)");
             return;
         }
+        String ma = sp.getMa();
         if (TonTaiMa(ma)) {
             System.out.println("Ma nay da co ");
             return;

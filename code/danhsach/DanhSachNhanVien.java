@@ -37,19 +37,39 @@ public class DanhSachNhanVien {
     }
 
     public void Them(Scanner sc) {
-        dsnv = Arrays.copyOf(dsnv, n + 1);
-        System.out.println("Chon loai nhan vien ban muon them(1.FullTime or 2.PartTime)");
-        int choice = sc.nextInt();
-        sc.nextLine();
+        System.out.println("Chon loai nhan vien ban muon them(1.FullTime or 2.PartTime, Enter de thoat)");
+        String input = sc.nextLine();
+        if (InputUtils.ThoatNeuEnter(input)) return;
+        int choice;
+        try {
+            choice = Integer.parseInt(input);
+        } catch (Exception e) {
+            System.out.println("Lua chon khong hop le");
+            return;
+        }
+        NhanVien nv = null;
         switch (choice) {
             case 1:
-                dsnv[n] = new NhanVienFullTime();
+                nv = new NhanVienFullTime();
                 break;
             case 2:
-                dsnv[n] = new NhanVienPartTime();
+                nv = new NhanVienPartTime();
                 break;
+            default:
+                System.out.println("Lua chon khong hop le");
+                return;
         }
-        dsnv[n].Nhap(sc);
+        nv.Nhap(sc);
+        // Check if user pressed Enter to exit at any input
+        if (nv.getHoten() == null || nv.getHoten().trim().isEmpty()
+            || nv.getDiachi() == null || nv.getDiachi().trim().isEmpty()
+            || nv.getSdt() == null || nv.getSdt().trim().isEmpty()
+            || nv.getMaNV() == null || nv.getMaNV().trim().isEmpty()) {
+            System.out.println("Da huy them nhan vien (thieu thong tin hoac nhan Enter de thoat)");
+            return;
+        }
+        dsnv = Arrays.copyOf(dsnv, n + 1);
+        dsnv[n] = nv;
         n++;
         GhiVaoFile("data/danhsachNV.txt");
     }

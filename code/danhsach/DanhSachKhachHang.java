@@ -43,6 +43,7 @@ public class DanhSachKhachHang {
         try {
             BufferedReader input = new BufferedReader(new FileReader(File));
             String line = input.readLine();
+            int maxSo = 0;
             while (line != null) {
                 String[] chuoi = line.split(",");
 
@@ -52,15 +53,19 @@ public class DanhSachKhachHang {
                 String MaKH = chuoi[3].trim();
                 line = input.readLine();
                 KhachHang kh = new KhachHang(HoTen, Diachi, Sdt, MaKH);
-                int so = Integer.parseInt(MaKH.substring(2));
-                if (so > KhachHang.dem) {
-                    KhachHang.dem = so;
-                }
+                try {
+                    int so = Integer.parseInt(MaKH.substring(2));
+                    if (so > maxSo) maxSo = so;
+                } catch (Exception ignore) {}
                 dskh = Arrays.copyOf(dskh, n + 1);
                 dskh[n] = kh;
                 n++;
             }
             input.close();
+            // Ensure next generated ID continues after the max existing one
+            if (maxSo >= 0) {
+                KhachHang.dem = Math.max(KhachHang.dem, maxSo + 1);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -77,9 +82,18 @@ public class DanhSachKhachHang {
     }
 
     public void Them() {
+        KhachHang kh = new KhachHang();
+        kh.Nhap(sc);
+        // Check if user pressed Enter to exit at any input
+        if (kh.getHoten() == null || kh.getHoten().trim().isEmpty()
+            || kh.getDiachi() == null || kh.getDiachi().trim().isEmpty()
+            || kh.getSdt() == null || kh.getSdt().trim().isEmpty()
+            || kh.getMaKH() == null || kh.getMaKH().trim().isEmpty()) {
+            System.out.println("Da huy them khach hang (thieu thong tin hoac nhan Enter de thoat)");
+            return;
+        }
         dskh = Arrays.copyOf(dskh, n + 1);
-        dskh[n] = new KhachHang();
-        dskh[n].Nhap(sc);
+        dskh[n] = kh;
         n++;
         GhiVaoFile("data/danhsachKH.txt");
     }
@@ -119,7 +133,7 @@ public class DanhSachKhachHang {
         String MaKH;
         boolean found = false;
         do {
-            System.out.print("Nhap ma khach hang (Enter de thoat): ");
+            System.out.print("Nhap ma khach hang: ");
             MaKH = sc.nextLine();
             if (InputUtils.ThoatNeuEnter(MaKH))
                 return;

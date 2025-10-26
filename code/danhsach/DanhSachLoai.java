@@ -72,11 +72,13 @@ public class DanhSachLoai {
     public void Them(Scanner sc) {
         Loai l = new Loai();
         l.Nhap(sc);
-        String ma = l.getMaloai();
-        if (ma == null || ma.trim().isEmpty()) {
-            System.out.println("Ma khong hop le");
+        // Check if user pressed Enter to exit at any input
+        if (l.getMaloai() == null || l.getMaloai().trim().isEmpty()
+            || l.getTenloai() == null || l.getTenloai().trim().isEmpty()) {
+            System.out.println("Da huy them loai (thieu thong tin hoac nhan Enter de thoat)");
             return;
         }
+        String ma = l.getMaloai();
         if (TonTaiMa(ma)) {
             System.out.println("Ma nay da ton tai");
             return;
