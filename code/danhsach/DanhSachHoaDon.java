@@ -300,6 +300,8 @@ public class DanhSachHoaDon {
             if (df.format(dshd[i].getNgayGD()).equals(df.format(NgayGD))) {
                 System.out.print("Nhap ngay giao dich moi (dd/MM/yyyy): ");
                 String newngay = sc.nextLine();
+                if (InputUtils.ThoatNeuEnter(newngay))
+                    return;
                 try {
                     dshd[i].setNgayGD(df.parse(newngay));
                 } catch (Exception ex) {

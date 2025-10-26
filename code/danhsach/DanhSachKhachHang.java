@@ -10,8 +10,8 @@ import code.doituong.*;
 import code.kiemtra.InputUtils;
 
 public class DanhSachKhachHang {
-    public KhachHang[] dskh;
-    public int n;
+    private KhachHang[] dskh;
+    private int n;
     public Scanner sc = new Scanner(System.in);
 
     public DanhSachKhachHang() {
