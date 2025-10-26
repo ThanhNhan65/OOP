@@ -35,6 +35,7 @@ public class QLKhachhang {
                     dskh.Them();
                     break;
                 case 2:
+                    System.out.println("Nhap ma nhan vien ban muon xoa: ");
                     dskh.Xoa(sc.nextLine());
                     break;
                 case 3:

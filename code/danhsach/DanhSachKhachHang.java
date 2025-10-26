@@ -182,15 +182,17 @@ public class DanhSachKhachHang {
         switch (c) {
             case 1:
                 System.out.println("Nhap ho ten khach hang ban muon tim kiem: ");
-                kh = Timkiem_HoTen(sc.nextLine());
-                if (InputUtils.ThoatNeuEnter(sc.nextLine()))
+                String input = sc.nextLine();
+                if (InputUtils.ThoatNeuEnter(input))
                     return;
+                kh = Timkiem_HoTen(input);
                 break;
             case 2:
                 System.out.println("Nhap ma khach hang ban muon tim kiem: ");
-                kh = Timkiem_MaKH(sc.nextLine());
-                if (InputUtils.ThoatNeuEnter(sc.nextLine()))
+                String input1 = sc.nextLine();
+                if (InputUtils.ThoatNeuEnter(input1))
                     return;
+                kh = Timkiem_MaKH(input1);
                 break;
             default:
                 System.out.println("Thoat chuong trinh");

@@ -180,7 +180,7 @@ public class DanhSachNhanVien {
                         case 3:
                             System.out.println("Nhap so dien thoai moi cua nhan vien: ");
                             String Sdt_moi = sc.nextLine();
-                            while(Sdt_moi.length()!=10){
+                            while (Sdt_moi.length() != 10) {
                                 System.out.print("Nhap lai so dien thoai: ");
                                 Sdt_moi = sc.nextLine();
                             }
@@ -206,7 +206,7 @@ public class DanhSachNhanVien {
     public NhanVien TimKiemNhanVienTheoMa(String MaNV) {
         for (int i = 0; i < n; i++) {
             if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV)) {
-                return dsnv[i];       
+                return dsnv[i];
 
             }
         }
@@ -265,16 +265,22 @@ public class DanhSachNhanVien {
         switch (c) {
             case 1:
                 System.out.print("Nhap ma nhan vien muon tim kiem: ");
-                nv = TimKiemNhanVienTheoMa(sc.nextLine());
-                if(nv==null)
+                String input = sc.nextLine();
+                if (InputUtils.ThoatNeuEnter(input))
+                    return;
+                nv = TimKiemNhanVienTheoMa(input);
+                if (nv == null)
                     System.out.println("Khong tim thay nhan vien");
                 else
                     System.out.println("Tim thay nhan vien");
                 break;
             case 2:
                 System.out.print("Nhap ho va ten nhan vien muon tim kiem: ");
-                nv = TimKiemNhanVienTheoHoTen(sc.nextLine());
-                if(nv==null)
+                String input1 = sc.nextLine();
+                if (InputUtils.ThoatNeuEnter(input1))
+                    return;
+                nv = TimKiemNhanVienTheoMa(input1);
+                if (nv == null)
                     System.out.println("Khong tim thay nhan vien");
                 else
                     System.out.println("Tim thay nhan vien");
