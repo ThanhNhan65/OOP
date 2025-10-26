@@ -30,20 +30,9 @@ public class DanhSachNhanVien {
             System.out.println("Danh sach rong!");
             return;
         }
-
-        System.out.println(
-                "+--------+----------------------+----------------------+--------------+--------------+--------------+");
-        System.out.printf("| %-6s | %-20s | %-20s | %-12s |%-12s | %-12s |\n", "Ma", "Ho va ten", "Dia chi", "Sdt",
-                "Loai", "Luong");
-        System.out.println(
-                "+--------+----------------------+----------------------+--------------+--------------+--------------+");
-
         for (int i = 0; i < n; i++) {
             dsnv[i].Xuat();
         }
-
-        System.out.println(
-                "+--------+----------------------+----------------------+--------------+--------------+--------------+");
     }
 
     public void Them(Scanner sc) {
@@ -69,15 +58,14 @@ public class DanhSachNhanVien {
             BufferedWriter writer = new BufferedWriter(new FileWriter(File, false));
             for (int i = 0; i < n; i++) {
                 NhanVien nv = dsnv[i];
+                int work = 0;
                 if (nv instanceof NhanVienFullTime) {
-                    NhanVienFullTime ft = (NhanVienFullTime) nv;
-                    writer.write(ft.getHoten() + "," + ft.getDiachi() + "," + ft.getSdt() + "," + ft.getMaNV()
-                            + ",FullTime," + ft.getNgay());
+                    work = ((NhanVienFullTime) nv).getngay();
                 } else if (nv instanceof NhanVienPartTime) {
-                    NhanVienPartTime pt = (NhanVienPartTime) nv;
-                    writer.write(pt.getHoten() + "," + pt.getDiachi() + "," + pt.getSdt() + "," + pt.getMaNV()
-                            + ",PartTime," + pt.getGio());
+                    work = ((NhanVienPartTime) nv).getgio();
                 }
+                writer.write(nv.getHoten() + "," + nv.getDiachi() + "," + nv.getSdt() + "," + nv.getMaNV() + ","
+                        + work + "," + nv.getLoai());
                 writer.newLine();
             }
             writer.close();
@@ -90,36 +78,32 @@ public class DanhSachNhanVien {
     public void DocTuFile(String File) {
         try {
             BufferedReader input = new BufferedReader(new FileReader(File));
-            String line;
-            while ((line = input.readLine()) != null) {
+            String line = input.readLine();
+            while (line != null) {
                 String[] chuoi = line.split(",");
-                if (chuoi.length < 6)
-                    continue;
 
                 String HoTen = chuoi[0];
                 String Diachi = chuoi[1];
                 long Sdt = Long.parseLong(chuoi[2]);
                 String MaNV = chuoi[3];
-                String Loai = chuoi[4];
-                int ngay = 0, gio = 0;
-
-                if (Loai.equals("FullTime"))
-                    ngay = Integer.parseInt(chuoi[5]);
-                else
-                    gio = Integer.parseInt(chuoi[5]);
+                int work = Integer.parseInt(chuoi[4]);
+                String loai = chuoi[5];
 
                 NhanVien nv;
-                if (Loai.equals("FullTime"))
-                    nv = new NhanVienFullTime(HoTen, Diachi, Sdt, MaNV, ngay, Loai);
-                else
-                    nv = new NhanVienPartTime(HoTen, Diachi, Sdt, MaNV, gio, Loai);
-
+                if ("FullTime".equals(loai)) {
+                    nv = new NhanVienFullTime(HoTen, Diachi, Sdt, MaNV, work);
+                } else {
+                    nv = new NhanVienPartTime(HoTen, Diachi, Sdt, MaNV, work);
+                }
                 int so = Integer.parseInt(MaNV.substring(2));
-                if (so > NhanVien.dem)
-                    NhanVien.dem = so + 1;
-
+                if (so > NhanVien.dem) {
+                    NhanVien.dem = so;
+                }
                 dsnv = Arrays.copyOf(dsnv, n + 1);
-                dsnv[n++] = nv;
+                dsnv[n] = nv;
+                n++;
+
+                line = input.readLine();
             }
             input.close();
         } catch (Exception ex) {
@@ -130,14 +114,14 @@ public class DanhSachNhanVien {
     public void Xoa(String MaNV) {
         boolean found = false;
         for (int i = 0; i < n; i++) {
-            if (dsnv[i].getMaNV().equals(MaNV)) {
+            if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV)) {
                 for (int j = i; j < n - 1; j++) {
                     dsnv[j] = dsnv[j + 1];
                 }
                 dsnv = Arrays.copyOf(dsnv, n - 1);
                 n--;
                 found = true;
-                System.out.println("da xoa nhan vien nay");
+                System.out.println("Da xoa nhan vien nay");
                 break;
             }
         }
@@ -150,7 +134,6 @@ public class DanhSachNhanVien {
 
     public void Sua_Chi_Tiet(Scanner sc) {
         NhanVien nv = null;
-        boolean found = false;
         System.out.println("-----SUA THONG TIN NHAN VIEN-----");
         System.out.println("1. Sua Ho va ten nhan vien.");
         System.out.println("2. Sua dia chi cua nhan vien.");
@@ -166,11 +149,13 @@ public class DanhSachNhanVien {
         }
 
         String MaNV;
+        boolean found;
         do {
+            found = false;
             System.out.print("Nhap ma nhan vien: ");
             MaNV = sc.nextLine();
             for (int i = 0; i < n; i++) {
-                if (dsnv[i].getMaNV().equals(MaNV)) {
+                if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV)) {
                     found = true;
                     switch (chon) {
                         case 1:
@@ -212,21 +197,18 @@ public class DanhSachNhanVien {
     public NhanVien TimKiemNhanVienTheoMa(String MaNV) {
         boolean found = false;
         for (int i = 0; i < n; i++) {
-            if (dsnv[i].getMaNV().equals(MaNV)) {
+            if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV)) {
                 found = true;
                 return dsnv[i];
             }
         }
-        if (!found)
-            System.out.println("Khong tim thay nhan vien");
         return null;
     }
 
     public NhanVien TimKiemNhanVienTheoHoTen(String HoTen) {
         boolean found = false;
         for (int i = 0; i < n; i++) {
-            if (dsnv[i].getHoten().equals(HoTen)) {
-                found = true;
+            if (dsnv[i] != null && dsnv[i].getHoten() != null && dsnv[i].getHoten().equals(HoTen)) {
                 return dsnv[i];
             }
         }
@@ -238,7 +220,7 @@ public class DanhSachNhanVien {
     public NhanVien SuaTheoHoTen(String HoTen_moi, String MaNV_moi) {
         boolean found = false;
         for (int i = 0; i < n; i++) {
-            if (dsnv[i].getMaNV().equals(MaNV_moi)) {
+            if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV_moi)) {
                 found = true;
                 dsnv[i].setHoten(HoTen_moi);
                 return dsnv[i];
@@ -252,7 +234,7 @@ public class DanhSachNhanVien {
     public NhanVien SuaTheoDiaChi(String DiaChi_moi, String MaNV_moi) {
         boolean found = false;
         for (int i = 0; i < n; i++) {
-            if (dsnv[i].getMaNV().equals(MaNV_moi)) {
+            if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV_moi)) {
                 found = true;
                 dsnv[i].setDiachi(DiaChi_moi);
                 return dsnv[i];
@@ -266,7 +248,7 @@ public class DanhSachNhanVien {
     public NhanVien SuaTheoSDT(long Sdt_moi, String MaNV_moi) {
         boolean found = false;
         for (int i = 0; i < n; i++) {
-            if (dsnv[i].getMaNV().equals(MaNV_moi)) {
+            if (dsnv[i] != null && dsnv[i].getMaNV() != null && dsnv[i].getMaNV().equals(MaNV_moi)) {
                 found = true;
                 dsnv[i].setSdt(Sdt_moi);
                 return dsnv[i];

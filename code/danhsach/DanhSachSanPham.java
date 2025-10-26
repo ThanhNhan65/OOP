@@ -10,14 +10,6 @@ import java.util.Scanner;
 import java.util.Arrays;
 import code.doituong.*;
 
-<<<<<<< HEAD
-public class DanhSachSanPham {
-    private SanPham[] ds = new SanPham[0];
-    private int n = 0;
-
-    public void docFile(DanhSachLoai dsl) {
-        try {
-=======
 public class DanhSachSanPham{
     private SanPham[] dssp;
     private int n ;
@@ -33,7 +25,6 @@ public class DanhSachSanPham{
     public void docFile(DanhSachLoai dsl){
         int maxid = 0;
         try{
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
             BufferedReader br = new BufferedReader(new FileReader("data/sanpham.txt"));
             String line = br.readLine();
             while (line != null) {
@@ -67,12 +58,8 @@ public class DanhSachSanPham{
                 line = br.readLine();
             }
             br.close();
-<<<<<<< HEAD
-        } catch (Exception ex) {
-=======
             SanPham.setmanext(maxid + 1);
         }catch(Exception ex){
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
             ex.printStackTrace();
         }
     }
@@ -80,16 +67,9 @@ public class DanhSachSanPham{
     public void ghiFile() {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("data/sanpham.txt"));
-<<<<<<< HEAD
-            for (int i = 0; i < n; i++) {
-                SanPham sp = ds[i];
-                if (sp == null)
-                    continue;
-=======
             for(int i = 0; i < n; i++){
                 SanPham sp = dssp[i];
                 if(sp == null) continue;
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
                 String maLoai = (sp.getLoai() != null ? sp.getLoai().getMaloai() : "");
                 bw.write(sp.getMa() + "," + sp.getTen() + "," + sp.getHang() + "," + maLoai + "," + sp.getGia());
                 bw.newLine();
@@ -115,16 +95,6 @@ public class DanhSachSanPham{
         dssp = java.util.Arrays.copyOf(dssp, n + 1);
         dssp[n++] = sp;
         ghiFile();
-<<<<<<< HEAD
-    }
-
-    private boolean TonTaiMa(String ma) {
-        if (ma == null || ma.isEmpty())
-            return false;
-        for (int i = 0; i < n; i++) {
-            SanPham p = ds[i];
-            if (p != null) {
-=======
     } 
     
     private boolean TonTaiMa(String ma){
@@ -132,7 +102,6 @@ public class DanhSachSanPham{
         for (int i = 0; i < n; i++){
             SanPham p = dssp[i];
             if (p != null){
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
                 String m = p.getMa();
                 if (m != null && m.equalsIgnoreCase(ma))
                     return true;
@@ -141,129 +110,32 @@ public class DanhSachSanPham{
         return false;
     }
 
-<<<<<<< HEAD
-    public void Xoa(Scanner sc) {
-        int c;
-        do {
-            System.out.println("1. Xoa san pham theo ma");
-            System.out.println("2. Xoa toan bo san pham ");
-            System.out.println("0. Thoat");
-            c = sc.nextInt();
-            sc.nextLine();
-            switch (c) {
-                case 1: {
-                    System.out.println("Nhap ma san pham muon xoa: ");
-                    String ma = sc.nextLine();
-                    boolean ok = XoaTheoMa(ma);
-                    if (ok) {
-                        System.out.println("Da xoa ma nay");
-                    } else {
-                        System.out.println("Khong thay ma nay");
-                    }
-                    break;
-                }
-                case 2: {
-                    System.out.println("Hien co" + n + "san pham");
-                    System.out.println("Ban muon xoa het chu, nhap OK de xac nhan: ");
-                    if ("OK".equalsIgnoreCase(sc.nextLine().trim())) {
-                        XoaTatCa();
-                    }
-                    break;
-                }
-                case 0:
-                    break;
-                default:
-                    System.out.println("Khong hop le");
-            }
-        } while (c != 0);
-    }
-
-    private boolean XoaTheoMa(String ma) {
-        for (int i = 0; i < n; i++) {
-            if (ds[i] != null && ma.equalsIgnoreCase(ds[i].getMa())) {
-                for (int j = i; j < n - 1; j++) {
-                    ds[j] = ds[j + 1];
-=======
     private boolean XoaTheoMa(String ma){
         for(int i = 0; i < n; i++){
             if(dssp[i] != null && ma.equalsIgnoreCase(dssp[i].getMa())){
                 for(int j = i; j < n - 1; j++){
                     dssp[j] = dssp[j + 1];
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
                 }
                 dssp[n - 1] = null;
                 n--;
-<<<<<<< HEAD
-                ds = java.util.Arrays.copyOf(ds, n);
-=======
                 dssp = java.util.Arrays.copyOf(dssp, n);
                 ghiFile();
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
                 return true;
             }
         }
         return false;
     }
 
-<<<<<<< HEAD
-    private void XoaTatCa() {
-        ds = new SanPham[0];
-=======
     private void XoaTatCa(){
         dssp = new SanPham[0];
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
         n = 0;
     }
 
-<<<<<<< HEAD
-    public void TimKiem(Scanner sc) {
-        int c;
-        do {
-            System.out.println("1. Tim theo ma");
-            System.out.println("2. Tim theo ten");
-            System.out.println("0. Thoat");
-            c = sc.nextInt();
-            sc.nextLine();
-            switch (c) {
-                case 1: {
-                    System.out.print("Nhap ma: ");
-                    String ma = sc.nextLine().trim();
-                    SanPham sp = TimTheoMa(ma);
-                    if (sp != null)
-                        sp.Xuat();
-                    else
-                        System.out.println("Khong tim thay");
-                    break;
-                }
-                case 2: {
-                    System.out.print("Nhap ten: ");
-                    String ten = sc.nextLine().trim();
-                    int dem = TimTheoTen(ten);
-                    if (dem == 0)
-                        System.out.println("Khong tim thay");
-                    break;
-                }
-                case 0:
-                    break;
-                default:
-                    System.out.println("Khong hop le");
-            }
-        } while (c != 0);
-    }
-
-    public SanPham TimTheoMa(String ma) {
-        if (ma == null)
-            return null;
-        for (int i = 0; i < n; i++) {
-            SanPham sp = ds[i];
-            if (sp != null && sp.getMa() != null && sp.getMa().equalsIgnoreCase(ma))
-=======
     public SanPham TimTheoMa(String ma){
         if(ma == null) return null;
         for(int i = 0; i < n; i++){
             SanPham sp = dssp[i];
             if(sp != null && sp.getMa() != null && sp.getMa().equalsIgnoreCase(ma))
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
                 return sp;
         }
         return null;
@@ -274,15 +146,9 @@ public class DanhSachSanPham{
             return 0;
         String k = ten.toLowerCase();
         int d = 0;
-<<<<<<< HEAD
-        for (int i = 0; i < n; i++) {
-            SanPham sp = ds[i];
-            if (sp != null && sp.getTen() != null && sp.getTen().toLowerCase().contains(k)) {
-=======
         for(int i = 0; i < n; i++){
             SanPham sp = dssp[i];
             if(sp != null && sp.getTen() != null && sp.getTen().toLowerCase().contains(k)){
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
                 sp.Xuat();
                 d++;
             }
@@ -335,22 +201,6 @@ public class DanhSachSanPham{
             }
         } while (c != 0);
     }
-<<<<<<< HEAD
-
-    private void SuaMa(Scanner sc, SanPham sp) {
-        System.out.println("Ma hien tai: " + sp.getMa());
-        System.out.print("Ma moi: ");
-        String maMoi = sc.nextLine().trim();
-        if (maMoi.isEmpty()) {
-            System.out.println("Khong hop le");
-            return;
-        }
-        for (int i = 0; i < n; i++) {
-            SanPham p = ds[i];
-            if (p != null && p != sp && p.getMa() != null && p.getMa().equalsIgnoreCase(maMoi)) {
-                System.out.println("Ma da ton tai");
-                return;
-=======
     for (int i = 0; i < n; i++){
         SanPham p = dssp[i];
         if (p != null && p != sp && p.getMa() != null && p.getMa().equalsIgnoreCase(maMoi)){
@@ -427,7 +277,6 @@ private void SuaToanBo(Scanner sc, DanhSachLoai dsl, SanPham sp){
             if(p != null && p != sp && s.equalsIgnoreCase(p.getMa())){ 
                 trung = true; 
                 break; 
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
             }
         }
         sp.setMa(maMoi);
@@ -546,21 +395,12 @@ private void SuaToanBo(Scanner sc, DanhSachLoai dsl, SanPham sp){
         String h = sc.nextLine().trim();
         boolean found = false;
         for (int i = 0; i < n; i++) {
-<<<<<<< HEAD
-            SanPham sp = ds[i];
-            if (sp == null)
-                continue;
-            String hh = (sp.getHang() == null) ? "" : sp.getHang().trim();
-            if (hh.equalsIgnoreCase(h))
-                sp.Xuat();
-=======
             SanPham sp = dssp[i];
             if(sp.getHang().equals(h)){
                 sp.Xuat();
                 found = true;
             }
             
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
         }
         System.out.println(found ? "" : "Khong tim thay");
     }
@@ -569,14 +409,8 @@ private void SuaToanBo(Scanner sc, DanhSachLoai dsl, SanPham sp){
         System.out.print("Nhap ma loai: ");
         String ma = sc.nextLine().trim();
         for (int i = 0; i < n; i++) {
-<<<<<<< HEAD
-            SanPham sp = ds[i];
-            if (sp == null)
-                continue;
-=======
             SanPham sp = dssp[i];
             if (sp == null) continue;
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
             Loai l = sp.getLoai();
             String ml = (l == null) ? "" : l.getMaloai();
             if (!ml.isEmpty() && ml.trim().equalsIgnoreCase(ma))
@@ -593,14 +427,8 @@ private void SuaToanBo(Scanner sc, DanhSachLoai dsl, SanPham sp){
             double min = Double.parseDouble(s1);
             double max = Double.parseDouble(s2);
             for (int i = 0; i < n; i++) {
-<<<<<<< HEAD
-                SanPham sp = ds[i];
-                if (sp == null)
-                    continue;
-=======
                 SanPham sp = dssp[i];
                 if (sp == null) continue;
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
                 double g = sp.getGia();
                 if (g >= min && g <= max)
                     sp.Xuat();
@@ -609,9 +437,6 @@ private void SuaToanBo(Scanner sc, DanhSachLoai dsl, SanPham sp){
         }
     }
 
-<<<<<<< HEAD
-}
-=======
     public void Hienthidanhsach(){
         for(int i=0; i<n; i++)
             dssp[i].Xuat();
@@ -619,4 +444,3 @@ private void SuaToanBo(Scanner sc, DanhSachLoai dsl, SanPham sp){
     
 
 }
->>>>>>> 359e97c70970aab8dd1a523ebc2aaef748d5a81c
