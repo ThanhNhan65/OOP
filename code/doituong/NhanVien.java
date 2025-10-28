@@ -10,7 +10,6 @@ public class NhanVien extends ConNguoi {
 
     public NhanVien() {
         super();
-        this.MaNV = String.format("NV%03d", dem++);
         loai = "";
     }
 

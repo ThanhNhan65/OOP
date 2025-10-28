@@ -27,6 +27,7 @@ public class QLNhanvien {
                     dsnv.HienThiDS();
                     break;
                 case 2:
+                    System.out.println("Nhap ma nhan vien can xoa: ");
                     dsnv.Xoa(sc.nextLine());
                     break;
                 case 3:

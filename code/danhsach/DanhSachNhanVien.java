@@ -39,7 +39,8 @@ public class DanhSachNhanVien {
     public void Them(Scanner sc) {
         System.out.println("Chon loai nhan vien ban muon them(1.FullTime or 2.PartTime, Enter de thoat)");
         String input = sc.nextLine();
-        if (InputUtils.ThoatNeuEnter(input)) return;
+        if (InputUtils.ThoatNeuEnter(input))
+            return;
         int choice;
         try {
             choice = Integer.parseInt(input);
@@ -60,12 +61,10 @@ public class DanhSachNhanVien {
                 return;
         }
         nv.Nhap(sc);
-        // Check if user pressed Enter to exit at any input
         if (nv.getHoten() == null || nv.getHoten().trim().isEmpty()
-            || nv.getDiachi() == null || nv.getDiachi().trim().isEmpty()
-            || nv.getSdt() == null || nv.getSdt().trim().isEmpty()
-            || nv.getMaNV() == null || nv.getMaNV().trim().isEmpty()) {
-            System.out.println("Da huy them nhan vien (thieu thong tin hoac nhan Enter de thoat)");
+                || nv.getDiachi() == null || nv.getDiachi().trim().isEmpty()
+                || nv.getSdt() == null || nv.getSdt().trim().isEmpty()
+                || nv.getMaNV() == null || nv.getMaNV().trim().isEmpty()) {
             return;
         }
         dsnv = Arrays.copyOf(dsnv, n + 1);
@@ -97,36 +96,44 @@ public class DanhSachNhanVien {
     }
 
     public void DocTuFile(String File) {
-        try {
-            BufferedReader input = new BufferedReader(new FileReader(File));
-            String line = input.readLine();
-            while (line != null) {
+        int maxSo = 0;
+        try (BufferedReader input = new BufferedReader(new FileReader(File))) {
+            String line;
+            while ((line = input.readLine()) != null) {
+                line = line.trim();
+                if (line.isEmpty())
+                    continue;
+
                 String[] chuoi = line.split(",");
+
+                if (chuoi.length < 6) {
+                    System.out.println("dong du lieu, khong hop le, bor qua: " + line);
+                    continue;
+                }
 
                 String HoTen = chuoi[0].trim();
                 String Diachi = chuoi[1].trim();
                 String Sdt = chuoi[2].trim();
                 String MaNV = chuoi[3].trim();
                 int work = Integer.parseInt(chuoi[4].trim());
-                String loai = chuoi[5];
+                String loai = chuoi[5].trim();
 
                 NhanVien nv;
-                if ("FullTime".equals(loai)) {
+                if ("FullTime".equalsIgnoreCase(loai)) {
                     nv = new NhanVienFullTime(HoTen, Diachi, Sdt, MaNV, work);
                 } else {
                     nv = new NhanVienPartTime(HoTen, Diachi, Sdt, MaNV, work);
                 }
-                int so = Integer.parseInt(MaNV.substring(2));
-                if (so > NhanVien.dem) {
-                    NhanVien.dem = so;
-                }
-                dsnv = Arrays.copyOf(dsnv, n + 1);
-                dsnv[n] = nv;
-                n++;
 
-                line = input.readLine();
+                int so = Integer.parseInt(MaNV.substring(2));
+                if (so > maxSo)
+                    maxSo = so;
+
+                dsnv = Arrays.copyOf(dsnv, n + 1);
+                dsnv[n++] = nv;
             }
-            input.close();
+
+            NhanVien.dem = maxSo + 1;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -285,10 +292,7 @@ public class DanhSachNhanVien {
         switch (c) {
             case 1:
                 System.out.print("Nhap ma nhan vien muon tim kiem: ");
-                String input = sc.nextLine();
-                if (InputUtils.ThoatNeuEnter(input))
-                    return;
-                nv = TimKiemNhanVienTheoMa(input);
+                nv = TimKiemNhanVienTheoMa(sc.nextLine());
                 if (nv == null)
                     System.out.println("Khong tim thay nhan vien");
                 else
@@ -296,10 +300,7 @@ public class DanhSachNhanVien {
                 break;
             case 2:
                 System.out.print("Nhap ho va ten nhan vien muon tim kiem: ");
-                String input1 = sc.nextLine();
-                if (InputUtils.ThoatNeuEnter(input1))
-                    return;
-                nv = TimKiemNhanVienTheoMa(input1);
+                nv = TimKiemNhanVienTheoHoTen(sc.nextLine());
                 if (nv == null)
                     System.out.println("Khong tim thay nhan vien");
                 else

@@ -37,12 +37,12 @@ public class NhanVienPartTime extends NhanVien {
         String input = sc.nextLine();
         if (InputUtils.ThoatNeuEnter(input))
             return;
-        int gio = Integer.parseInt(input);
+        this.gio = Integer.parseInt(input);
     }
 
     @Override
     public void Xuat() {
-        System.out.printf("| %-8s | %-25s | %-25s | %-15s | %-10s | %8d gio  | %12.0f |%n",
+        System.out.printf("| %-8s | %-25s | %-25s | %-15s | %-10s | %4d gio  | %12.0f |%n",
                 getMaNV(), getHoten(), getDiachi(), getSdt(), getLoai(), gio, (double) getLuong());
     }
 }
