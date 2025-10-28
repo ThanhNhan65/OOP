@@ -18,7 +18,7 @@ public class SanPham implements INhapXuat {
     }
 
     public SanPham(String ma, String ten, String hang, Loai loai, double gia) {
-        this.ma = String.format("SP%03d", manext++);
+        this.ma = ma;
         this.ten = ten;
         this.hang = hang;
         this.loai = loai;
@@ -74,7 +74,7 @@ public class SanPham implements INhapXuat {
     }
 
     public void Nhap(Scanner sc) {
-        System.out.print("Nhap ten sp: ");
+        System.out.print("Nhap ten san pham: ");
         ten = sc.nextLine();
         if (InputUtils.ThoatNeuEnter(ten))
             return;
@@ -82,15 +82,25 @@ public class SanPham implements INhapXuat {
         hang = sc.nextLine();
         if (InputUtils.ThoatNeuEnter(hang))
             return;
-        System.out.print("Nhap gia: ");
-        String input = sc.nextLine();
-        if (InputUtils.ThoatNeuEnter(input))
-            return;
-        double gia = Double.parseDouble(input);
-        sc.nextLine();
+        while (true) {
+            System.out.print("Nhap gia: ");
+            String input = sc.nextLine().trim();
+            if (InputUtils.ThoatNeuEnter(input)) return;
+            try {
+                double g = Double.parseDouble(input);
+                if (g < 0) {
+                    System.out.println("Gia phai >= 0. Nhap lai.");
+                    continue;
+                }
+                this.gia = g;
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Gia phai la so. Nhap lai.");
+            }
+        }
 
         if (dsl != null) {
-            Loai l = null;
+            Loai l = new Loai();
             do {
                 System.out.print("Nhap ma loai: ");
                 String maLoai = sc.nextLine().trim();

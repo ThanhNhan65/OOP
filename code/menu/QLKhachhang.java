@@ -35,7 +35,7 @@ public class QLKhachhang {
                     dskh.Them();
                     break;
                 case 2:
-                    dskh.Xoa(sc.nextLine());
+                    dskh.Xoa();
                     break;
                 case 3:
                     dskh.SuaKH();
@@ -50,7 +50,7 @@ public class QLKhachhang {
                     System.out.println("Thoat quan ly khach hang.");
                     return;
                 default:
-                    System.out.println("Khong co chuc nang nay, cho cap nhat.");
+                    System.out.println("Lua chon khong hop le! Vui long chon lai.");
             }
         } while (chon != 0);
     }

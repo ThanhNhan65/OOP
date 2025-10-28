@@ -27,7 +27,7 @@ public class QLNhanvien {
                     dsnv.HienThiDS();
                     break;
                 case 2:
-                    dsnv.Xoa(sc.nextLine());
+                    dsnv.Xoa(sc);
                     break;
                 case 3:
                     dsnv.Sua_Chi_Tiet(sc);
@@ -42,7 +42,7 @@ public class QLNhanvien {
                     System.out.println("Thoat chuong trinh.");
                     return;
                 default:
-                    System.out.println("Khong co chuc nang nay, cho cap nhat.");
+                    System.out.println("Lua chon khong hop le! Vui long chon lai.");
             }
         } while (chon != 0);
     }

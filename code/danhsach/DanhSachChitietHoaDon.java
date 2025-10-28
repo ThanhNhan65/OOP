@@ -73,7 +73,6 @@ public class DanhSachChitietHoaDon {
     public void Them(Scanner sc, DanhSachHoaDon dshd, DanhSachSanPham dssp) {
         ChiTietHoaDon ct = new ChiTietHoaDon(dshd, dssp);
         ct.Nhap(sc);
-
         if (ct.getSP().getMa() == null || ct.getSP().getMa().trim().isEmpty()
             || ct.getSL() <= 0|| ct.getHD() == null || ct.getHD().getMaHD() == null || ct.getHD().getMaHD().trim().isEmpty()) 
                 return;
@@ -128,6 +127,8 @@ public class DanhSachChitietHoaDon {
                 case 0:
                     System.out.println("Thoat menu sua.");
                     break;
+                default:
+                    System.out.println("Lua chon khong hop le! Vui long chon lai.");
             }
         } while (choice != 0);
     }
@@ -243,6 +244,8 @@ public class DanhSachChitietHoaDon {
                 case 0:
                     System.out.println("Thoat menu xoa.");
                     break;
+                default:
+                    System.out.println("Lua chon khong hop le! Vui long chon lai.");
             }
         } while (choice != 0);
     }

@@ -42,7 +42,6 @@ public class Kho {
         for (int i = 0; i < dsct.getN(); i++)
             if (sp.getMa().equals(dsct.getct(i).getSP().getMa()))
                 tong += dsct.getct(i).getSL();
-
         return tong;
     }
 
@@ -63,10 +62,27 @@ public class Kho {
                 return;
             this.sp = dssp.TimTheoMa(masp);
         }
-        System.out.println("Nhap dau vao");
-        while (Dauvao < 0) {
-            System.out.println("Nhap lai dau vao");
-            this.Dauvao = sc.nextInt();
+        int check = tinhDaura();
+        System.out.println("Nhap dau vao (so nguyen >= " + check + "):");
+        while (true) {
+            String line = sc.nextLine();
+            if (InputUtils.ThoatNeuEnter(line))
+                return;
+            try {
+                int val = Integer.parseInt(line.trim());
+                if (val < 0) {
+                    System.out.println("Nhap lai:");
+                    continue;
+                }
+                if (val < check) {
+                    System.out.println("Nhap lai:");
+                    continue;
+                }
+                this.Dauvao = val;
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Nhap khong hop le. Vui long nhap mot so nguyen:");
+            }
         }
     }
 

@@ -35,7 +35,6 @@ public class QLHoadon{
                 System.out.println("0. Thoat");
                 System.out.print("Chon: ");
                 choice = sc.nextInt();
-                sc.nextLine();
     
                 switch (choice) {
                     case 1:

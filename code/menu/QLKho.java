@@ -54,8 +54,8 @@ public class QLKho {
                 case 0:
                     System.out.println("Thoat quan ly kho");
                     break;
-                default:
-                    System.out.println("Lua chon khong hop le!");
+                    default:
+                        System.out.println("Lua chon khong hop le! Vui long chon lai.");
             }
         } while (chon != 0);
     }

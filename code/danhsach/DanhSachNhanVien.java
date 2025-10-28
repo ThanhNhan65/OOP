@@ -60,12 +60,10 @@ public class DanhSachNhanVien {
                 return;
         }
         nv.Nhap(sc);
-        // Check if user pressed Enter to exit at any input
         if (nv.getHoten() == null || nv.getHoten().trim().isEmpty()
             || nv.getDiachi() == null || nv.getDiachi().trim().isEmpty()
             || nv.getSdt() == null || nv.getSdt().trim().isEmpty()
             || nv.getMaNV() == null || nv.getMaNV().trim().isEmpty()) {
-            System.out.println("Da huy them nhan vien (thieu thong tin hoac nhan Enter de thoat)");
             return;
         }
         dsnv = Arrays.copyOf(dsnv, n + 1);
@@ -97,6 +95,7 @@ public class DanhSachNhanVien {
     }
 
     public void DocTuFile(String File) {
+        int maxSo=0;
         try {
             BufferedReader input = new BufferedReader(new FileReader(File));
             String line = input.readLine();
@@ -109,16 +108,16 @@ public class DanhSachNhanVien {
                 String MaNV = chuoi[3].trim();
                 int work = Integer.parseInt(chuoi[4].trim());
                 String loai = chuoi[5];
+                
+                int so = Integer.parseInt(MaNV.substring(2));
+                if (so > maxSo) 
+                    maxSo = so;
 
                 NhanVien nv;
                 if ("FullTime".equals(loai)) {
                     nv = new NhanVienFullTime(HoTen, Diachi, Sdt, MaNV, work);
                 } else {
                     nv = new NhanVienPartTime(HoTen, Diachi, Sdt, MaNV, work);
-                }
-                int so = Integer.parseInt(MaNV.substring(2));
-                if (so > NhanVien.dem) {
-                    NhanVien.dem = so;
                 }
                 dsnv = Arrays.copyOf(dsnv, n + 1);
                 dsnv[n] = nv;
@@ -127,12 +126,15 @@ public class DanhSachNhanVien {
                 line = input.readLine();
             }
             input.close();
+            NhanVien.setdem(maxSo +1 ) ;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    public void Xoa(String MaNV) {
+    public void Xoa(Scanner sc) {
+        System.out.print("Nhap ma nhan vien (Enter de thoat): ");
+        String MaNV = sc.nextLine();
         if (InputUtils.ThoatNeuEnter(MaNV))
             return;
         boolean found = false;
@@ -209,10 +211,8 @@ public class DanhSachNhanVien {
                                 nv.Xuat();
                             break;
                         default:
-                            System.out.println("Lua chon khong hop le.");
-                            break;
+                            System.out.println("Lua chon khong hop le! Vui long chon lai.");
                     }
-                    break;
                 }
             }
             if (!found) {
@@ -300,8 +300,7 @@ public class DanhSachNhanVien {
                     System.out.println("Tim thay nhan vien");
                 break;
             default:
-                System.out.println("Khong tim kiem nhan vien.");
-                break;
+                System.out.println("Lua chon khong hop le! Vui long chon lai.");
         }
         if (nv != null) {
             System.out.println("Thong tin nhan vien tim thay: ");

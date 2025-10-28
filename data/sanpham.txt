@@ -1,4 +1,4 @@
-SP001,Guitar Acoustic Yamaha,Yamaha,L001,5000000.0
-SP002,Piano Kawai,Kawai,L002,15000000.0
-SP003,Trong Jazz Pearl,Pearl,L003,8000000.0
-SP004,Sax Alto Selmer,Selmer,L004,12000000.0
+SP001,Guitar Acoustic Yamaha,Yamaha,L002,5000000.0
+SP002,Piano Kawai,Kawai,L002,1.5E7
+SP004,Sax Alto Selmer,Selmer,L004,1.2E7
+SP005,s?dsad,sdsfd,L002,1.23456787E8

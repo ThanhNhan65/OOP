@@ -6,21 +6,24 @@ import code.kethua.*;
 
 public class KhachHang extends ConNguoi {
     public String MaKH;
-    public static int dem = 1;
+    private static int dem = 1;
 
     public KhachHang() {
         MaKH = String.format("KH%03d", dem++);
+    }
+    public KhachHang(String Hoten, String Diachi, String Sdt, String MaKH) {
+        super(Hoten, Diachi, Sdt);
+        this.MaKH = MaKH;
     }
 
     public String getMaKH() {
         return MaKH;
     }
 
-    public KhachHang(String Hoten, String Diachi, String Sdt, String MaKH) {
-        super(Hoten, Diachi, Sdt);
-        this.MaKH = String.format("KH%03d", dem++);
+    public static void setdem(int value){
+        dem = value;
     }
-
+        
     @Override
     public void Nhap(Scanner sc) {
         super.Nhap(sc);

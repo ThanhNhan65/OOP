@@ -40,10 +40,11 @@ public class DanhSachKhachHang {
     }
 
     public void DocTuFile(String File) {
+        int maxSo = 0;
         try {
             BufferedReader input = new BufferedReader(new FileReader(File));
             String line = input.readLine();
-            int maxSo = 0;
+            
             while (line != null) {
                 String[] chuoi = line.split(",");
 
@@ -51,21 +52,20 @@ public class DanhSachKhachHang {
                 String Diachi = chuoi[1].trim();
                 String Sdt = chuoi[2].trim();
                 String MaKH = chuoi[3].trim();
-                line = input.readLine();
-                KhachHang kh = new KhachHang(HoTen, Diachi, Sdt, MaKH);
-                try {
-                    int so = Integer.parseInt(MaKH.substring(2));
-                    if (so > maxSo) maxSo = so;
-                } catch (Exception ignore) {}
+                
+                int so = Integer.parseInt(MaKH.substring(2));
+                if (so > maxSo) 
+                    maxSo = so;
+                
+                    KhachHang kh = new KhachHang(HoTen, Diachi, Sdt, MaKH);
                 dskh = Arrays.copyOf(dskh, n + 1);
                 dskh[n] = kh;
                 n++;
+
+                line = input.readLine();
             }
             input.close();
-            // Ensure next generated ID continues after the max existing one
-            if (maxSo >= 0) {
-                KhachHang.dem = Math.max(KhachHang.dem, maxSo + 1);
-            }
+            KhachHang.setdem(maxSo+1);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -84,7 +84,6 @@ public class DanhSachKhachHang {
     public void Them() {
         KhachHang kh = new KhachHang();
         kh.Nhap(sc);
-        // Check if user pressed Enter to exit at any input
         if (kh.getHoten() == null || kh.getHoten().trim().isEmpty()
             || kh.getDiachi() == null || kh.getDiachi().trim().isEmpty()
             || kh.getSdt() == null || kh.getSdt().trim().isEmpty()
@@ -98,7 +97,9 @@ public class DanhSachKhachHang {
         GhiVaoFile("data/danhsachKH.txt");
     }
 
-    public void Xoa(String MaKH) {
+    public void Xoa() {
+        System.out.print("Nhap ma khach hang: ");
+        String MaKH = sc.nextLine();
         if (InputUtils.ThoatNeuEnter(MaKH))
             return;
         boolean found = false;
@@ -165,10 +166,8 @@ public class DanhSachKhachHang {
                             kh = SuaTheoSDT(MaKH, sdt_moi);
                             break;
                         default:
-                            System.out.println("Thoat chuong trinh.");
-                            break;
+                            System.out.println("Lua chon khong hop le! Vui long chon lai.");
                     }
-                    break;
                 }
             }
             if (!found) {
@@ -180,6 +179,8 @@ public class DanhSachKhachHang {
             System.out.println("Da sua thong tin khach hang.");
             kh.Xuat();
         }
+        else
+            System.out.println("Khong co khach hang.");
         GhiVaoFile("data/danhsachKH.txt");
 
     }
@@ -196,15 +197,17 @@ public class DanhSachKhachHang {
         switch (c) {
             case 1:
                 System.out.println("Nhap ho ten khach hang ban muon tim kiem: ");
-                kh = Timkiem_HoTen(sc.nextLine());
-                if (InputUtils.ThoatNeuEnter(sc.nextLine()))
+                String Hoten = sc.nextLine();
+                if (InputUtils.ThoatNeuEnter(Hoten))
                     return;
+                kh = Timkiem_HoTen(Hoten);
                 break;
             case 2:
                 System.out.println("Nhap ma khach hang ban muon tim kiem: ");
-                kh = Timkiem_MaKH(sc.nextLine());
-                if (InputUtils.ThoatNeuEnter(sc.nextLine()))
+                String makh = sc.nextLine();
+                if (InputUtils.ThoatNeuEnter(makh))
                     return;
+                kh = Timkiem_MaKH(makh);
                 break;
             default:
                 System.out.println("Thoat chuong trinh");
@@ -214,6 +217,8 @@ public class DanhSachKhachHang {
             System.out.println("Da tim thay khach hang: ");
             kh.Xuat();
         }
+        else 
+            System.out.println("Khong tim thay!");
     }
 
     public KhachHang Timkiem_MaKH(String MaKH) {

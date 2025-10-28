@@ -31,7 +31,8 @@ public class QLLoai{
                         case 3: dsl.Sua(sc); break;
                         case 4: dsl.TimKiem(sc); break;
                         case 5: dsl.Xem(); break;
-                        default: System.out.println("Khong hop le");
+                        default:
+                            System.out.println("Lua chon khong hop le! Vui long chon lai.");
                     }
         }
     }

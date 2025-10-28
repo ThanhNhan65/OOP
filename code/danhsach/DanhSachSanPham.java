@@ -91,7 +91,6 @@ public class DanhSachSanPham {
         if (sp.getMa() == null || sp.getMa().trim().isEmpty()
             || sp.getTen() == null || sp.getTen().trim().isEmpty()
             || sp.getLoai() == null || sp.getLoai().getMaloai() == null || sp.getLoai().getMaloai().trim().isEmpty()) {
-            System.out.println("Da huy them san pham (thieu thong tin hoac nhan Enter de thoat)");
             return;
         }
         String ma = sp.getMa();
@@ -111,7 +110,7 @@ public class DanhSachSanPham {
             SanPham p = dssp[i];
             if (p != null) {
                 String m = p.getMa();
-                if (m != null && m.equalsIgnoreCase(ma))
+                if (m != null && m.equals(ma))
                     return true;
             }
         }
@@ -124,6 +123,7 @@ public class DanhSachSanPham {
             System.out.println("1. Xoa san pham theo ma");
             System.out.println("2. Xoa toan bo san pham ");
             System.out.println("0. Thoat");
+            System.out.println("Chon:");
             c = sc.nextInt();
             sc.nextLine();
             switch (c) {
@@ -151,7 +151,7 @@ public class DanhSachSanPham {
                 case 0:
                     break;
                 default:
-                    System.out.println("Khong hop le");
+                    System.out.println("Lua chon khong hop le! Vui long chon lai.");
             }
         } while (c != 0);
     }
@@ -184,6 +184,7 @@ public class DanhSachSanPham {
             System.out.println("1. Tim theo ma");
             System.out.println("2. Tim theo ten");
             System.out.println("0. Thoat");
+            System.out.print("Chon: ");
             c = sc.nextInt();
             sc.nextLine();
             switch (c) {
@@ -212,7 +213,7 @@ public class DanhSachSanPham {
                 case 0:
                     break;
                 default:
-                    System.out.println("Khong hop le");
+                    System.out.println("Lua chon khong hop le! Vui long chon lai.");
             }
         } while (c != 0);
     }
@@ -258,9 +259,8 @@ public class DanhSachSanPham {
             System.out.println("3.Sua hang");
             System.out.println("4.Sua loai");
             System.out.println("5.Sua gia");
-            System.out.println("6.Sua toan bo");
             System.out.println("0. Thoat");
-            System.out.print("-----Chon------");
+            System.out.print("Chon: ");
             c = sc.nextInt();
             sc.nextLine();
             switch (c) {
@@ -279,13 +279,10 @@ public class DanhSachSanPham {
                 case 5:
                     SuaGia(sc, sp);
                     break;
-                case 6:
-                    SuaToanBo(sc, dsl, sp);
-                    break;
                 case 0:
                     break;
                 default:
-                    System.out.println("Khong hop le");
+                    System.out.println("Lua chon khong hop le! Vui long chon lai.");
             }
         } while (c != 0);
     }
@@ -343,15 +340,18 @@ public class DanhSachSanPham {
         String loaiHienTai = (sp.getLoai() != null ? sp.getLoai().getMaloai() : "null");
         System.out.println("Ma loai hien tai: " + loaiHienTai);
         System.out.print("Ma loai moi: ");
-        String input = sc.nextLine();
-        Loai l = dsl.TimTheoMa(sc.nextLine().trim());
+        String ma = sc.nextLine().trim();          
+        if (InputUtils.ThoatNeuEnter(ma)) return;
+
+        Loai l = dsl.TimTheoMa(ma);                
         if (l == null) {
-            System.out.println("Khong hop le");
+            System.out.println("Khong ton tai trong loai.txt");
             return;
         }
-        sp.setLoai(l);
-        ghiFile();
+        sp.setLoai(l);                              
+        ghiFile();                                   
     }
+
 
     private void SuaGia(Scanner sc, SanPham sp) {
         System.out.println("Gia hien tai: " + sp.getGia());
@@ -367,70 +367,6 @@ public class DanhSachSanPham {
         } catch (Exception e) {
             System.out.println("Khong hop le");
         }
-    }
-
-    private void SuaToanBo(Scanner sc, DanhSachLoai dsl, SanPham sp) {
-        String s;
-        System.out.println("Ma hien tai: " + sp.getMa());
-        System.out.print("Ma moi: ");
-        s = sc.nextLine().trim();
-        if (InputUtils.ThoatNeuEnter(s))
-            return;
-        if (!s.isEmpty()) {
-            boolean trung = false;
-            for (int i = 0; i < n; i++) {
-                SanPham p = dssp[i];
-                if (p != null && p != sp && s.equalsIgnoreCase(p.getMa())) {
-                    trung = true;
-                    break;
-                }
-            }
-            if (!trung)
-                sp.setMa(s);
-        }
-
-        System.out.println("Ten hien tai: " + sp.getTen());
-        System.out.print("Ten moi: ");
-        s = sc.nextLine().trim();
-        if (InputUtils.ThoatNeuEnter(s))
-            return;
-        if (!s.isEmpty())
-            sp.setTen(s);
-
-        System.out.println("Hang hien tai: " + sp.getHang());
-        System.out.print("Hang moi: ");
-        s = sc.nextLine().trim();
-        if (InputUtils.ThoatNeuEnter(s))
-            return;
-        if (!s.isEmpty())
-            sp.setHang(s);
-
-        String loaiHienTai = (sp.getLoai() != null ? sp.getLoai().getMaloai() : "null");
-        System.out.println("Ma loai hien tai: " + loaiHienTai);
-        System.out.print("Ma loai moi: ");
-        s = sc.nextLine().trim();
-        if (InputUtils.ThoatNeuEnter(s))
-            return;
-        if (!s.isEmpty()) {
-            Loai l = dsl.TimTheoMa(s);
-            if (l != null)
-                sp.setLoai(l);
-        }
-
-        System.out.println("Gia hien tai: " + sp.getGia());
-        System.out.print("Gia moi: ");
-        s = sc.nextLine().trim();
-        if (InputUtils.ThoatNeuEnter(s))
-            return;
-        if (!s.isEmpty()) {
-            try {
-                double gia = Double.parseDouble(s);
-                if (gia >= 0)
-                    sp.setGia(gia);
-            } catch (Exception ignored) {
-            }
-        }
-        ghiFile();
     }
 
     public void locTheoHang(Scanner sc) {

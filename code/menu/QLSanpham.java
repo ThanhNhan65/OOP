@@ -66,7 +66,7 @@ public class QLSanpham{
                     dssp.Hienthidanhsach();;
                     break;
                 default:
-                    System.out.println("Khong hop le");
+                    System.out.println("Lua chon khong hop le! Vui long chon lai.");
             }
         }
     }

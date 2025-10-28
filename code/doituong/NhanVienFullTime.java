@@ -12,6 +12,10 @@ public class NhanVienFullTime extends NhanVien {
         super();
         ngay = 0;
     }
+    public NhanVienFullTime(String Hoten, String Diachi, String Sdt, String MaNV, int ngay) {
+        super(Hoten, Diachi, Sdt, MaNV);
+        this.ngay = ngay;
+    }
 
     public int getngay() {
         return ngay;
@@ -22,27 +26,23 @@ public class NhanVienFullTime extends NhanVien {
         return "FullTime";
     }
 
-    public NhanVienFullTime(String Hoten, String Diachi, String Sdt, String MaNV, int ngay) {
-        super(Hoten, Diachi, Sdt, MaNV);
-        this.ngay = ngay;
-    }
 
-    public long getLuong() {
+    public long tinhLuong() {
         return ngay * luong;
     }
 
     public void Nhap(Scanner sc) {
         super.Nhap(sc);
-        System.out.println("Nhap so gio lam viec cua nhan vien: ");
+        System.out.println("Nhap so ngay lam viec cua nhan vien: ");
         String input = sc.nextLine();
         if (InputUtils.ThoatNeuEnter(input))
             return;
-        int ngay = Integer.parseInt(input);
+        this.ngay = Integer.parseInt(input);
     }
 
     @Override
     public void Xuat() {
-        System.out.printf("| %-8s | %-25s | %-25s | %-15s | %-10s | %8d ngay | %12.0f |%n",
-                getMaNV(), getHoten(), getDiachi(), getSdt(), getLoai(), ngay, (double) getLuong());
+        System.out.printf("| %-5s | %-20s | %-20s | %-15s | %-10s | %4d ngay | %12d |%n",
+                getMaNV(), getHoten(), getDiachi(), getSdt(), getLoai(), ngay, tinhLuong());
     }
 }

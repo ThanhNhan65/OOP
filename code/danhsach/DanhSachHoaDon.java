@@ -49,6 +49,9 @@ public class DanhSachHoaDon {
                 KhachHang kh = dskh.Timkiem_MaKH(maKH);
                 NhanVien nv = dsnv.TimKiemNhanVienTheoMa(maNV);
 
+                if (id > Maxid)
+                    Maxid = id;
+
                 if (kh != null && nv != null) {
                     hd.setKh(kh);
                     hd.setNv(nv);
@@ -56,9 +59,6 @@ public class DanhSachHoaDon {
                     dshd = Arrays.copyOf(dshd, n + 1);
                     dshd[n] = hd;
                     n++;
-
-                    if (id > Maxid)
-                        Maxid = id;
                 }
 
                 line = input.readLine();
@@ -90,11 +90,13 @@ public class DanhSachHoaDon {
     public void Them(Scanner sc, DanhSachKhachHang dskh, DanhSachNhanVien dsnv, DanhSachSanPham dssp,
             DanhSachChitietHoaDon dsct) {
         HoaDon hd = new HoaDon(dskh, dsnv);
+        if (dsct != null) {
+            hd.setdsct(dsct);
+        }
         hd.Nhap(sc);
         if (hd.getMaHD() == null || hd.getMaHD().trim().isEmpty()
             || hd.getKh().getMaKH() == null || hd.getKh().getMaKH().trim().isEmpty()
             || hd.getNv().getMaNV() == null || hd.getNv().getMaNV().trim().isEmpty()) {
-           
             return;
         }
         dshd = Arrays.copyOf(dshd, n + 1);
@@ -110,7 +112,6 @@ public class DanhSachHoaDon {
             ct.Nhap(sc);
             if (ct.getSP().getMa() == null || ct.getSP().getMa().trim().isEmpty()
                 || ct.getSL() <= 0) {
-               
                 break;
             }
             dshd[n - 1].getdsct().ThemChiTiet(ct);
@@ -182,6 +183,8 @@ public class DanhSachHoaDon {
                     }
                     Timkiem_MaNV(manv);
                     break;
+                default:
+                    System.out.println("Lua chon khong hop le! Vui long chon lai.");
             }
         } while (choice != 0);
     }
@@ -375,6 +378,8 @@ public class DanhSachHoaDon {
                         System.out.println("Loi dinh dang ngay. Vui long su dung dd/MM/yyyy");
                     }
                     break;
+                default: 
+                    System.out.println("Lua chon khong hop le! Vui long chon lai.");
 
             }
         } while (choice != 0);

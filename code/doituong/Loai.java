@@ -47,8 +47,4 @@ public class Loai implements INhapXuat {
     public void Xuat() {
         System.out.printf("| %-10s | %-20s |%n", maLoai, tenLoai);
     }
-
-    public String toFile() {
-        return maLoai + "," + tenLoai;
-    }
 }

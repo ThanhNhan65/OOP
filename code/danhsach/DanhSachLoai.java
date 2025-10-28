@@ -17,6 +17,9 @@ public class DanhSachLoai {
         ds = new Loai[0];
         n = 0;
     }
+    public int getN() {
+        return n;
+    }
 
     public void docFile() {
         int maxid = 0;
@@ -72,10 +75,8 @@ public class DanhSachLoai {
     public void Them(Scanner sc) {
         Loai l = new Loai();
         l.Nhap(sc);
-        // Check if user pressed Enter to exit at any input
         if (l.getMaloai() == null || l.getMaloai().trim().isEmpty()
             || l.getTenloai() == null || l.getTenloai().trim().isEmpty()) {
-            System.out.println("Da huy them loai (thieu thong tin hoac nhan Enter de thoat)");
             return;
         }
         String ma = l.getMaloai();
@@ -114,38 +115,12 @@ public class DanhSachLoai {
     }
 
     public void Xoa(Scanner sc) {
-        int c;
-        do {
-            System.out.println("1. Xoa loai theo ma");
-            System.out.println("2. Xoa toan bo loai");
-            System.out.println("0. Thoat");
-            c = sc.nextInt();
-            sc.nextLine();
-            switch (c) {
-                case 1: {
-                    System.out.print("Nhap ma loai muon xoa: ");
-                    String ma = sc.nextLine().trim();
-                    if (InputUtils.ThoatNeuEnter(ma))
-                        return;
-                    boolean ok = XoaTheoMa(ma);
-                    System.out.println(ok ? "Da xoa" : "Khong thay ma nay");
-                    break;
-                }
-                case 2: {
-                    System.out.println("Hien co " + n + " loai");
-                    System.out.println("Nhap OK de xac nhan xoa het:");
-                    if ("OK".equalsIgnoreCase(sc.nextLine().trim())) {
-                        XoaTatCa();
-                        System.out.println("Da xoa tat ca");
-                    }
-                    break;
-                }
-                case 0:
-                    break;
-                default:
-                    System.out.println("Khong hop le");
-            }
-        } while (c != 0);
+        System.out.print("Nhap ma loai muon xoa: ");
+        String ma = sc.nextLine().trim();
+        if (InputUtils.ThoatNeuEnter(ma))
+            return;
+        boolean ok = XoaTheoMa(ma);
+        System.out.println(ok ? "Da xoa" : "Khong thay ma nay");           
     }
 
     private boolean XoaTheoMa(String ma) {
@@ -165,12 +140,6 @@ public class DanhSachLoai {
         return false;
     }
 
-    private void XoaTatCa() {
-        ds = new Loai[0];
-        n = 0;
-        ghiFile();
-    }
-
     public void Sua(Scanner sc) {
         System.out.print("Nhap ma loai muon sua: ");
         String ma = sc.nextLine().trim();
@@ -188,6 +157,7 @@ public class DanhSachLoai {
             System.out.println("2. Sua ten");
             System.out.println("3. Sua toan bo");
             System.out.println("0. Thoat");
+            System.out.println("Chon:");
             c = sc.nextInt();
             sc.nextLine();
             switch (c) {
@@ -268,7 +238,7 @@ public class DanhSachLoai {
 
             switch (c) {
                 case 1: {
-                    System.out.print("Nhap MA loai: ");
+                    System.out.print("Nhap ma loai: ");
                     String ma = sc.nextLine().trim();
                     Loai l = TimTheoMa(ma);
                     if (l == null) {
@@ -280,7 +250,7 @@ public class DanhSachLoai {
                     break;
                 }
                 case 2: {
-                    System.out.print("Nhap TEN can tim: ");
+                    System.out.print("Nhap ten can tim: ");
                     String ten = sc.nextLine().trim();
                     int d = TimTheoTen(ten);
                     if (d == 0)
@@ -290,7 +260,7 @@ public class DanhSachLoai {
                 case 0:
                     break;
                 default:
-                    System.out.println("Khong hop le!");
+                    System.out.println("Lua chon khong hop le! Vui long chon lai.");
             }
         } while (c != 0);
     }
@@ -320,9 +290,4 @@ public class DanhSachLoai {
         }
         return d;
     }
-
-    public int getN() {
-        return n;
-    }
-
 }

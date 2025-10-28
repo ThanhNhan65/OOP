@@ -2,3 +2,5 @@ Nguyen Thanh Sang,Binh Chanh,0907123123,NV001,40,FullTime
 Tran Minh Khoa,Thu Duc TPHCM,0976543210,NV002,40,FullTime
 Le Thi Lan,Quan 10 TPHCM,0965432109,NV003,20,PartTime
 Pham Van Minh,Binh Tan TPHCM,0954321098,NV004,20,PartTime
+Nguyen Khanh Hung,TPHCM,0806050607,NV005,14,FullTime
+adsadsad,��s,1234567689,NV007,233,FullTime

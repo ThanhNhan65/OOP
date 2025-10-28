@@ -5,7 +5,7 @@ import code.kethua.*;
 
 public class NhanVien extends ConNguoi {
     private String MaNV;
-    public static int dem = 1;
+    private static int dem = 1;
     private String loai;
 
     public NhanVien() {
@@ -16,7 +16,7 @@ public class NhanVien extends ConNguoi {
 
     public NhanVien(String Hoten, String Diachi, String Sdt, String MaNV) {
         super(Hoten, Diachi, Sdt);
-        this.MaNV = String.format("NV%03d", dem++);
+        this.MaNV = MaNV;
     }
 
     public String getLoai() {
@@ -26,10 +26,12 @@ public class NhanVien extends ConNguoi {
     public String getMaNV() {
         return MaNV;
     }
+    public static void setdem(int value){
+        dem= value;
+    }
 
     @Override
     public void Nhap(Scanner sc) {
-        this.MaNV = String.format("NV%03d", dem++);
         super.Nhap(sc);
     }
 
